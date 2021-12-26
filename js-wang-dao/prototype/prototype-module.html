@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<script>
+    // 模块是实现特定功能的一组属性和方法的封装。
+    // 1.把模块写成一个对象
+
+    // 缺点：这样的写法会  暴露所有模块成员  ，内部状态可以被外部改写。
+    var module1 = new Object({
+        _count: 0,
+        m1: function() {
+            console.log('m1 function => ', this._count);
+        },
+        m2: function() {
+            console.log('m2 function => ', this._count);
+        }
+    });
+
+    module1.m1();
+    module1.m2();
+
+    module1._count = 99;
+    module1.m1();
+    module1.m2();
+    console.log(module1);
+</script>
+
+<script>
+    // 2.封装私有变量：构造函数的写法
+
+    // 将私有变量封装在构造函数中，导致构造函数与实例对象是一体的，总是存在于内存之中，无法在使用完成后清除 // todo bad
+    // 非常耗费内存
+    function StringBuilder() {
+        var buffer = []; // 模块的私有变量
+
+        this.add = function(str) {
+            buffer.push(str)
+        };
+
+        this.toString = function() {
+            return buffer.join(' , ');
+        }
+    }
+
+    var result = new StringBuilder();
+    result.add('result');
+    result.add('result_2');
+    console.warn(result.toString(), result);
+
+
+    // not better also
+    // 私有变量可以从外部读写，不是很安全 // todo bad
+    function StringBuilder2() {
+        this._butter = [];
+    }
+
+    StringBuilder2.prototype = {
+        constructor: StringBuilder2,
+        add: function(str) {
+            this._butter.push(str);
+        },
+        toString: function() {
+            return this._butter.join(' , ');
+        }
+    };
+
+    var result2 = new StringBuilder2();
+    result2.add('result2');
+    result2.add('result2_2');
+    console.log(result2.toString(), result2);
+</script>
+
+<script>
+    // 3.封装私有变量：立即调用的函数表达式 // todo IIFE
+</script>
+
+
+<script>
+    // 4.模块的放大模式
+    var module4 = (function(mod) {
+        mod.function = {
+            // ...
+        };
+        return mod;
+    })(window.module || {});
+</script>
+
+<script>
+    // 5.输入全局变量
+    // 保证模块的独立性，还使得模块之间的依赖关系变得明显
+    var module5 = (function($, YAHOO) {
+
+    })('jQuery', 'YAHOO');
+
+    //
+    (function($, window, document) {
+
+        function go(num) { // 外部无法调用的
+
+        }
+
+        function handleEvents() { // 外部无法调用的
+
+        }
+
+        function initialize() { // 外部无法调用的
+
+        }
+
+        function dieCarouselDie() { // 外部无法调用的
+
+        }
+
+        window.finalCarousel = {
+            init: initialize, // 对外暴露init和destroy接口
+            destroy: dieCarouselDie
+        };
+
+    })('jQuery', window, document);
+</script>
+
+</body>
+</html>

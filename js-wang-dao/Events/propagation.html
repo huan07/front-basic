@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="parent" style="background: pink; width:200px;height: 200px;">
+    <p id="child" style="background: red; width:100px;height: 100px;">点击子元素</p>
+</div>
+<br>
+<br>
+
+<script>
+    // 同一个事件在多个节点上触发
+    var phases = {
+        1: 'capture',
+        2: 'target',
+        3: 'bubble'
+    };
+
+    var parent = document.querySelector('#parent');
+    var child = document.querySelector('#child');
+
+    parent.addEventListener('click', callback, true);
+
+    child.addEventListener('click', callback, true);
+    child.addEventListener('click', callback, false);
+
+    parent.addEventListener('click', callback, false);
+
+    function callback(event) {
+        var tag = event.currentTarget.tagName;
+        var phase = phases[event.eventPhase];
+        console.log('Tag: \'' + tag + '\'. EventPhase: \'' + phase + '\'');
+    }
+</script>
+
+<script>
+    // 在捕获阶段依次为window、document、html、body、div、p
+    // 反之，冒泡阶段
+</script>
+
+</body>
+</html>

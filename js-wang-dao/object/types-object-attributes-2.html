@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 对象的拷贝 // todo copy
+      var extend = function (target, source) {
+        for (var prop in source) {
+          target[prop] = source[prop];
+        }
+        return target;
+      };
+
+      var obj = { a: 1 };
+      var obj2 = {
+        get a() {
+          return 1;
+        },
+      };
+
+      var result = extend({}, obj);
+      var result_2 = extend({}, obj2); // 如果遇到存取器定义的属性，会只拷贝值。// !
+
+      console.log('result =>', result, result_2);
+
+      // fixed
+      var extendFixed = function (target, source) {
+        for (var prop in source) {
+          console.warn('prop =>', prop);
+
+          if (!source.hasOwnProperty(prop)) {
+            // ! better 避免代码横向展开，不要将满足条件的代码全部写在 if 的 {} 里面
+            // Object.getOwnPropertyDescriptor不能获取继承的属性undefined值，防止Object.defineProperty报错
+            continue;
+          }
+
+          Object.defineProperty(target, prop, Object.getOwnPropertyDescriptor(source, prop));
+        }
+        return target;
+      };
+
+      var resultFixed = extendFixed({}, obj);
+      var resultFixed_2 = extendFixed({}, obj2);
+
+      console.warn('resultFixed =>', resultFixed, resultFixed_2);
+
+      // todo 这么写可以吗？可以的
+      var extendFixed2 = function (target, source) {
+        var des = Object.getOwnPropertyDescriptors(source);
+        Object.defineProperties(target, des);
+        return target;
+      };
+
+      var resultFixed2 = extendFixed2({}, obj);
+      var resultFixed2_2 = extendFixed2({}, obj2);
+
+      console.log('extendFixed2 =>', resultFixed2);
+      console.log(resultFixed2_2);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="id" onclick="console.log(this, this.id)">测试this 元素的on-属性</div>
+<br><br>
+
+
+<div id="id2">测试this 元素节点的事件属性</div>
+<br><br>
+
+
+<div id="id3">测试this DOM2级</div>
+
+<script>
+    // 监听函数内部的this => 触发事件的那个元素节点
+    document.getElementById('id2').onclick = function() {
+        console.log(this, this.id);
+    };
+
+    document.getElementById('id3').addEventListener('click', function() {
+        console.log(this, this.id);
+    });
+</script>
+
+</body>
+</html>

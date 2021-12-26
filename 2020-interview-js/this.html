@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    (() => {
+        // TODO ...
+        // https://www.bilibili.com/video/BV1hV411679v?p=8
+        var length = 100;
+
+        function f1() {
+            console.log(this, this.length);
+        }
+
+        var obj = {
+            length: 10,
+            f2: function(f1) {
+                f1(); // 0
+                arguments[0](); // 2
+                console.log(arguments); // 类数组
+            }
+        };
+        obj.f2(f1, 1, 2);
+
+    })();
+
+    (() => {
+        // https://www.bilibili.com/video/BV1BK411H7Rs?from=search&seid=17928497433741340145
+        function f2() {
+            console.log(this);
+        }
+
+        var arr = [f2, 100, 200];
+        arr[0](); // this => arr
+    })();
+
+</script>
+
+
+</body>
+</html>

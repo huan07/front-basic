@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="10.1.css">
+</head>
+<body onload="console.log('window loaded 2',event,event.target)">
+<img src="https://www.baidu.com/img/bd_logo1.png" alt="" id="img" onload="console.log('Image loaded 2')">
+<img src="https://www.baidu.com/img/bd_logo1.png" alt="" id="img2" width="270">
+
+<script>
+    window.addEventListener('load', function(event) {
+        console.log('window loaded 1', event, event.target, event.target === document);
+    }, false);
+</script>
+
+<script>
+    // onload
+    var img = document.getElementById('img2');
+    img.addEventListener('load', function() {
+        console.log('Image loaded 1');
+    }, false);
+
+    // 创建 img元素
+    window.addEventListener('load', function() {
+        var image = document.createElement('img');
+        image.addEventListener('load', function(event) {
+            console.log('创建 img元素  =  ', event.target.src);
+        }, false);
+        document.body.appendChild(image);
+        image.src = 'https://www.baidu.com/img/bd_logo1.png'; // 开始下载
+        image.width = '360';
+    }, false);
+
+    window.addEventListener('load', function() {
+        var image = new Image(); // 部分浏览器支持 将Image对象作为img元素， 无法添加到DOM树
+        image.addEventListener('load', function(event) {
+            console.log('无法添加到DOM树  =  new Image() loaded');
+        }, false);
+        image.src = 'https://www.baidu.com/img/bd_logo1.png';
+    }, false);
+
+    window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.addEventListener('load', function(event) {
+            console.log('script loaded => ', event.target.src, event.target.type);
+        }, false);
+        script.type = 'text/javascript';
+        script.src = '//' + window.location.host + '/js-basic/10.1.js';
+        document.body.appendChild(script); // 添加到文档后才开始下载，和css一样
+    }, false);
+</script>
+
+<script>
+    // unload  清除引用，避免内存泄露
+    // resize
+    window.addEventListener('resize', function() {
+        console.log('window resized'); // 少加大计算量的代码，频繁被执行，会导致浏览器反应变慢
+    }, false);
+
+    // scroll 发生在window对象，实际表示的是页面中元素的变化
+    window.addEventListener('scroll', function() {
+        if (document.compatMode === 'CSS1Compat') {
+            console.log('html => ', document.documentElement.scrollTop); // 少加大计算量的代码
+        } else {
+            console.log('body => ', document.body.scrollTop);
+        }
+    }, false);
+</script>
+
+</body>
+</html>

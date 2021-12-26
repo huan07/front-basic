@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // https://mp.weixin.qq.com/s/QvkOhX0hQs8O15tlB6cm9Q
+      // 1.首先不要把NULL看成是null，js的关键字是区分大小写的，所以这就是一个普通的变量，而且没有声明，
+      // typeof对没有声明的变量使用是不会报错的，返回'undefined'，typeof对undefined使用也是'undefined'，所以两者相等
+      //
+      // typeof对函数使用返回'function'，class只是es6新增的语法糖，本质上还是函数，所以两者相等
+      console.log(typeof undefined == typeof NULL);
+      console.log(typeof function () {} == typeof class {});
+    </script>
+  </body>
+</html>

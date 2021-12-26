@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<!--
+<script>
+    // beforeunload事件在窗口、文档、各种资源将要卸载前触发
+    window.addEventListener('beforeunload', function (event){
+        event.returnValue = 'ready to leave';
+    });
+
+
+    // 取得最大兼容性
+    window.addEventListener('beforeunload', function (e) {
+        var confirmationMessage = '确认关闭窗口？';
+
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
+    });
+</script>
+
+<script>
+    // 一种场合可以监听unload事件，其他情况都不应该监听：
+    // 用户修改了表单，还没有保存就要离开。
+    // unload事件在 窗口关闭，document对象将要卸载时触发。它的触发顺序排在beforeunload、pagehide事件后面。
+    // 事件是无法取消的，即使在监听函数里面抛出错误，也不能停止文档的卸载。
+    window.addEventListener('unload', function(event) {
+        console.log('文档将要卸载');
+    });
+</script>-->
+
+<script>
+    // load事件在 页面、某个资源加载成功 时触发，从浏览器缓存加载不会触发
+    // error
+    // abort
+
+    // 发生在 document对象，window对象 +
+    // 各种外部资源：
+    // 图像（image）、样式表（style sheet）、脚本（script）、视频（video）、音频（audio）、Ajax请求（XMLHttpRequest）
+    window.addEventListener('load', function(event) {
+        alert('所有资源都加载完成！');
+    });
+</script>
+
+</body>
+</html>

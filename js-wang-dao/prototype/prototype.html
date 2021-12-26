@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<script>
+    // prototype
+    // JavaScript 规定，每个函数都有一个 prototype 属性，指向一个对象（原型对象）。// todo !!
+    // 原型对象 的所有属性和方法，都能被 实例对象 共享
+    function Foo() {
+
+    }
+
+    console.log(Foo, Foo.prototype);
+</script>
+<script>
+    // 原型链
+    // 所有对象都继承了Object.prototype的属性，
+    // 由于原型对象也是对象，所以它也有自己的原型，原型链的尽头是null
+    console.log('原型对象的 __proto__ =>',
+        Foo.prototype.__proto__, Foo.prototype.__proto__ === Object.prototype, '\n',
+
+        Object.getPrototypeOf(Foo.prototype), Object.getPrototypeOf(Foo.prototype) === Object.prototype, '\n',
+
+        Object.prototype, Object.prototype.isPrototypeOf(Foo.prototype)
+    );
+    console.log('原型链的尽头是 null =>', Object.prototype.__proto__);
+</script>
+
+<script>
+    // constructor
+    // a.constructor属性定义在prototype对象上面，意味着可以被所有实例对象继承。// todo !!
+    // b.constructor属性的作用是，可以得知某个 实例对象 ，到底是 哪一个构造函数 产生的。
+    function P() {
+
+    }
+
+    var p = new P();
+    console.warn('constructor => ', p.constructor === P, P.prototype.constructor === P);
+    console.log(p.hasOwnProperty('constructor'), P.prototype.hasOwnProperty('constructor'));
+
+
+    // 2.有了constructor属性，就可以从一个实例对象新建另一个实例 // TODO ? ?
+    function Constr() {
+
+    }
+
+    var x = new Constr();
+
+    var y = new x.constructor();
+
+    console.log(x);
+    console.log(x.constructor);
+    console.log(y);
+
+
+    // constructor属性表示 原型对象 与 构造函数 之间的关联关系，// todo !!
+    // 如果修改了原型对象，一般会同时修改constructor属性，防止引用的时候出错。
+    function Person(name) {
+        this.name = name;
+    }
+
+    console.warn('修改原型对象之前 =>',
+        Person.prototype.constructor === Person, // 默认恒等规则 // todo !!
+        Person.prototype
+    );
+
+    Person.prototype = {
+        // 新原型是一个普通对象
+        // 普通对象的 constructor 属性指向 Object 构造函数（沿着原型链查找属性值）
+        method: function() {
+
+        }
+    };
+
+    console.log('修改原型对象之后 =>',
+        Person.prototype.constructor === Person,
+        Person.prototype.constructor === Object,
+        Person.prototype
+    );
+</script>
+
+</body>
+</html>

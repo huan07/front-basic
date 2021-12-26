@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>1</title>
+    </head>
+    <body>
+        <script>
+            console.log('1 === 1.0 => ', 1 === 1.0);
+
+            // JavaScript 内部会自动将十六进制、八进制、二进制转为十进制
+            console.log('0x10 => ', 0x10);
+            console.log('0o10 => ', 0o10);
+            console.log('0b10 => ', 0b10);
+            console.log('10 => ', 10);
+
+            // 正零和负零都会被当作正常的0
+            console.log('-0 === +0 => ', -0 === +0);
+            console.log('-0 === 0 => ', -0 === 0);
+            console.log('+0 === 0 => ', +0 === 0);
+
+            // 唯一有区别的场合，当作分母，返回值是不同的
+            console.log('1 / +0 => ', 1 / +0);
+            console.log('1 / -0 => ', 1 / -0);
+            console.log('(1 / +0) === (1 / -0) => ', 1 / +0 === 1 / -0);
+            console.log('0 / 0 NaN result => ', 0 / 0);
+
+            // NaN
+            // 出现场合：将字符串解析成数字出错
+            console.log("5 - 'x' => ", 5 - 'x');
+            console.log("5 - Number('x') => ", 5 - Number('x'));
+            console.log('0 / 0 => ', 0 / 0);
+
+            // NaN不是独立的数据类型，而是一个特殊数值 todo !!!
+            console.log(typeof NaN === 'number');
+
+            // NaN不等于任何值，不等于它本身 todo !!!
+            // NaN作为参数的运算，得到的结果都是NaN
+            console.log('NaN === NaN => ', NaN === NaN);
+            console.log('[NaN].indexOf(NaN) => ', [NaN].indexOf(NaN));
+            console.log('NaN + 1 => ', NaN + 1);
+        </script>
+    </body>
+</html>

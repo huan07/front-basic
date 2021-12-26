@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="0.css" />
+    <style type="text/css">
+      body > * {
+        margin: 0 0 10px 10px;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background: red;
+      }
+
+      .box2 {
+        width: 100px;
+        height: 100px;
+        background: wheat;
+      }
+
+      .text-p {
+        width: 300px;
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <span style="background-color: pink"> 这个段落有一些文本。不推荐用颜色名称 </span>
+
+    <p style="background-color: #999">这个段落有一些文本。</p>
+    <p style="background-color: rgb(153, 153, 153)">这个段落有一些文本。</p>
+    <p style="background-color: rgba(153, 153, 153, 1)">这个段落有一些文本。</p>
+
+    <p style="background-color: rgba(153, 153, 153, 0.1)">这个段落有一些文本。</p>
+
+    <div class="box">
+      <div class="box2"></div>
+    </div>
+
+    <p class="text-p text-ellipsis">This is some long text that will not fit in the box</p>
+    <p class="text-p long-text">
+      This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long
+      word will break and wrap to the next line.
+    </p>
+    <p class="text-p multi-text-ellipsis">
+      如果我们要实现多行文本溢出显示省略号呢， 如果我们要实现多行文本溢出显示省略号呢，
+      如果我们要实现多行文本溢出显示省略号呢， 如果我们要实现多行文本溢出显示省略号呢，
+      如果我们要实现多行文本溢出显示省略号呢
+    </p>
+  </body>
+</html>

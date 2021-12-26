@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="10.1.css">
+    <style>
+        body > * {
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div">
+    right click or ctrl+click me to get a custom context menu
+</div>
+<ul id="ul" style="position: absolute;visibility: hidden;background-color: red">
+    <li>列表项1</li>
+    <li>列表项2</li>
+    <li>列表项3</li>
+    <li><a href="http://www.baidu.com">跳转到百度首页</a></li>
+    <li><a href="http://www.baidu.com">跳转到百度首页</a></li>
+    <li><a href="http://www.baidu.com" target="_blank">跳转到百度首页</a></li>
+</ul>
+
+<script>
+    // contextmenu
+    window.addEventListener('load', function() {
+        var div = document.getElementById('div');
+
+        div.addEventListener('contextmenu', function(event) {
+            event.preventDefault();
+            var ul = document.getElementById('ul');
+            ul.style.left = event.clientX + 'px';
+            ul.style.top = event.clientY + 'px';
+            ul.style.visibility = 'visible';
+        }, false);
+
+        document.addEventListener('click', function() {
+            document.getElementById('ul').style.visibility = 'hidden';
+        }, false);
+    }, false);
+</script>
+
+<script>
+    window.addEventListener('beforeunload', function(event) {
+        var message = 'i am really going to miss you if you go';
+        event.returnValue = message;
+        // return message; // 并没有出现提示框
+        event.preventDefault();
+    }, false);
+</script>
+
+<script>
+    window.addEventListener('hashchange', function(event) {
+        console.log('current hash:' + location.hash);
+    }, false);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // 异步操作的模式
+      // 1.回调函数  f2必须等到f1执行完成，才能执行
+      // 缺点：
+      function f1(callback) {
+        console.log('f1');
+
+        callback();
+      }
+
+      function f2() {
+        console.log('f2');
+      }
+
+      f1(f2);
+
+      // 2.事件监听
+
+      // 3.发布／订阅
+    </script>
+
+    <script src="asyncFoo.js"></script>
+    <script>
+      //
+      asyncFoo(1, final);
+
+      asyncFoo(1, function (value1) {
+        asyncFoo(value1, final);
+      });
+
+      /*asyncFoo(111, function (value1){
+        asyncFoo(value1, function (value2){
+            asyncFoo(value2, final);
+        });
+    });*/
+    </script>
+  </body>
+</html>

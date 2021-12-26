@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // WheelEvent => MouseEvent => Event
+    // KeyboardEvent => Event
+    // ProgressEvent
+    // input事件 => InputEvent => Event
+    // TouchEvent => Event
+    // DragEvent => MouseEvent => Event
+</script>
+
+
+<ul id="ul">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+</ul>
+
+<ul id="ul2">
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+</ul>
+
+<script>
+    // mouseenter 父节点触发，子节点间的移动 不会触发了；
+    // mouseleave 离开父节点 不会触发，离开子节点 触发；
+    var ul = document.querySelector('#ul');
+    ul.addEventListener('mouseenter', function(event) {
+        var ele = event.target;
+
+        ele.style.color = 'hotpink';
+        console.log('父元素ul === ele', ul === ele, ele); //
+        setTimeout(function() {
+
+            ele.style.color = '';
+            console.log(ele);
+        }, 2000);
+    }, false);
+
+
+    // mouseover 父节点触发，子节点间的移动  还会触发；
+    // mouseout 离开父节点 触发，离开子节点 触发；
+    var ul2 = document.querySelector('#ul2');
+    ul2.addEventListener('mouseover', function(event) {
+        var ele = event.target;
+
+        ele.style.color = 'red';
+        console.log('子元素li === ele', ele); //
+        setTimeout(function() {
+
+            ele.style.color = '';
+            console.log(ele);
+        }, 2000);
+    }, false);
+</script>
+
+
+</body>
+</html>

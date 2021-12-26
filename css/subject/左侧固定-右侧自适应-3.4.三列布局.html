@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        .wrapper {
+            height: 200px;
+            background: pink;
+        }
+
+        .box {
+            width: 160px;
+            height: 160px;
+            background: wheat;
+        }
+
+        .box2 {
+            height: 180px;
+            background: grey;
+        }
+
+        /* 减去 左边元素的宽度，右边元素的宽度 */
+        .test {
+            width: calc(100% - 320px);
+        }
+
+        .inline-block {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper BFC_3_1">
+    <div class="box pull-left">box</div>
+    <div class="box2 pull-left test">box2</div>
+    <div class="box pull-left">box</div>
+</div>
+<hr>
+
+<div class="wrapper inline-block-parent">
+    <div class="box inline-block">box</div>
+    <div class="box2 inline-block test">box2</div>
+    <div class="box inline-block">box</div>
+</div>
+
+</body>
+</html>

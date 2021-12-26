@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // .isPrototypeOf
+      // 实例对象继承来的方法，
+      // 实例对象在参数对象的原型链上，就返回true
+      var o1 = {};
+      var o2 = Object.create(o1);
+      var o3 = Object.create(o2);
+      console.log(o1, o2, o3);
+      console.log(o1.isPrototypeOf(o2), o2.isPrototypeOf(o3), o1.isPrototypeOf(o3));
+      console.log(Object.prototype.isPrototypeOf({}));
+
+      // .__proto__ （ 只有浏览器才需要部署，其他环境可以没有这个属性，内部属性 ）
+      // 返回实例对象的原型对象，可读写
+      var obj = {};
+      var pro_ = { pro: 'pro' };
+      obj.__proto__ = pro_;
+      console.log('__proto__ =>', Object.getPrototypeOf(obj) === pro_);
+
+      var A3 = { name: '张三' };
+      var B3 = { name: '李四' };
+      var proto = {
+        print: function () {
+          console.log(this.name);
+        },
+      };
+      A3.__proto__ = proto;
+      B3.__proto__ = proto;
+      console.log(A3, B3);
+      A3.print();
+      B3.print();
+      console.log(A3.print === proto.print, B3.print === proto.print);
+    </script>
+
+    <script>
+      // 获得对象的所有属性（自身+继承，枚举+不可枚举）
+      function inheritedPropertyNames(obj) {
+        var props = {};
+        var results = []; // ! bad
+
+        while (obj) {
+          console.warn('obj =>', obj);
+
+          Object.getOwnPropertyNames(obj).forEach(function (p) {
+            props[p] = true; // ! better 会过滤掉重复的属性，__proto__被排除
+            results.push(p); // ! bad
+          });
+          obj = Object.getPrototypeOf(obj);
+        }
+
+        console.log('results =>', results);
+        return Object.getOwnPropertyNames(props);
+      }
+
+      console.log(
+        'inheritedPropertyNames =>',
+        inheritedPropertyNames({ a: 'a' }),
+        inheritedPropertyNames([1])
+      );
+    </script>
+
+    <script>
+      // 对象的拷贝（ 拷贝原对象的 实例属性 + 原型 ） // TODO ??
+      function copyOwnPropertiesFrom(target, source) {
+        Object.getOwnPropertyNames(source).forEach(function (propKey) {
+          var desc = Object.getOwnPropertyDescriptor(source, propKey);
+          Object.defineProperty(target, propKey, desc);
+        });
+        return target;
+      }
+
+      function copyObject(orig) {
+        var copy = Object.create(Object.getPrototypeOf(orig));
+        copyOwnPropertiesFrom(copy, orig);
+        return copy;
+      }
+
+      // better by ES2017
+      function copyObject2(orig) {
+        return Object.create(Object.getPrototypeOf(orig), Object.getOwnPropertyDescriptors(orig));
+      }
+
+      // test
+      var obj = Object.defineProperties(
+        {},
+        {
+          p1: {
+            value: 123,
+            writable: true,
+          },
+          p2: {
+            value: 'abc',
+            enumerable: true,
+          },
+          p3: {
+            value: true,
+            configurable: true,
+          },
+        }
+      );
+      Object.setPrototypeOf(obj, { proto: 'protoValue' });
+
+      var copyResult = copyObject(obj);
+      var copyResult_2 = copyObject2(obj);
+
+      console.error(obj, copyResult, copyResult_2);
+      for (var prop in obj) {
+        console.log('objProp => ', prop);
+      }
+      for (var prop in copyResult) {
+        console.log('copyResultProp => ', prop);
+      }
+      for (var prop in copyResult_2) {
+        console.log('copyResult_2Prop => ', prop);
+      }
+    </script>
+  </body>
+</html>

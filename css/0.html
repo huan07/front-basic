@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <!-- 
+    !
+    加上 浏览器标题左侧显示logo图片，
+    浏览器就不会默认请求 http://localhost:63342/favicon.ico
+    -->
+    <link rel="shortcut icon" href="../images/icon-correct.png" />
+    <link rel="stylesheet" type="text/css" href="0.css" />
+    <style type="text/css">
+      #id1 {
+        color: yellow; /* ! 1.内部样式放在外部样式的后面，内部样式将覆盖外部样式 */
+      }
+
+      .class1 {
+        color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div>第一个块元素</div>
+
+    <div id="id1">第二个块元素</div>
+
+    <div class="class1">第三个块元素</div>
+    <div class="class1" style="color: red">第四个块元素</div>
+
+    <script type="text/javascript">
+      var x = 5;
+      console.log('x => ', x);
+    </script>
+    <script type="text/javascript" src="0.js"></script>
+  </body>
+</html>

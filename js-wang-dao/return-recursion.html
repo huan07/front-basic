@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // return, 提前退出函数体
+      // JavaScript 引擎遇到 return 语句，就直接返回 return 后面的那个表达式的值，后面即使还有语句，也不会得到执行
+      // 没有 return , 函数执行结束后，从调用栈移除（实际上，返回的是 undefined ） // todo !!
+      var foo = function () {
+        return 'foo';
+
+        var a = 'a';
+        console.log(a);
+      };
+
+      var bar = function () {
+        var a = 'a';
+        var b = 'b';
+        console.log('inner bar() =>', a, b);
+      };
+
+      console.log('foo() result =>', foo());
+
+      var barResult = bar();
+      console.log('bar() result =>', barResult);
+    </script>
+
+    <script>
+      // 递归：函数可以调用自身
+      function fib(num) {
+        if (num === 0) {
+          return 1;
+        }
+        if (num === 1) {
+          return 1;
+        }
+        return fib(num - 2) + fib(num - 1);
+      }
+
+      var recursion0 = fib(0);
+      var recursion1 = fib(1);
+      var recursion4 = fib(4);
+      // => f(2) + f(3)
+      // => f(0)+f(1) + f(1)+f(2)
+      // => 3 + f(0)+f(1)
+      // => 5
+      console.log(recursion0, recursion1, recursion4);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>todo</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      /*
+        测试 类选择器，属性选择器，伪类选择器 todo 伪类选择器 优先级更高啊
+        */
+
+      /*p:first-child {
+            background-color: white;
+        }*/
+
+      [title='title'] {
+        background-color: black;
+      }
+
+      .p1 {
+        background-color: purple;
+      }
+
+      /*
+        测试 元素选择器，组合选择器 todo p + div 权重明显大于 div，组合选择器 优先级更高啊
+        */
+      p + div {
+        color: silver;
+      }
+
+      div {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="p1" title="title">我是一个段落</p>
+
+    <div class="div1">我是一个块元素</div>
+  </body>
+</html>

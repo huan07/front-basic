@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="parent" style="background: #665b5d; width:200px;height: 200px;">
+    <p id="child" style="background: #662533; width:100px;height: 100px;">点击子元素</p>
+</div>
+<br>
+<br>
+
+<script>
+    var parent = document.querySelector('#parent');
+    var child = document.querySelector('#child');
+
+    function callback(event) {
+        var tag = event.currentTarget.tagName;
+        console.log('Tag: ' + tag); // 没有任何输出
+    }
+
+    parent.addEventListener('click', callback, false);
+
+    var click = new Event('click', { bubbles: false });
+    child.dispatchEvent(click); // TODO
+</script>
+
+<div style="width:50%;height: 100px; background:pink;" id="testLinkDiv">
+    <a id="testLink" href="http://www.baidu.com">跳转到百度搜索页面 x 阻止了浏览器对该事件的默认行为</a>
+    <br>
+    <br>
+</div>
+<input type="text" id="myInput" />
+<br>
+<br>
+<script>
+    function preventEvent(evt) {
+        if (evt.cancelable) {
+            evt.preventDefault();
+        } else {
+            console.warn('This event couldn\'t be canceled.');
+            console.dir(event);
+        }
+    }
+
+    document.querySelector('#testLink').addEventListener('click', function(evt) {
+        preventEvent(evt);
+        // evt.stopPropagation();// test 不会阻止事件的传播
+    });
+
+    document.querySelector('#testLinkDiv').addEventListener('click', function(evt) {
+        console.log('link DOM parent click');
+    });
+
+
+    // example
+    // 只能输入小写字母
+    // 但是用户体验不好，不推荐
+    document.querySelector('#myInput').addEventListener('keypress', function(evt) {
+        if (evt.charCode < 97 || evt.charCode > 122) {
+            preventEvent(evt);
+        }
+    });
+</script>
+
+
+<div id="parent2" style="background: #ccbf07; width:200px;height: 200px;">
+    <p id="child2" style="background: #fff6c4; width:100px;height: 100px;">点击子元素</p>
+</div>
+<br>
+<br>
+<script>
+    // Event.currentTarget / this 正在执行的监听函数所绑定的那个节点。
+    // Event.target               原始触发事件的那个节点（ 事件传播触发 ）
+    function hide(e) {
+        console.log(e, this);
+        console.log(this === e.currentTarget);
+        console.log(this === e.target);
+        e.target.style.visibility = 'hidden';
+    }
+
+    document.getElementById('parent2').addEventListener('click', hide);
+
+
+    //
+    document.querySelector('#child2').addEventListener('click', function(e) {
+        console.log('composedPath =>', e.composedPath()); // 冒泡经过的所有上层节点
+    });
+</script>
+
+<script>
+    var evt = new Event('foo');
+    console.log('evt => ', evt);
+
+
+    // example
+    // 鼠标每秒移动的像素数量 TODO
+    var previousX;
+    var previousY;
+    var previousT;
+
+    window.addEventListener('mousemove', function(event) {
+        if (
+            previousX !== undefined &&
+            previousY !== undefined &&
+            previousT !== undefined
+        ) {
+            var deltaX = event.screenX - previousX;
+            var deltaY = event.screenY - previousY;
+            var deltaD = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+            var deltaT = event.timeStamp - previousT;
+            // console.log(deltaD / deltaT * 1000);
+        }
+
+        previousX = event.screenX;
+        previousY = event.screenY;
+        previousT = event.timeStamp;
+    });
+</script>
+
+<div style="height: 50px;background: #1497cc" id="hotpinkDOM">
+</div>
+<script>
+    function click1(evt) {
+        console.log('hello click1');
+        // evt.stopImmediatePropagation(); // 阻止同一个事件的其他监听函数被调用
+    }
+
+    function click2(evt) {
+        console.log('hello click2');
+    }
+
+    document.querySelector('#hotpinkDOM').addEventListener('click', click1);
+    document.querySelector('#hotpinkDOM').addEventListener('click', click2);
+</script>
+
+
+</body>
+</html>

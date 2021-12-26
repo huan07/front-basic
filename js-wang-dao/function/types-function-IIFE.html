@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // function 关键字出现在行首，一律解释成语句，以圆括号结尾，会报错 // todo !! !!
+
+      // 1.function 关键字 当作语句
+      function foo() {}
+
+      // 2.function 关键字 当作表达式
+      var bar = function () {};
+
+      // fixed 不要让 function 关键字出现在行首
+      (function () {
+        console.log('console 1');
+      })();
+
+      (function () {
+        console.log('console 2');
+      })();
+
+      //
+      //
+      (function (global) {})(window);
+    </script>
+
+    <script>
+      // 用途
+      // 1.不必为函数命名，避免了污染全局变量
+      // 2.IIFE 内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量（
+      // // a.用来自定义函数模块，如手写 Promise 构造函数
+      // // b.封装私有变量（外部代码无法读取内部的 _count 变量）
+      // ）
+      var foo = 'bar';
+      (function () {
+        var foo = 'foo';
+        console.warn('foo =>', foo);
+      })();
+
+      var value = (function () {
+        return 'value';
+      })();
+      console.log('IIFE return value =>', value);
+    </script>
+
+    <script>
+      // 封装私有变量：立即调用的函数表达式
+      // 将相关的属性和方法封装在一个函数作用域里面，可以达到不暴露私有成员的目的
+      // 外部代码无法读取内部的 _count 变量
+      var module3 = (function () {
+        var _count = 59;
+        var m1 = function () {
+          console.warn('m1 function =>', _count);
+        };
+        var m2 = function () {
+          console.log('m2 function =>', _count);
+        };
+        return {
+          // JavaScript 模块的基本写法
+          m1: m1,
+          m2: m2,
+        };
+      })();
+
+      module3.m1();
+      module3.m2();
+      console.log('module3 =>', module3);
+    </script>
+  </body>
+</html>

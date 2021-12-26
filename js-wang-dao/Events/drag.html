@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // 拖拉的对象
+    // 1. 元素节点( draggable属性设为true )
+    // 2. 图片、链接、选中的文字
+</script>
+
+<div id="div1" style="background: pink; width:200px;height: 200px;" draggable="true">
+</div>
+<br>
+<br>
+<script>
+    var $ele = document.querySelector('#div1');
+    $ele.addEventListener('dragstart', function(evt) {
+        evt.target.style.background = 'hotpink';
+    });
+    $ele.addEventListener('dragend', function(evt) {
+        evt.target.style.background = 'black';
+    });
+</script>
+
+<!--
+example
+-->
+<div class="dropzone" style="background: #dadada; width:200px;height: 100px;">
+    <div id="draggable" draggable="true" style="background: #d7c4ff; display: inline-block;">
+        该节点可拖拉
+    </div>
+</div>
+<br>
+
+<div class="dropzone" style="background: #dadada; width:400px;height: 100px;">
+</div>
+<br>
+
+<div class="dropzone" style="background: #dadada; width:300px;height: 100px;">
+</div>
+<br>
+
+<div class="dropzone" style="background: #dadada; width:200px;height: 100px;">
+</div>
+<br>
+
+<script>
+    // 被拖拉节点
+    var dragged;
+
+    // 发生在 被拖拉节点（子元素）
+    document.addEventListener('dragstart', function(event) {
+        // 保存被拖拉节点
+        dragged = event.target;
+
+        // 的背景色变透明
+        event.target.style.opacity = 0.2;
+    });
+    document.addEventListener('dragend', function(event) {
+        // 的背景色恢复正常
+        event.target.style.opacity = '';
+    });
+
+
+    // 发生在 源节点
+    document.addEventListener('dragleave', function(event) {
+        if (event.target.className === 'dropzone') {
+            event.target.style.background = 'black';
+        }
+    });
+
+
+    // 发生在 目标节点（父节点）
+    // dragenter 进入节点时 触发一次
+    // dragover 没有离开目标节点 持续触发
+    // drop 释放到目标节点
+    document.addEventListener('dragenter', function(event) {
+        // 由于该事件会冒泡，所以要过滤节点
+        if (event.target.className === 'dropzone') {
+            event.target.style.background = 'purple';
+        }
+    });
+    document.addEventListener('dragover', function(event) {
+        // 防止拖拉效果被重置，允许被拖拉的节点放入目标节点
+        event.preventDefault();
+    });
+    document.addEventListener('drop', function(event) {
+        // 防止事件默认行为（比如某些元素节点上可以打开链接），
+        event.preventDefault();
+        if (event.target.className === 'dropzone') {
+            event.target.style.background = 'red';
+            // 将被拖拉节点插入目标节点
+            // dragged.parentNode.removeChild(dragged); // TODO DOM节点只会在文档出现一次，不用写
+            event.target.appendChild(dragged);
+        }
+    });
+</script>
+
+<script>
+    // TODO
+</script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // input事件：元素值变化一次触发一次
+    // <input>、<select>、<textarea>的值发生变化
+    // <input> type=radio/checkbox值发生变化
+    // 打开contenteditable属性的元素值发生变化
+
+    // change事件：元素失焦触发一次
+    // <input>、<select>、<textarea>的值发生变化
+    // 激活type=radio/checkbox时触发。
+</script>
+<select id="mySelect">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+</select>
+<br>
+<br>
+
+<input type="text" id="input2">
+<br>
+<br>
+<script>
+    var $ele = document.querySelector('#mySelect');
+    $ele.addEventListener('input', function(evt) {
+        console.log(evt.type);
+        console.log('evt.target.value => ', evt.target.value);
+    });
+
+    var $ele2 = document.querySelector('#input2');
+    $ele2.addEventListener('input', function(evt) {
+        console.log(evt.type);
+        console.log('evt.target.value => ', evt.target.value);
+
+        //
+        console.log(evt);
+        console.log('evt.data => ', evt.data);
+        console.log('evt.inputType => ', evt.inputType);
+        console.log('evt.dataTransfer => ', evt.dataTransfer);
+    });
+    $ele2.addEventListener('change', function(evt) {
+        console.log(evt.type);
+        console.log('evt.target.value => ', evt.target.value);
+    });
+</script>
+
+
+<script>
+    // select事件
+    // 在<input>、<textarea>里面选中文本时触发
+</script>
+<input type="text" id="input3">
+<script>
+    var $ele3 = document.querySelector('#input3');
+    $ele3.addEventListener('select', function(evt) {
+        console.log(evt.type, evt.target.value, evt);
+    });
+</script>
+
+
+</body>
+</html>

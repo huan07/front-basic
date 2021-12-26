@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO ?? 写的不好吧 </title>
+    <style>
+        body {
+            background-color: #98aaa1;
+        }
+
+        #div2 {
+            color: black;
+            background-color: white;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="div2">窗口大小改变后，调整自身高度，函数节流来阻止函数在给定时间内被多次调用</div>
+
+<script>
+    // 函数节流
+    // 用定时器对函数进行节流
+    // 其基本思想：某些代码不可以在没有间断的情况下连续重复执行
+
+    // 第一次调用函数，创建一个定时器，在指定的时间间隔之后运行代码
+    // 当第二次调用该函数时，它会清除前一次的定时器并设置另一个。
+    var processor = {
+        timeoutId: null,
+
+        performProcessing: function() {
+            console.log('actual performProcessing ');
+        },
+
+        process: function() {
+            clearTimeout(this.timeoutId); // 清除存好的timeoutId, 来阻止之前的调用被执行；
+
+            var that = this;
+            this.timeoutId = setTimeout(function() { // 创建一个新的定时器来调用performProcessing；
+                that.performProcessing();
+            }, 500);
+        }
+    };
+    processor.process();
+
+    // 简化processor
+    function throttle(method, context) {
+        clearTimeout(method.tId);
+
+        method.tId = setTimeout(function() {
+            method.call(context);
+        }, 100);
+    }
+
+    function resizeDiv(tip) {
+        var div = document.getElementById('div2');
+        div.style.height = div.offsetHeight + 'px';
+        console.log(tip, div.offsetHeight);
+    }
+
+    window.onresize = function() {
+        resizeDiv('连续触发');
+
+        throttle(resizeDiv);
+    }
+</script>
+
+</body>
+</html>

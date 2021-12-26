@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>y</title>
+  </head>
+  <body>
+    <script>
+      var name = 'World!';
+      (function () {
+        if (typeof name === 'undefined') {
+          var name = 'Jack';
+          console.log('Goodbye ' + name); //
+        } else {
+          console.log('Hello ' + name);
+        }
+      })();
+
+      //
+      var str = 'World!';
+      (function (name) {
+        if (typeof name === 'undefined') {
+          var name = 'Jack';
+          console.log('Goodbye ' + name);
+        } else {
+          console.log('Hello ' + name); //
+        }
+      })(str);
+    </script>
+
+    <script>
+      // var声明会把变量提升到当前作用域顶部，所以a=1并不会报错，
+      // 另外在 全局作用域下 使用var声明变量，该变量会变成 window的一个属性 ，以上两点都和是否在严格模式下无关
+
+      a = 1;
+      var a = 2;
+      console.log('window.a =>', window.a);
+      console.log('a =>', a);
+    </script>
+
+    <script>
+      // https://mp.weixin.qq.com/s/QvkOhX0hQs8O15tlB6cm9Q
+      // todo !
+      (function () {
+        var a = 1;
+        function a() {}
+        console.log(a); // 1
+
+        var b;
+        function b() {}
+        console.log(b); // 函数b
+
+        function b() {}
+        var b;
+        console.log(b); // 函数b
+      })();
+    </script>
+
+    <script>
+      // todo ...
+    </script>
+
+    <script>
+      // y
+      function a() {}
+
+      var a;
+      console.log(typeof a); // 'function'
+
+      // 题目2
+      if (!(b in window)) {
+        // todo 在这之前b提升，b添加为window对象的属性
+        var b = 1;
+      }
+      console.log('b =>', b); // undefined
+
+      // 题目3
+      var c = 1;
+
+      function c(c) {
+        console.log('c =>', c);
+      }
+
+      c(2); // todo error 声明提升之后，因为c=1赋值覆盖了函数c的声明
+    </script>
+
+    <script>
+      // https://www.bilibili.com/video/BV1fE411P7Eh
+      (function () {
+        var m = 1,
+          j = (k = 0);
+
+        function add(n) {
+          return (n = n + 1);
+        }
+
+        y = add(m);
+
+        function add(n) {
+          return (n = n + 3); // todo ?? 可以这么写
+        }
+
+        z = add(m);
+
+        console.log(y, z); // 4, 4
+      })();
+    </script>
+
+    <script>
+      // https://www.bilibili.com/video/BV1hV411679v?p=5
+      // y
+      (() => {
+        function fun(n) {
+          console.warn(n); // 123
+          var n = 456;
+          console.warn(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+
+      // 改动后
+      (() => {
+        function fun() {
+          console.log(n); // undefined
+          var n = 456;
+          console.log(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+
+      // 再改动
+      (() => {
+        function fun() {
+          console.log(n); // 123
+          n = 456;
+          console.log(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+    </script>
+
+    <script>
+      // https://www.bilibili.com/video/BV1hV411679v?p=11
+      // y
+      var a2 = 10;
+
+      function test() {
+        a2 = 100;
+        console.warn('a2', a2); // 100
+        console.log(this.a2); // 10，因为this.a2是全局执行上下文的值，并不是函数执行上下文的值
+        var a2; // 变量声明提升了
+        console.log(a2); // 100
+      }
+
+      test();
+    </script>
+  </body>
+</html>

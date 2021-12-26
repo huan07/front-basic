@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <div id="div-customers"></div>
+
+    <script>
+      // 图像Ping
+      // 一个网页可以从任何网页加载图像，不用担心跨域问题，请求的数据是通过查询字符串形式发送的
+      var img = new Image();
+
+      img.onload = img.onerror = function () {
+        console.log('Done');
+      };
+
+      img.src = 'https://www.baidu.com/img/bd_logo1.png?qua=high&name=value';
+    </script>
+
+    <script type="text/javascript">
+      // jsonp
+
+      // 特点：
+      // 简单易用，
+      // 没有兼容性问题，老式浏览器全部支持，服务端改造非常小
+
+      // 不足：
+      // 只能发 GET 请求
+      // 其他域可能不安全
+      // 不好确定 JSONP 请求是否失败
+      function callbackFunction(result) {
+        console.log('result =>', result);
+        var ul = '<ul>';
+        for (var i = 0; i < result.length; i++) {
+          ul += '<li>' + result[i] + '</li>';
+        }
+        ul += '</ul>';
+        document.getElementById('div-customers').innerHTML = ul;
+      }
+
+      function addScriptTag(src) {
+        var script = document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        // script.type = 'text/javascript';
+        script.src = src;
+        document.body.appendChild(script);
+      }
+
+      window.onload = function () {
+        addScriptTag('http://www.runoob.com/try/ajax/jsonp.php?jsoncallback=callbackFunction');
+        // jsoncallback=callbackFunction 需要和后端约定 键值对
+        // 服务器返回的是 callbackFunction(["customername1","customername2"])
+      };
+    </script>
+  </body>
+</html>

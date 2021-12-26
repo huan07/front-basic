@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6.2.3原型模式</title>
+  </head>
+  <body>
+    <!-- x3 -->
+    <script>
+      // prototype 每个函数都有的属性，是一个指针，指向对象，其用途是，实例对象共享的属性和方法
+      function Person() {
+        // 实例属性、方法
+      }
+
+      Person.prototype.name = 'person11_person12'; // 原型对象 的所有属性和方法，都能被 实例对象 共享
+      Person.prototype.age = 30;
+      Person.prototype.job = 'job';
+      Person.prototype.sayName = function () {
+        return this.name + '-' + this.age + '-' + this.job;
+      };
+
+      var person11 = new Person();
+
+      var person12 = new Person();
+      person12.name = 'person12';
+
+      console.log(person11, person12);
+      console.log('实例对象共享的方法 =>', person11.sayName, person11.sayName === person12.sayName);
+
+      //
+      console.log('constructor =>', person11.constructor === Person);
+      console.warn(
+        '函数关系恒等规则 =>',
+        Person.prototype,
+        Person.prototype.constructor === Person
+      );
+
+      console.warn(
+        '实例对象的隐式原型 指向 构造函数的显式原型 =>',
+        person11.__proto__ === Person.prototype
+      );
+      console.log(Object.getPrototypeOf(person11) === Person.prototype);
+      console.log(Person.prototype.isPrototypeOf(person11));
+
+      //
+      var descriptor = Object.getOwnPropertyDescriptor(Person, 'prototype');
+      var descriptor2 = Object.getOwnPropertyDescriptor(Person.prototype, 'constructor');
+
+      console.error('prototype不可枚举 =>', descriptor);
+      console.error('constructor不可枚举 =>', descriptor2);
+    </script>
+  </body>
+</html>

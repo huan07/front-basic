@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        .box {
+            width: 200px;
+            height: 60px;
+            background: red;
+        }
+
+        .box2 {
+            width: 200px;
+            height: 100px;
+            background: lightblue;
+
+            /* margin-top: 10px; */
+            margin-top: 10px;
+
+        }
+
+        .box3 {
+            width: 200px;
+            height: 60px;
+            background: lightgrey;
+
+            /* margin-top: 20px; */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<!--
+todo 在父元素设置overflow: hidden，BFC 的特点，
+隐藏了子元素，比较有局限
+-->
+
+<div class="box">
+    box
+</div>
+<div class="box2 BFC_3_1">
+    <div class="box3">box3</div>
+</div>
+
+</body>
+</html>

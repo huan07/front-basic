@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // 深层对象的可变性
+      // Object.freeze 将会使对象 浅冻结 ，但不会保护深层属性不被修改。
+      // 如果我们觉得需要保护一个对象，避免其“从头到尾”发生改变，则可以递归地应用 Object.freeze 或使用现有的“深度冻结”库。
+      // https://mp.weixin.qq.com/s/6TbV-WlXi7btB4b3nfHIIQ
+      const user = {
+        name: 'Joe',
+        age: 25,
+        pet: {
+          type: 'dog',
+          name: 'Buttercup',
+        },
+      };
+
+      Object.freeze(user);
+
+      user.pet.name = 'Daffodil';
+
+      console.log(user, user.pet.name);
+    </script>
+  </body>
+</html>

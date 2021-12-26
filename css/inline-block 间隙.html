@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="0.css">
+    <style type="text/css">
+        body > div {
+            margin-bottom: 40px;
+        }
+
+        .fixed2 {
+            font-size: 0; /* 2.比较麻烦，父子元素都要设置font-size todo 还行吧，具体场景用具体对策 */
+        }
+
+        .fixed3 {
+            letter-spacing: -100px; /* 3.水平方向间隙消除了，但是垂直方向并没有啊 todo bad */
+        }
+
+        .box {
+            background: wheat;
+        }
+
+        .span {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<!--
+TODO
+因为white-space属性指定 元素内的空白 怎样处理，默认值是normal , 也就是空格，回车当作空白符
+有换行了，就会有空白符显示出来，
+解决方式1：行内块元素不要换行写，/* 1.水平方向间隙消除了，但是垂直方向并没有啊 todo bad */
+空白符就是一个字符，有字符了就有字体大小，
+-->
+<div>
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+</div>
+<hr>
+
+<div>
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50"><img
+    src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50"><img
+    src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+</div>
+
+<div class="fixed2">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+</div>
+
+<div class="fixed3">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+    <img src="../images/icon-wyz-logo.png" alt="../images/icon-wyz-logo.png" width="100" height="50">
+</div>
+
+<div class="box">
+    <img src="../images/image.jpg" alt="" width="200" height="100">
+    <span>good film</span>
+    <span>好电影，图片文字是按照 基线 对齐的</span>
+</div>
+<hr>
+
+<div class="box fixed2">
+    <img src="../images/image.jpg" alt="" width="200" height="100">
+    <span class="span">good film</span>
+    <span class="span">还是没有解决，因为文字默认vertical-align: baseline 基线 对齐</span>
+</div>
+
+<!-- 有副作用，文字下垂了呢 ？？？todo bad -->
+<div class="box" style="line-height: 0;">
+    <img src="../images/image.jpg" alt="" width="200" height="100">
+    <span class="span">good film</span>
+    <span class="span">基线 不是字体最底部的那条线</span>
+</div>
+
+<!-- 图片底部对其即可 todo best -->
+<div class="box">
+    <img src="../images/image.jpg" alt="" style="vertical-align: bottom;" width="200" height="100">
+    <span class="span">good film</span>
+    <span class="span">已解决，图片底部和文字地步对齐，图片底部没有间隙</span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <script>
+      // 任何类型的值转为字符串值
+      console.log('string =>', String('324'), String(''));
+
+      console.log('number =>', String(123));
+
+      console.log('true / false result =>', String(true), String(false));
+
+      console.log('undefined / null result =>', String(undefined), String(null));
+    </script>
+
+    <script>
+      // String
+      // 参数是对象，返回类型字符串
+      // 参数是数组，返回数组的字符串形式(因为数组有自定义的toString方法)
+      var obj = { a: 1 };
+      console.warn('object => ', String(obj));
+      console.error(String([1, 2, 3]), String([1]), String([]), String([1]));
+
+      function myString(obj) {
+        var _string = obj.toString();
+        console.error('obj.toString() =>', _string);
+        if (typeof _string === 'object') {
+          var _value = obj.valueOf();
+          if (typeof _value === 'object') {
+            console.error('');
+          }
+          return String(_value);
+        }
+        return String(_string);
+      }
+
+      var obj2 = {
+        valueOf: function () {
+          return {};
+        },
+        toString: function () {
+          return {};
+        },
+      };
+
+      // console.log(myString(obj2)); // error
+
+      console.log(
+        myString({
+          // '2'
+          toString: function () {
+            return 2;
+          },
+        })
+      );
+
+      console.log(
+        myString({
+          // ''
+          toString: function () {
+            return '';
+          },
+        })
+      );
+
+      console.log(
+        myString({
+          // 'false'
+          toString: function () {
+            return false;
+          },
+        })
+      );
+
+      console.log(
+        myString({
+          // '[string String]' // todo !!
+          valueOf: function () {
+            return 333;
+          },
+        })
+      );
+
+      console.log(
+        myString({
+          // '333'
+          valueOf: function () {
+            return 2;
+          },
+          toString: function () {
+            return 333; // 优先调用
+          },
+        })
+      );
+    </script>
+  </body>
+</html>

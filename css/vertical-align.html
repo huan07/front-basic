@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="0.css">
+    <style type="text/css">
+        div {
+            width: 400px;
+            height: 150px;
+            background: lightpink;
+            border: 1px solid black;
+        }
+
+        span {
+            display: inline-block; /* todo 1. */
+            width: 80px;
+            background: white;
+            margin-left: 20px;
+        }
+
+        div > span:nth-of-type(3n+1) {
+            height: 40px;
+        }
+
+        div > span:nth-of-type(3n+2) {
+            height: 60px;
+        }
+
+        div > span:nth-of-type(3n+0) {
+            height: 80px;
+        }
+
+        .defau {
+            vertical-align: baseline; /* todo 2. */
+        }
+
+        .box-1 {
+            vertical-align: top;
+        }
+
+        .box-2 {
+            vertical-align: middle;
+        }
+
+        .box-3 {
+            vertical-align: bottom;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <span style="font-size: 12px;">内联元素</span>
+    <span style="font-size: 14px;">内联元素</span>
+    <span style="font-size: 20px;">内联元素</span>
+</div>
+<br>
+
+<div>
+    <span class="defau" style="font-size: 12px;">内联元素</span>
+    <span class="defau" style="font-size: 14px;">内联元素</span>
+    <span class="defau" style="font-size: 20px;">内联元素</span>
+</div>
+<hr>
+<hr>
+
+<p>top: 把元素的顶端与行中最高元素的顶端对齐</p>
+<div>
+    <span class="box-1"></span>
+    <span class=""></span>
+    <span class=""></span>
+</div>
+<br>
+
+<div>
+    <span class="box-1"></span>
+    <span class="box-1"></span>
+    <span class="box-1"></span>
+</div>
+<hr>
+<hr>
+
+<p>middle: 把此元素放置在父元素的中部</p>
+<div>
+    <span class="box-2" style="background: wheat;"></span>
+    <span class="box-2" style="background: wheat;"></span>
+    <span class="box-2" style="background: wheat;"></span>
+</div>
+<hr>
+<hr>
+
+<p>bottom: 把元素的底端与行中最低的元素的底端对齐</p>
+<div>
+    <span class="box-3"></span>
+    <span class="box-3"></span>
+    <span class="box-3"></span>
+</div>
+
+</body>
+</html>

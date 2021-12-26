@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<button id="btn">点我</button>
+<button id="btn1">解决方案1</button>
+<br />
+<br />
+
+
+<button id="btn2">解决方案2 自定义 bind 函数</button>
+<button id="btn3">解决方案3 原生 bind 函数</button>
+<br />
+<br />
+
+
+<button id="btn4">点我4 自定义 bind 函数结合函数柯里化</button>
+<button id="btn5">点我5 原生 bind 函数结合函数柯里化</button>
+<br />
+<br />
+
+<!-- x3 -->
+<script>
+    // Object.prototype.toString 只能检测 原生构造函数的构造函数名
+</script>
+
+<script>
+    // 使用构造函数窃取模式的继承并且不使用原型链，继承很可能被破坏
+    function Polygon(sides) {
+        if (this instanceof Polygon) { // 起初 this => Rectangle
+            this.sides = sides;
+            this.getArea = function() {
+                return 0;
+            };
+        } else {
+            return new Polygon(sides); // new 出来之后 this => Polygon
+        }
+    }
+
+    function Rectangle(width, height) {
+        Polygon.call(this, 2);
+        this.width = width;
+        this.height = height;
+        this.getArea = function() {
+            return this.width * this.height;
+        };
+    }
+
+    var rect = new Rectangle(5, 10);
+    console.log(rect, rect.getArea());// 没有继承到sides属性
+
+
+    // 解决上述问题：组合继承 或者 寄生组合式继承
+    function Polygon2(sides) {
+        if (this instanceof Polygon2) { // 原型链上找到
+            this.sides = sides;
+            this.getArea = function() {
+                return 0;
+            };
+        } else {
+            return new Polygon2(sides);
+        }
+    }
+
+    function Rectangle2(width, height) {
+        Polygon2.call(this, 2);
+        this.width = width;
+        this.height = height;
+        this.getArea = function() {
+            return this.width * this.height;
+        };
+    }
+
+    Rectangle2.prototype = new Polygon2();
+
+    var rect2 = new Rectangle2(55, 100);
+    console.log(rect2, rect2.getArea());
+</script>
+
+<script>
+    // 惰性载入函数，提高代码执行性能，to add 可以参照es6-basic/8/contains 加深理解
+    // 创建一个匿名、自执行的函数
+</script>
+
+<script>
+    // 函数绑定
+    // 将函数作为变量传递的同时保留代码的执行环境
+    var handler = {
+        innerText: 'event handled',
+        handleClick: function(event) {
+            console.log(this.innerText + ' , ' + event.target.innerText, this === event.target);
+        }
+    };
+
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click', handler.handleClick, false); // this => DOM 按钮，并不是 handler 对象
+
+
+    // todo fixed
+    var btn1 = document.getElementById('btn1');
+    btn1.addEventListener('click', function(event) { // 闭包
+        handler.handleClick(event);
+    }, false);
+
+
+    // todo fixed2 自定义 bind，返回了 在给定环境中 调用给定函数 的函数
+    function bind(fn, context) { // 自定义
+        return function() {
+            return fn.apply(context, arguments);
+        }
+    }
+
+    var btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', bind(handler.handleClick, handler), false);
+
+
+    // todo fixed3 原生函数具备的bind
+    var btn3 = document.getElementById('btn3');
+    btn3.addEventListener('click', handler.handleClick.bind(handler), false);
+</script>
+
+<script>
+    function add(num1, num2) {
+        return num1 + num2;
+    }
+
+    function curriedAdd(num2) {
+        return add(5, num2);
+    }
+
+    console.log(add(2, 3), curriedAdd(3));
+
+    // 函数绑定
+    // 函数柯里化：把 接受多个参数的函数 变换成 接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下参数的新函数
+
+    // 函数柯里化原理是，使用闭包把传入参数保存起来，当传入参数的数量足够执行函数时，就开始执行函数
+    function curry(fn) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        return function() {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var finalArgs = args.concat(innerArgs);
+            return fn.apply(null, finalArgs);
+        }
+    }
+
+    //
+    // 自定义 bind 函数结合函数柯里化
+    function bind2(fn, context) {
+        var args = Array.prototype.slice.call(arguments, 2);
+        return function() {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var finalArgs = args.concat(innerArgs);
+            return fn.apply(context, finalArgs);
+        }
+    }
+
+    var handler4 = {
+        innerText: 'event handled 4',
+        handleClick: function(name, event) { // 单击的回调函数，默认最后参数是 event
+            console.log(this.innerText + ' , ' + name + ' , ' + event.target.innerText);
+        }
+    };
+
+    var btn4 = document.getElementById('btn4');
+    btn4.addEventListener('click', bind2(handler4.handleClick, handler4, 'btn4 按钮'), false);
+
+    // 原生 bind 函数结合函数柯里化
+    var btn5 = document.getElementById('btn5');
+    btn5.addEventListener('click', handler4.handleClick.bind(handler4, 'btn5 按钮'), false);
+
+
+    var curriedAdd2 = curry(add, 5);
+    console.log('curriedAdd2 =>', curriedAdd2(3));
+
+    var curriedAdd2_2 = curry(add, 5, 12);
+    console.log('curriedAdd2_2 =>', curriedAdd2_2());
+</script>
+
+</body>
+</html>

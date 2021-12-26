@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x</title>
+</head>
+<body>
+
+<script>
+    setTimeout(function() {
+        console.log('timeout 2000');
+    }, 2000);
+
+    setTimeout(function() {
+        console.log('timeout 1000');
+    }, 1000);
+
+    function fn() {
+        console.log('fn()');
+    }
+
+    fn();
+
+    console.log('执行alert() 之前');
+    alert('---- ---- => '); // 暂停当前主线程的执行，同时暂停计时，点击确定后，恢复程序执行和计时。// todo !!
+    console.log('执行alert() 之后');
+
+</script>
+
+</body>
+</html>

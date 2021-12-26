@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <style>
+      .animation {
+        width: 400px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="animation" style="background: red"></div>
+    <script>
+      var animation = document.getElementsByClassName('animation')[0];
+      var opacity = 1;
+
+      var fader = setInterval(function () {
+        opacity -= 0.1;
+        if (opacity >= 0.1) {
+          animation.style.opacity = opacity;
+        } else {
+          opacity = 1;
+          // clearInterval(fader);
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>

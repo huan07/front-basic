@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <style>
+      .change-color {
+        width: 400px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="change-color"></div>
+    <div class="change-color fixed"></div>
+
+    <script>
+      // 3.将任务放到浏览器最早可得的空闲时段执行
+
+      // 所以那些计算量大、耗时长的任务，常常会被放到几个小部分，分别放到setTimeout(f, 0)里面执行。
+
+      // 写法1:
+      // 会造成浏览器“堵塞”，因为 JavaScript 执行速度远高于 DOM，会造成大量 DOM 操作“堆积”
+      // 看不到背景颜色的变化，只看到最后一次背景颜色值  // ! bad
+      var changeColor = document.getElementsByClassName('change-color')[0];
+      for (var i = 0xffa100; i <= 0xffa1f0; i += 32) {
+        changeColor.style.backgroundColor = '#' + i.toString(16);
+
+        console.log('changeColor =>', changeColor.style.backgroundColor);
+      }
+
+      // 写法2:
+      // ! better
+      var changeColorFixed = document.querySelector('.change-color.fixed');
+      var timer;
+      var i = 0xffa100;
+
+      function func() {
+        timer = setTimeout(func, 1000);
+        changeColorFixed.style.backgroundColor = '#' + i.toString(16);
+        i += 32;
+
+        if (i > 0xffa1f0) {
+          clearTimeout(timer);
+        }
+
+        console.log('changeColorFixed =>', changeColorFixed.style.backgroundColor, timer);
+      }
+
+      timer = setTimeout(func, 1000); // 模拟 setInterval // !!
+
+      // 使用这种技巧的例子有代码高亮的处理
+      // 如果代码块很大，一次性处理，可能会对性能造成很大的压力，
+      // 那么将其分成一个个小块，一次处理一块，比如写成setTimeout(highlightNext, 50)的样子，性能压力就会减轻。
+    </script>
+  </body>
+</html>

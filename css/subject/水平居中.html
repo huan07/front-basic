@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      .span-2 {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    </style>
+  </head>
+  <body>
+    <p class="text-center">段落</p>
+    <div class="text-center">
+      <span>span 对齐了，1.通过在父元素 div (block元素) 设置 text-align: center</span>
+    </div>
+    <hr />
+
+    <span class="text-center red-color">内联元素 并没有对齐？？</span>
+    <br />
+
+    <span class="text-center red-color" style="display: inline-block">
+      行内块元素 并没有对齐？？
+    </span>
+    <hr />
+
+    <div style="height: 200px; border: 2px solid wheat; position: relative">
+      <span class="span-2">span 对齐了，2.用定位 position: absolute; 脱离文档流，div 可以平移</span>
+    </div>
+  </body>
+</html>

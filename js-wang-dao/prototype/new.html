@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 构造函数的特点
+      // 首字母大写
+      // 1.函数体内部使用了 this 关键字，代表了所要生成的实例对象
+      // 2.生成对象的时候，必须使用 new 命令
+      var Vehicle = function (p) {
+        this.price = p;
+      };
+
+      var v = new Vehicle(500);
+      console.log(v);
+
+      var v2 = Vehicle(999); // 普通函数调用，不会生成实例对象；this 这时代表全局对象，将造成一些意想不到的结果。
+      console.log(v2, this.price, price, typeof v2); // 返回的是 undefined // !!
+    </script>
+
+    <script>
+      // 为了保证构造函数必须与 new 命令一起使用
+      // fixed1
+      function Fubar(foo, bar) {
+        'use strict';
+        // 严格模式，函数内部的 this 不能指向全局对象，默认等于 undefined，JavaScript 不允许对 undefined 添加属性
+
+        this._foo = foo;
+        this._bar = bar;
+      }
+
+      // Fubar('foo','bar'); // error
+
+      // fixed2 better
+      function Fubar2(foo, bar) {
+        console.log('Fubar2 this => => => => => =>', this);
+        if (!(this instanceof Fubar2)) {
+          return new Fubar2(foo, bar);
+        }
+        this._foo = foo;
+        this._bar = bar;
+      }
+
+      console.warn(new Fubar2('foo2', 'bar2')._foo);
+      console.log(Fubar2('foo', 'bar')._foo);
+
+      // fixed3 better
+      function Fubar3() {
+        console.log('解决方法3 new.target => => => => => =>', new.target);
+        if (!new.target) {
+          throw new Error('请使用 new 命令调用');
+        }
+      }
+
+      new Fubar3();
+      // Fubar3();
+    </script>
+
+    <script>
+      // new 命令的原理
+      function Foo() {}
+
+      var obj = {}; // 创建空对象
+      obj.__proto__ = Foo.prototype; // 空对象的隐式原型等于构造函数的显式原型
+      Foo.call(obj);
+
+      // 1.构造函数内部有 return obj, 则返回 obj; 否则, 返回 this 对象 // !
+      // 2.对普通函数使用 new 命令，返回 {} // !
+      (function example() {
+        var Vehicle = function () {
+          this.price = 1000;
+          return { price: 100 }; // 这种情况下，没有foo.__proto__ === Foo.prototype
+        };
+        var vehicle = new Vehicle();
+        console.log('new =>', vehicle);
+
+        //
+        var Vehicle2 = function () {
+          this.price = 2000;
+          return 200; // 被忽略的，new 的结果是 this
+        };
+        var vehicle2 = new Vehicle2();
+        console.log('new2 =>', vehicle2, vehicle2 === 200);
+
+        //
+        function getMessage() {
+          return 'this is a message';
+        }
+
+        var msg = new getMessage();
+        console.log('new ordinary function =>', msg, typeof msg);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>doing</title>
+</head>
+<body>
+
+<script>
+    var defaultView = document.defaultView;
+    console.log(defaultView, defaultView === window);
+
+    //
+    var scrollingElement = document.scrollingElement;
+    console.log('scrollingElement => ', scrollingElement, scrollingElement.scrollTop);
+
+    //
+    var activeElement = document.activeElement;
+    console.log('activeElement => ', activeElement);
+
+    //
+    var fullscreenElement = document.fullscreenElement;
+    console.log('fullscreenElement => ', fullscreenElement);
+</script>
+
+<script>
+    // HTMLCollection实例
+    var links = document.links;
+
+    var forms = document.forms;
+
+    var images = document.images;
+
+    var scripts = document.scripts;
+
+    var styleSheets = document.styleSheets;
+
+    console.log('links => ', links);
+
+    console.log('forms => ', forms);
+
+    console.log('images => ', images);
+
+    console.log('scripts => ', scripts);
+
+    console.log('styleSheets => ', styleSheets);
+</script>
+
+<script>
+    var documentURI = document.documentURI; // 继承自Document接口，可用于所有文档
+
+    var URL = document.URL;                 // 继承自HTMLDocument接口，只能用于 HTML 文档
+
+    console.log('documentURI => ', documentURI);
+
+    console.log('URL => ', URL);
+</script>
+
+<script>
+    // 设置document.domain会导致端口被改成null  todo !!!
+    var domain = document.domain;
+
+    console.log('domain => ', domain);
+
+    /* var location = window.location;
+     var location2 = document.location;
+
+     console.log(location);
+     console.log(location2);*/
+
+    var lastModified = document.lastModified;
+    console.log('lastModified => ', lastModified);
+</script>
+
+<script>
+    var characterSet = document.characterSet;
+    console.log('characterSet => ', characterSet);
+
+    var referrer = document.referrer;
+    console.log('referrer => ', referrer);
+</script>
+
+<script>
+    var compatMode = document.compatMode;
+
+    if (compatMode === 'CSS1Compat') {
+        console.log('严格模式 => ', compatMode);
+        console.log('严格模式 => ', '<!DOCTYPE html> ');
+    } else if (compatMode === 'BackCompat') {
+        console.log('向后兼容模式 => ', compatMode);
+    }
+</script>
+
+<script>
+    // 检查网页是否加载成功
+    if (document.readyState === 'complete') {
+        console.log('document.readyState => ', document.readyState);
+    }
+
+    // 轮询检查 TODO ??
+    var interval = setInterval(function() {
+
+        // alert(document.readyState);
+
+        if (document.readyState === 'complete') {
+            clearInterval(interval);
+
+            // alert(document.readyState);
+            // alert('退出 ');
+        }
+
+    }, 100);
+</script>
+
+<iframe id="editor" src="about:blank"></iframe>
+<script>
+    var editor = document.getElementById('editor');
+    editor.contentDocument.designMode = 'on';
+</script>
+
+<script>
+    // todo !!! implementation
+</script>
+
+</body>
+</html>

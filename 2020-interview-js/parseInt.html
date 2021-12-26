@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    var result = "1 2 3".replace(/\d/g, parseInt);
+
+    console.log(result)
+
+    var item0 = parseInt('1', 0); // TODO 0是特殊情况
+    var item2 = parseInt('2', 2);
+    var item4 = parseInt('3', 4);
+    var itemEmpty = parseInt('', 1);
+    var itemEmpty3 = parseInt('', 3);
+    console.log(
+        item0,
+        item2,
+        item4,
+        itemEmpty,
+        itemEmpty3
+    )
+
+    // 题目2
+    var result2 = ["1", "2", "3"].map(parseInt);
+
+    console.log('result2 =>', result2)
+
+    var x = parseInt('1', 0);
+    var y = parseInt('2', 1);
+    var z = parseInt('3', 2);
+
+    console.log(x, y, z)
+
+</script>
+
+</body>
+</html>

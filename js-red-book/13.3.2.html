@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<input type="button" value="click me btnDOM0" id="btnDOM0">
+<input type="button" value="click me btnIE" id="btnIE"><br><br>
+
+<a href="http://www.baidu.com" id="link" target="_blank">跳转到百度首页</a><br>
+<a href="http://www.baidu.com" id="link2" target="_blank">跳转到百度首页 取消默认行为，取消事件传播</a>
+
+<script>
+    var btn = document.getElementById('btnDOM0');
+    btn.onclick = function() {
+        var event = window.event;
+        console.log(event.srcElement === this);  // true
+    };
+
+    var btnIE = document.getElementById('btnIE');
+    btnIE.attachEvent('onclick', function(event) {
+        // 也可以用 window.event
+        console.log(event.srcElement === this);  // false  this => window 在全局作用域执行的
+    });
+
+    var linkX = document.getElementById('link');
+    linkX.onclick = function() { // test only in ie
+        var event = window.event;
+        event.returnValue = false; // 取消事件的默认行为
+
+        event.cancelBubble = true;  // 只能取消事件冒泡（ IE 只支持事件冒泡）
+    };
+</script>
+
+<script>
+    var EventUtil = {
+        getEvent: function(event) {
+            return event ? event : window.event;
+        },
+        getTarget: function(event) {
+            return event.target || event.srcElement;
+        },
+        preventDefault: function(event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
+        stopPropagation: function(event) {
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        }
+    };
+
+
+    // test
+    var link2 = document.getElementById('link2');
+    link2.onclick = function(event) {
+        var e = EventUtil.getEvent(event);
+        console.log(EventUtil.getTarget(e));
+
+        EventUtil.preventDefault(e);
+        EventUtil.stopPropagation(e);
+    };
+
+    document.body.onclick = function() {
+        console.log('propagation to document.body');
+    }
+</script>
+
+</body>
+</html>

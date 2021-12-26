@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <style>
+      input {
+        width: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="button" id="my-button" value="click" />
+    <br />
+    <br />
+    <hr />
+
+    <input type="text" class="input-box" value="" />
+    <br />
+    <br />
+    <hr />
+
+    <input type="text" class="input-box bad" value="立即将字符转为大写 体验稍微差些" />
+    <br />
+    <br />
+    <hr />
+
+    <input type="text" class="input-box better" value="立即将字符转为大写" />
+
+    <script>
+      setTimeout(function () {
+        console.log(11);
+      }, 0);
+      console.log(22);
+    </script>
+
+    <script>
+      // setTimeout(f, 0)用途
+      // 1.可以调整事件的发生顺序
+
+      // 事件冒泡传播，子元素事先接收到onclick事件，向上传播到祖先元素onclick事件
+      // 执行顺序调整为A => C => B
+      var btn = document.getElementById('my-button');
+      btn.onclick = function A() {
+        console.log('A =>');
+
+        setTimeout(function B() {
+          // 子元素的事件回调 后触发
+          console.log('B =>');
+        }, 0);
+      };
+
+      document.body.onclick = function C() {
+        console.log('C =>');
+      };
+
+      // 2.用户自定义的回调函数，通常在浏览器的默认动作之前触发
+
+      // 只能将本次输入前的字符转为大写，因为浏览器此时还没接收到新的文本 // ! bad
+      document.getElementsByClassName('input-box')[0].onkeypress = function (event) {
+        this.value = this.value.toUpperCase();
+      };
+
+      // 看到变化过程，体验稍微差些 // ! bad
+      document.getElementsByClassName('input-box bad')[0].onkeyup = function (event) {
+        this.value = this.value.toUpperCase();
+      };
+
+      // ! better
+      document.getElementsByClassName('input-box better')[0].onkeypress = function (event) {
+        var self = this;
+        setTimeout(function () {
+          self.value = self.value.toUpperCase();
+        }, 0);
+      };
+    </script>
+  </body>
+</html>

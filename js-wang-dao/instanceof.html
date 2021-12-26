@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<script>
+    // instanceof 原理
+    // 右侧 构造函数的 prototype 属性是否在 // todo !!
+    // 左侧 实例对象的原型链上( .__proto__ )
+
+    // instanceof 检查整个原型链，因此同一个实例对象，可能会对多个构造函数都返回 true
+    function Vehicle() {
+
+    }
+
+    var v = new Vehicle();
+
+    console.log('v =>', v);
+    console.log('__proto__ =>', v.__proto__ === Vehicle.prototype, v.__proto__.__proto__ === Object.prototype);
+    console.log('instanceof =>', v instanceof Vehicle, v instanceof Object);
+
+
+    // 特殊情况 null 没有 __proto__ 属性
+    var obj = Object.create(null);
+    console.warn(obj, typeof obj, obj instanceof Object); // 注意：此时 instanceof 判断失真 // todo !!
+
+    // 应用
+    // 可以用来判断非 null 的对象
+    function isObject(input) {
+        return typeof input === 'object' && input instanceof Object;
+    }
+
+    function isObjectSelfDefine(input) {
+        return input instanceof Object && input !== null;
+    }
+
+    console.log('isObject =>', isObject({}), isObject(null));
+    console.log('isObjectSelfDefine =>', isObjectSelfDefine({}), isObjectSelfDefine(null));
+</script>
+
+<script>
+    // 用处，
+    // 判断值的类型，只能适用于对象 // todo !!
+    console.log([] instanceof Array, {} instanceof Object, undefined instanceof Object, null instanceof Object);
+</script>
+
+</body>
+</html>

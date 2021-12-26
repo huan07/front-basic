@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      div {
+        width: 200px;
+        height: 100px;
+        border: 1px solid wheat;
+
+        line-height: 100px;
+      }
+
+      span {
+        /* line-height: 200px; */
+      }
+
+      p {
+        /* line-height: 200px; */
+        /* TODO p元素是块元素需要重置 margin padding, 因为浏览器有默认css值 */
+      }
+
+      .div2 {
+        height: 200px; /* TODO X 不够灵活的高度 */
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+todo
+2.用 line-height, 与父元素等高度
+优点：可以设置父元素固定高度
+缺点：不太适合多行文字（ 除非父元素的高度够高 ）
+-->
+
+    <div>
+      <span>充电，为爱充电</span>
+    </div>
+    <hr />
+
+    <div>
+      <p>充电，为爱充电</p>
+    </div>
+    <hr />
+
+    <div class="div2">充电，为爱充电 充电，为爱充电 充电，为爱充电</div>
+  </body>
+</html>

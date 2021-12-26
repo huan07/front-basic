@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      .box {
+        border: 10px solid red;
+      }
+
+      .box2 {
+        width: 200px;
+        height: 50px;
+        background: wheat;
+      }
+
+      .box3 {
+        height: 20px;
+        background: pink;
+      }
+
+      .box-height {
+        /* 一旦父元素的高度写死，父元素的高度 将不能自适应 子元素的高度，不推荐用使用，! bad */
+        height: 70px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box2">origin</div>
+    </div>
+    <div class="box3"></div>
+    <br />
+    <hr />
+    <br />
+
+    <div class="box">
+      <div class="box2 pull-left">pull-left</div>
+    </div>
+    <div class="box3"></div>
+    <br />
+    <hr />
+    <br />
+
+    <div class="box box-height">
+      <div class="box2 pull-left">pull-left</div>
+    </div>
+    <div class="box3"></div>
+  </body>
+</html>

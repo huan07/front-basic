@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      var err = new Error('出错了');
+      console.log('err =>', err);
+      console.log('err.message =>', err.message); // message读取构造函数的参数 // !!
+
+      // 非标准属性
+      console.warn('err.name =>', err.name); // 开发者可以自定义，可以用来区分错误类型，// !!
+      console.warn('err.stack =>', err.stack);
+    </script>
+
+    <script>
+      function throwit() {
+        throw new Error('-- -- ');
+      }
+
+      function catchit() {
+        try {
+          throwit();
+        } catch (e) {
+          // e => try 代码块内 throw 的实例对象
+          console.log('catchit() e =>', e);
+        }
+      }
+
+      // console.log(foo); // 只是当前一段 script 代码终止了 // !!
+      // throwit();
+      catchit();
+      console.log('test 抛出错误 =>');
+    </script>
+
+    <script>
+      // 自定义错误
+      function UserError(message) {
+        this.message = message || '默认信息';
+        this.name = 'UserError';
+      }
+
+      UserError.prototype = new Error(); // 可以参照class extends
+      UserError.prototype.constructor = UserError; //
+
+      var userErr = new UserError();
+      console.log(userErr, userErr.message);
+    </script>
+
+    <script>
+      // throw 手动中断程序执行，抛出错误
+      // try...catch 代码块捕获错误之后，程序不会中断
+
+      // throw 'Error'; // 可以抛出多种数据类型
+
+      // throw new UserError('测试自定义Error 中断程序 '); // test
+
+      try {
+        throw new UserError('测试自定义Error 不会中断程序 ');
+      } catch (e) {
+        console.log('自定义错误 e =>', e);
+        console.log('e.name =>', e.name);
+        console.log('e.message =>', e.message);
+      }
+
+      // catch代码块之中，还可以再抛出错误，甚至使用嵌套的try...catch结构。// todo !!
+    </script>
+  </body>
+</html>

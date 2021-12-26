@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x</title>
+</head>
+<body>
+
+<script>
+    // todo ?? 往后继续看
+
+    // example 2
+    function idle(x) {
+        try {
+            console.log('example 2 => ', x); // 1.
+            return 'result'; // 2. 只是最后返回
+        } finally {
+            console.log('FINALLY'); // 3.
+        }
+    }
+
+    var result = idle('hello');
+    console.log(result);
+
+    // example 3
+    // return语句的执行是排在finally代码之前，只是等finally代码执行完毕后才返回 // todo !!!
+    var count = 99;
+
+    function countUp() {
+        try {
+            return count;
+        } finally {
+            count++;
+        }
+    }
+
+    countUp();
+    console.log('example 3 count => 100', count);
+
+    // finally代码块用法的典型场景
+    // 读取文件 TODO
+
+
+    // example 4
+    function f() { // todo ???
+        try {
+            console.log(0);
+            throw 'bug';
+        } catch (e) {
+            console.log('example 4 => ', 1);
+            return true;    // 转入finally执行 todo !!!
+            console.log(2); // x
+        } finally {
+            console.log(3);
+            return false;   // 覆盖掉catch的返回值 todo !!!
+            console.log(4); // x
+        }
+        console.log(5);     // x
+    }
+
+    var result = f();
+    console.log('example 4 result false => ', result);
+
+
+    // catch代码块之中，触发转入finally代码快的标志，return / throw语句。
+    // example 5 // todo ???
+    function f5() {
+        try {
+            throw '出错了f5';
+        } catch (e) {
+            console.log('捕捉到内部错误');
+            throw e;
+        } finally {
+            return false;
+        }
+    }
+
+    try {
+        f5();
+    } catch (e) {
+        console.log('caught outer "bogus"');
+    }
+
+
+    // try代码块内部，还可以再使用try代码块。
+    // example 6
+    try {
+
+        try {
+            consle.log('hello world'); // 报错
+        } finally {
+            console.log('finally');    // 执行
+        }
+        console.log('will i run');
+
+    } catch (e) {
+        console.log('e => ', e);      // 被catch住
+        console.error(e.message);
+    }
+</script>
+
+</body>
+</html>

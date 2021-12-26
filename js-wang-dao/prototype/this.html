@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // this
+      // 总是返回一个对象，就是属性或方法“当前”所在的对象
+      var person = {
+        name: '张三',
+        describe: function () {
+          return '姓名 ' + this.name;
+        },
+      };
+      console.log(person.describe());
+    </script>
+
+    <script>
+      // 对象的属性可以赋给另一个对象，所以属性所在的当前对象是可变的，即 this 的指向是可变的 // !
+      var A = {
+        name: '张三',
+        describe: function () {
+          console.log('f1, 姓名 =>', this.name);
+        },
+      };
+      var B = {
+        name: '李四',
+      };
+
+      B.describe = A.describe;
+      A.describe();
+      B.describe();
+
+      // 2.
+      // 重构下
+      function f2() {
+        console.log('f2, 姓名2 =>', this.name);
+      }
+
+      var A2 = {
+        name: '张三2',
+        describe: f2,
+      };
+      var B2 = {
+        name: '李四2',
+        describe: f2,
+      };
+
+      A2.describe();
+      B2.describe();
+
+      // 3.
+      // 只要函数被赋给另一个变量，this 的指向就会变
+      var A3 = {
+        name: '张三',
+        describe: function () {
+          console.log('姓名3 =>', this.name);
+        },
+      };
+      var name = 'window.李四3';
+      var f = A3.describe;
+      f();
+
+      // todo ？
+      function validate(obj, lowval, hival) {
+        if (obj.value < lowval || obj.value > hival) {
+          console.log('Invalid value');
+        } else {
+          console.log(obj.value);
+        }
+      }
+    </script>
+    <input type="text" name="age" size="3" onChange="validate(this,18,99)" style="width: 200px" />
+
+    <script>
+      // todo ?
+      // 由于函数是一个单独的值，所以它可以在不同的环境（上下文）执行 // todo ?? 需要再理解
+      var fun = function () {
+        console.error('fun');
+      };
+      var obj = { fun: fun };
+
+      fun(); // 单独执行
+      obj.fun(); // obj环境执行
+
+      //
+      //
+      var fun2 = function () {
+        console.log(xx);
+      };
+      // fun2(); // xx未定义 error // todo !!
+
+      //
+      // this 能够在函数体内部获得当前的运行环境（context）// !! !! !!
+      var fun3 = function () {
+        console.log('this.x => ', this.x);
+      };
+
+      var x = 3;
+      var obj3 = {
+        fun3: fun3,
+        x: 33,
+      };
+
+      fun3(); // 单独执行
+      obj3.fun3(); // obj3环境执行
+    </script>
+
+    <script>
+      // this使用场合
+      // 1.全局环境
+      console.warn('this === window => 1', this === window);
+
+      function fun() {
+        console.warn('this === window => 2', this === window);
+      }
+
+      fun();
+
+      // 2.构造函数
+      var Obj = function (p) {
+        this.p = p;
+      };
+      var o = new Obj('hello world');
+      console.log('o.p =>', o.p);
+
+      // 3.对象的方法
+      var obj3 = {
+        foo: function () {
+          console.log(this);
+        },
+      };
+      obj3.foo();
+
+      // TODO ??
+      (obj3.foo = obj3.foo)(); // this => window
+      (false || obj3.foo)(); // this => window
+      (1, obj3.foo)(); // this => window
+
+      // 分别等同于
+      (obj3.foo = function () {
+        console.log(this);
+      })();
+      (function () {
+        console.log(this);
+      })();
+
+      (
+        false ||
+        function () {
+          console.log(this);
+        }
+      )();
+
+      (1,
+      function () {
+        console.log(this);
+      })();
+    </script>
+
+    <script>
+      // this 所在的方法不在对象的第一层，这时 this 只是指向 当前一层的对象 // !! !! !!
+      var a = {
+        p: 'hello',
+        b: {
+          m: function () {
+            console.warn('this.p => ', this.p); // this => 当前层，不会继承更上面的层
+          },
+        },
+      };
+      a.b.m();
+
+      // 避免多层 this
+      var o = {
+        f1: function () {
+          console.log('多层this =>', this);
+          var f2 = (function () {
+            console.log('多层this 内部 =>', this); // this => window
+          })();
+        },
+      };
+      o.f1();
+
+      {
+        // fixed: this by that 或者用箭头函数
+        var o2 = {
+          f1: function () {
+            console.warn('多层this fixed =>', this);
+            var that = this; // todo fixed 闭包（ 沿作用域链查处 ）
+            var f2 = (function () {
+              console.warn('多层this 内部 fixed =>', that); // that => o2
+            })();
+          },
+        };
+        o2.f1();
+
+        //
+        // fixed2: this by use strict
+        var counter = {
+          count: 0,
+        };
+        counter.inc = function () {
+          // 'use strict'; // error this => undefined
+          this.count++;
+        };
+
+        var f = counter.inc;
+        f(); // 改变的是全局环境的 count // !!
+        counter.inc(); // 改变的是 counter 的 count  // !!
+
+        console.log('counter.count => ', counter.count, window.count);
+      }
+    </script>
+
+    <script>
+      // 避免数组处理方法中的 this
+      var o = {
+        v: 'hello',
+        p: ['a1', 'a2'],
+        f: function f() {
+          this.p.forEach(function (item) {
+            console.warn(this.v + ' ' + item); // this.v => undefined, fixed可以使用中间变量固定this
+          });
+        },
+      };
+      o.f();
+
+      {
+        // fixed
+        var oFixed = {
+          v: 'hello1',
+          p: ['a1', 'a2'],
+          f: function f() {
+            var that = this;
+            this.p.forEach(function (item) {
+              console.log(that.v + ' ' + item);
+            });
+          },
+        };
+        oFixed.f();
+
+        // fixed2
+        var oFixed2 = {
+          v: 'hello2',
+          p: ['a1', 'a2'],
+          f: function f() {
+            this.p.forEach(function (item) {
+              console.log(this.v + ' ' + item);
+            }, this);
+          },
+        };
+        oFixed2.f();
+
+        // fixed3
+        var oFixed3 = {
+          v: 'hello3',
+          p: ['a1', 'a2'],
+          f: function f() {
+            this.p.forEach(
+              function (item) {
+                console.log(this.v + ' ' + item);
+              }.bind(this)
+            );
+          },
+        };
+        oFixed3.f();
+      }
+    </script>
+  </body>
+</html>

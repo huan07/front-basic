@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x4</title>
+</head>
+<body>
+
+<script>
+    // ! 用于将布尔值变为相反值（对于非布尔值，先做一次隐式类型转换为布尔值） // todo 隐式转换
+    // !! 经过两次取反运算，等价于 Boolean()
+</script>
+
+<script>
+    // 且运算符 &&
+    // 左侧运算子的布尔值是 true (对于非布尔值，先做一次隐式类型转换为布尔值)，则返回右边运算子 的值 (如果是函数，就去执行函数) // todo 隐式转换
+    // 左侧运算子的布尔值是 false (对于非布尔值，先做一次隐式类型转换为布尔值)，则返回左边运算子 的值 ，忽略右边运算子
+
+    // && 优先级比 || 高
+
+    // 用途：判断是函数，再执行函数
+    function f() {
+        console.log('f function');
+    }
+
+    f && f(); // todo !! 取代 if 结构，满足条件则执行，可用但是不够严谨
+    typeof ff === 'function' && ff(); // todo 并不会报错
+</script>
+
+<script>
+    // 或运算符 ||
+
+    // 用途：为一个变量设置默认值（容错处理，确保某种数据类型的情况下，调用其api，否则，可能会报错）
+    var array = undefined;
+    var _array = array || []; // todo !! 可用但是不够严谨
+    // console.log(array.length); // todo error
+    console.log(_array.length);
+
+    //
+    // “短路”规则，且运算符可以多个连用
+    // && 返回第一个为 false 的运算子 的值，而
+    // || 返回第一个为 true 的运算子 的值，
+    // 防止不必要的工作 // todo
+</script>
+
+</body>
+</html>

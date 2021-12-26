@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="0.css" />
+    <style type="text/css">
+      .box {
+        background: #bfa;
+        line-height: 50px; /* 此处被覆盖 */
+        font: 20px Georgia, serif;
+        /*
+        这种写法，要注意，// !
+        因为所有字体属性font里面包括了line-height属性，
+        但是，与拆开的写法相比，推荐简写属性，因为浏览器只解析一次，性能较好，// !
+        拆开写3次，就需要解析3次。
+        */
+      }
+
+      .box2 {
+        background: #bfa;
+        font: 20px Georgia, serif;
+        line-height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <p>我是一段超链接</p>
+      <br />
+      <p>我是一段超链接</p>
+      <br />
+      <p>我是一段超链接</p>
+      <br />
+      <p>
+        我是一段超链接，
+        <span class="red-color">line-height 并未生效 ? ? </span>
+      </p>
+      <br />
+    </div>
+
+    <div class="box2">
+      <p>我是一段超链接</p>
+      <br />
+      <p>我是一段超链接</p>
+      <br />
+      <p>我是一段超链接</p>
+      <br />
+      <p>我是一段超链接</p>
+      <br />
+    </div>
+  </body>
+</html>

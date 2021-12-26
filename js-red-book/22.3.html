@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            background-color: #98aaa1;
+        }
+
+        #div {
+            position: relative;
+            left: 0;
+            transition: 0.05s;
+            color: white;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<button id="btn">点我</button>
+
+<div id="div" style="left: 0;">重复移动的div缓缓移动重复移动的div缓缓移动</div>
+
+<script>
+    var btn = document.getElementById('btn');
+    btn.onclick = function() {
+        setTimeout(function() {
+            btn.style.background = 'black';
+        }, 2000);
+    }
+</script>
+
+<script>
+    // 避免setInterval()的重复定时器，使用链式setTimeout()调用
+    setTimeout(function() {
+        var div = document.getElementById('div');
+        var left = parseInt(div.style.left) + 5;
+        div.style.left = left + 'px';
+
+        if (left < 400) {
+            setTimeout(arguments.callee, 50);
+        }
+    }, 50);
+</script>
+
+<script>
+    // Yielding Processes  to add
+</script>
+
+</body>
+</html>

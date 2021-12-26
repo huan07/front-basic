@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 指定函数内部的this指向
+      var obj = {};
+      var f = function () {
+        return this;
+      };
+
+      console.log(
+        f.call() === window,
+        f.call(null) === window,
+        f.call(undefined) === window, // 不传/null/undefined，默认传入全局对象 // !
+        f.call(window) === window
+      );
+
+      console.log(f.call(obj) === obj); // call传入对象
+      console.log(f.call(5)); // call方法的参数是一个原始值，那么 这个原始值会自动转成 对应的包装对象
+    </script>
+
+    <script>
+      function add(a, b) {
+        return a + b;
+      }
+
+      console.warn('add => ', add.call(null, 11, 22), add.apply(null, [11, 22])); // call, apply 唯一区别传参数格式不一样
+
+      //
+      // call应用
+      // 调用对象的原生方法 // !
+      var obj = {};
+      console.log('自定义方法 before =>', obj.hasOwnProperty('toString')); // false
+
+      // 自定义方法覆盖掉继承的 hasOwnProperty 方法 缺陷
+      obj.hasOwnProperty = function () {
+        return true;
+      };
+      console.log('自定义方法 after =>', obj.hasOwnProperty('toString'));
+
+      // 无论 obj 上有没有同名方法，都不会影响结果 // !
+      console.log('调用对象的原生方法 =>', Object.prototype.hasOwnProperty.call(obj, 'toString')); // false
+
+      // apply应用
+      // 1.找出最大值
+      var a = [11, 12, 99];
+      var max = Math.max.apply(null, a);
+      var min = Math.min.apply(null, a);
+      console.log('max, min =>', max, min);
+
+      // 2.将数组的空元素变为 undefined
+      var arr = ['a', , 'b'];
+      var arrWithUndefined = Array.apply(null, arr); // todo ??
+      console.log('Array.apply => ', arr, arrWithUndefined);
+
+      // 3.“类似数组的对象”转为真正的数组 Array.prototype.slice
+
+      // 4.绑定回调函数的对象 // todo ??
+    </script>
+
+    <script>
+      // example
+      var counter = {
+        count: 0,
+        inc: function () {
+          this.count++;
+        },
+      };
+      var xx = {
+        count: 100,
+      };
+
+      var func = counter.inc.bind(counter);
+      func();
+
+      var funcXX = counter.inc.bind(xx);
+      funcXX();
+
+      console.log('bind =>', counter.count, xx.count);
+
+      //
+      //
+      // bind() 还可以接受更多的参数，将这些参数绑定 原函数的参数
+      var add = function (x, y) {
+        return this.m + this.n + x + y;
+      };
+      var obj = {
+        m: 1,
+        n: 100,
+      };
+      var newAdd = add.bind(obj, 2);
+      var value = newAdd(200);
+
+      console.warn('newAdd =>', newAdd);
+      console.log('bind value =>', value);
+
+      //
+      //
+      // 注意点
+      // 1.每一次返回一个新函数, 事件解绑 // !
+      // 2.结合回调函数使用( 数组forEach, map的回调函数内部this => window ) // !
+      var counter2 = {
+        count: 88,
+        inc: function () {
+          'use strict';
+          this.count++;
+        },
+      };
+
+      function callIt(callback) {
+        callback();
+      }
+
+      callIt(counter2.inc.bind(counter2)); // this 总是指向 counter2 // !
+      console.log('counter2.count =>', counter2.count);
+
+      // 3.结合call使用 // TODO ? ?
+      var xx = [1, 2, 3].slice(0, 1);
+      var xx_ = Array.prototype.slice.call([4, 5, 6], 0, 1);
+      console.log(xx, xx_);
+    </script>
+  </body>
+</html>

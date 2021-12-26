@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="0.css" />
+    <style type="text/css">
+      div:nth-of-type(3n + 1) {
+        width: 100px;
+        height: 30px;
+        background: red;
+      }
+
+      div:nth-of-type(3n + 2) {
+        width: 200px;
+        height: 60px;
+        background: wheat;
+      }
+
+      div:nth-of-type(3n + 0) {
+        width: 100px;
+        height: 30px;
+        background: blue;
+        border: 2px dashed black;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pull-left"></div>
+    <div></div>
+    <div></div>
+    <br />
+
+    <div class="pull-left"></div>
+    <div class="clear-left">clear-left</div>
+    <!-- todo 清除左侧浮动元素 对它的影响 -->
+    <div></div>
+    <br />
+    <hr />
+    <hr />
+    <br />
+
+    <!---->
+    <div class="pull-left"></div>
+    <div class="clear-left pull-right">pull-right 参照物</div>
+    <div></div>
+    <br />
+    <hr />
+    <br />
+
+    <div class="pull-left"></div>
+    <div class="clear-left pull-right"></div>
+    <div class="clear-left">clear-left</div>
+    <br />
+    <hr />
+    <br />
+
+    <div class="pull-left"></div>
+    <div class="clear-left pull-right">一样的</div>
+    <div class="clear-right">clear-right</div>
+    <br />
+    <hr />
+    <br />
+
+    <div class="pull-left"></div>
+    <div class="clear-left pull-right">一样的</div>
+    <div class="clear-both">clear-both</div>
+    <!-- todo clear: both 清除对它影响较大的那个元素的浮动 -->
+  </body>
+</html>

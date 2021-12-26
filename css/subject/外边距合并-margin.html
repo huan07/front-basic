@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      body > div {
+        background: pink;
+        width: 300px;
+      }
+
+      .box {
+        margin: 50px;
+      }
+
+      .box2 {
+        margin: 50px;
+        border-top: 1px solid yellow;
+      }
+
+      .box3 {
+        margin: auto; /* margin设置给垂直方向auto相当于0 */
+        border-top: 1px solid yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">一个 块元素 外边距塌陷</div>
+    <div class="box">一个 块元素 外边距塌陷</div>
+    <hr />
+
+    <div class="box2">box2一个块元素</div>
+    <div class="box2">box2一个块元素</div>
+    <hr />
+
+    <div class="box3">box3一个块元素</div>
+    <div class="box3">box3一个块元素</div>
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+
+    <div class="box" style="display: inline">一个 内联元素 不会外边距塌陷</div>
+    <div class="box" style="display: inline">一个 内联元素 不会外边距塌陷</div>
+    <hr />
+
+    <div class="box" style="display: inline-block">一个 行内块元素 不会外边距塌陷</div>
+    <div class="box" style="display: inline-block">一个 行内块元素 不会外边距塌陷</div>
+  </body>
+</html>

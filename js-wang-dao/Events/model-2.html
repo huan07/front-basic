@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<div id="div">元素节点对象的事件属性</div>
+
+<script>
+    window.onload = function() {
+        console.log('body onload');
+    };
+
+    document.getElementById('div').onclick = function() {
+        console.log('测试 触发事件click');
+    }
+</script>
+
+<script>
+    // 监听函数，只会在冒泡阶段触发
+</script>
+
+</body>
+</html>

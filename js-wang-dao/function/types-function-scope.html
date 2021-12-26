@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 全局变量：函数外部声明的变量
+      var v = 1;
+
+      function f() {
+        console.log('global v =>', v);
+      }
+
+      f();
+
+      //
+      // 局部变量：在函数内部定义的变量
+      function f2() {
+        var v2 = 2;
+      }
+
+      // console.log('local v2 => ', v2);  // error
+
+      // 函数内部的局部变量，覆盖同名全局变量（ 沿着作用域链查找 ） // !!
+      var v3 = 3;
+
+      function f3() {
+        var v3 = 32;
+        console.warn('函数内部调用v3 =>', v3);
+      }
+
+      f3();
+      console.log('函数外部调用v3 =>', v3);
+    </script>
+  </body>
+</html>

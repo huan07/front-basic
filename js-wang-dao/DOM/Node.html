@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>done</title>
+</head>
+<body>
+
+<div id="text-content">this is<span>some text </span>here</div>
+<div id="text-content-w">this is <span> some text </span> here</div>
+
+<script>
+    //
+    var tContent = document.getElementById('text-content').textContent;
+    console.log(tContent);
+
+    document.getElementById('text-content-w').textContent = '<p>被替换为段落</p>'
+</script>
+
+<script>
+    // 遍历当前节点的所有后代节点
+    function DOMComb(parent, callback) { // TODO ???
+        if (parent.hasChildNodes()) {
+            for (var node = parent.firstChild; node; node = node.nextSibling) {
+                if (node.nodeType === 1) {
+                    DOMComb(node, callback);
+                }
+            }
+        }
+        callback(parent, parent.nodeName);
+    }
+
+    DOMComb(document.body, console.log);
+
+
+    function elementsIter(parent, joinStr) { // better TODO ???
+        var result = [];
+
+        var children = parent.children;
+        for (var i = 0, len = children.length; i < len; i++) {
+            var child = children[i];
+            if (child.hasChildNodes()) {
+                elementsIter(child, joinStr);
+            } else {
+                result.push(child);
+            }
+        }
+        return result.join(joinStr);
+    }
+
+    var all = elementsIter(document.body, '//');
+    console.log('all ', all)
+</script>
+
+</body>
+</html>

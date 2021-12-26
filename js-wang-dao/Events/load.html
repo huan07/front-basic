@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // DOMContentLoaded: 网页下载并解析完成（整张页面的 DOM 生成）
+    // 所有外部资源（样式表、脚本、iframe 等等）可能还没有下载结束，
+    // 执行时间比load事件早
+
+    // todo attention
+    // JavaScript 脚本是同步执行的，脚本一旦发生堵塞，将推迟触发DOMContentLoaded事件
+    document.addEventListener('DOMContentLoaded', function(event) {
+        console.log('DOM 已生成');
+    });
+
+    for (var i = 0; i < 6; i++) {
+        console.log('js脚本是同步执行 => ', i, 'DOMContentLoaded事件在本轮同步任务执行结束后执行');
+
+    }
+</script>
+
+<script>
+    // readystatechange
+    // 当 Document 对象和 XMLHttpRequest 对象的readyState属性发生变化时触发
+    // loading,
+    // interactive,
+    // complete
+    document.onreadystatechange = function() {
+        console.log('document.readyState => ', document.readyState);
+        if (document.readyState === 'interactive') {
+            console.log('interactive condition => ', document.readyState);
+        }
+    }
+</script>
+
+</body>
+</html>

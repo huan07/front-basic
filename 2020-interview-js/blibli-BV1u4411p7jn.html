@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<a href="https://www.bilibili.com/video/BV1u4411p7jn" target="_blank">视频链接</a>
+
+<div>hoisting</div>
+<script>
+
+
+    // 题目2
+    //console.log(aa); // todo error 使用了未声明（未定义）的变量，js 执行会报错
+    aa = 12;
+
+    function fn() {
+        console.log(aa);
+        aa = 13;
+    }
+
+    fn();
+    console.log(aa);
+
+
+    // 题目3
+    (() => {
+        var a = 10, b = 11, c = 12;
+
+        function test(a) {
+            a = 1; // todo atten  a 在这儿是形参变量，是局部变量，并不是缺省 var 变量的全局变量
+            var b = 2;
+            c = 3;
+        }
+
+        test(11);
+        console.log('题目3 a', a, b, c); // 1错了，11，3
+
+    })();
+</script>
+
+<div>closure</div>
+<script>
+
+
+    // 题目2
+    function fn4(i) {
+        return function(n) {
+            console.error(n + (i++));
+        };
+    }
+
+    var f4 = fn4(10);
+    f4(20); // 30
+    fn4(20)(40); // 60
+    fn4(30)(50); // 80
+    f4(30); // 41
+
+    // 题目3 // todo ... P5 可以再看，虽然做对了
+    var num = 10;
+    var obj = { num: 20 };
+    obj.fn = (function(num) {
+        this.num = num * 3;
+        num++;
+        return function(n) {
+            this.num += n;
+            num++;
+            console.log('题目3', num);
+        };
+    })(obj.num);
+
+    var fn5 = obj.fn;
+    fn5(5); // 22
+
+    obj.fn(10); // 23
+    console.log('题目3', num, obj.num); // 60+5, 20+10
+
+
+    // 题目4
+
+    (() => {
+        var n = 0;
+
+        function a() {
+            var n = 10;
+
+            function b() {
+                n++;
+                console.log('inner n', n);
+            }
+
+            b();
+            return b;
+        }
+
+        var c = a(); // 11
+        c(); // 12
+
+        console.log('outer n', n); // 0
+
+    })();
+</script>
+
+<div>prototype</div>
+<script>
+    function Fn() {
+        this.x = 100;
+        this.y = 200;
+        this.getX = function() {
+            console.warn(this, this.x);
+        };
+    }
+
+    Fn.prototype = {
+        y: 400,
+        getX: function() {
+            console.log(this, this.x);
+        },
+        getY: function() {
+            console.log(this, this.y);
+        },
+        sum: function() {
+            console.log(this.x + this.y);
+        }
+    };
+
+    var f1 = new Fn;
+    var f2 = new Fn;
+    console.log('prototype', f1.getX === f2.getX); // false
+    console.log('prototype', f1.getY === f2.getY); // true
+
+    console.error(f1.__proto__.getY === Fn.prototype.getY); // true
+    console.log(f1.__proto__.getX === f2.getX); // false
+    console.log(f1.getX === Fn.prototype.getX); // false
+
+    console.error(f1.constructor); // Object() {}
+    console.log(Fn.prototype.__proto__.constructor); // Object() {}
+
+    f1.getX(); // this => 实例对象, 调用的是实例方法，100
+    f2.getY(); // this => 实例对象, 调用的是原型方法，200
+
+    f1.__proto__.getX(); // this => Fn.prototype, undefined
+    Fn.prototype.getY(); // this => Fn.prototype, 400
+
+
+    // 题目2
+    function Fun() {
+        this.a = 0;
+        this.b = function() {
+            console.log('题目2 a', this, this.a);
+        };
+    }
+
+    Fun.prototype = {
+        b: function() {
+            this.a = 20;
+            console.log('题目2 b', this.a);
+        },
+        c: function() {
+            this.a = 30;
+            console.log('题目2 c', this, this.a);
+        }
+    };
+
+    var myFun = new Fun();
+    myFun.b(); // 0
+    myFun.c(); // 30
+    Fun.prototype.c(); // 30
+</script>
+
+
+<hr>
+<button type="button" class="btn">点我1</button>
+<br>
+<button type="button" class="btn">点我2</button>
+<br>
+<button type="button" class="btn">点我3</button>
+<hr>
+
+<input type="button" class="input" value="按钮1 todo fixed"><br>
+<input type="button" class="input" value="按钮2"><br>
+<input type="button" class="input" value="按钮3">
+<hr>
+
+<input type="button" class="input2" value="按钮21 todo fixed2"><br>
+<input type="button" class="input2" value="按钮22"><br>
+<input type="button" class="input2" value="按钮23">
+<hr>
+<script>
+    // 所有的事件绑定都是异步编程（绑定的时候并没有执行），当点击操作触发事件函数执行的时候，循环已经结束了。
+    var btns = document.querySelectorAll('.btn');
+    for (var i = 0, len = btns.length; i < len; i++) {
+        btns[i].onclick = function() {
+            console.log(i);
+        };
+    }
+
+    // todo fixed IIFE解决，形成单独的作用域
+    var inputs = document.querySelectorAll('.input');
+    for (var j = 0, len = inputs.length; j < len; j++) {
+        inputs[j].onclick = (function(i) {
+            return function() {
+                console.log(i);
+            };
+        })(j);
+    }
+
+    // todo fixed2 let 块级作用域
+    var inputs2 = document.querySelectorAll('.input2');
+    for (let j2 = 0, len = inputs2.length; j2 < len; j2++) {
+        inputs2[j2].onclick = function() {
+            console.log(j2);
+        };
+    }
+</script>
+
+<div>this</div>
+<script>
+    var name = 'window';
+    var tom = {
+        name: 'tom',
+        show: function() {
+            console.log(this.name);
+        },
+        wait: function() {
+            var fun = this.show;
+            fun();
+        }
+    };
+    tom.wait(); // window
+</script>
+
+</body>
+</html>

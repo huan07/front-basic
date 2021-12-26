@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // 判断一个值>=0
+    var num = 0;
+    var str = '0';
+    var str_2 = '';
+    var str_3 = 'null';
+    var x = null;
+    var y = undefined;
+
+    var data = [
+        {
+            dataType: num,
+            'parseInt() result': parseInt(num) >= 0,
+            'result': num >= 0,
+            'Number()': Number(num),
+            'Number() result': Number(num) >= 0,
+
+            '+1 result': num + 1,
+            '+1 >=1 result': num + 1 >= 1
+        },
+        {
+            dataType: str,
+            'parseInt() result': parseInt(str) >= 0,
+            'result': str >= 0,
+            'Number()': Number(str),
+            'Number() result': Number(str) >= 0,
+
+            '+1 result': str + 1,
+            '+1 >=1 result': str + 1 >= 1
+        },
+        {
+            dataType: str_2,
+            'parseInt() result': parseInt(str_2) >= 0,
+            'result': str_2 >= 0,
+            'Number()': Number(str_2),
+            'Number() result': Number(str_2) >= 0,
+
+            '+1 result': str_2 + 1,
+            '+1 >=1 result': str_2 + 1 >= 1
+        },
+        {
+            dataType: str_3,
+            'parseInt() result': parseInt(str_3) >= 0,
+            'result': str_3 >= 0,
+            'Number()': Number(str_3),
+            'Number() result': Number(str_3) >= 0,
+
+            '+1 result': str_3 + 1,
+            '+1 >=1 result': str_3 + 1 >= 1
+        },
+        {
+            dataType: x,
+            'parseInt() result': parseInt(x) >= 0,
+            'result': x >= 0,
+            'Number()': Number(x),
+            'Number() result': Number(x) >= 0,
+
+            '+1 result': x + 1,
+            '+1 >=1 result': x + 1 >= 1
+        },
+        {
+            dataType: y,
+            'parseInt() result': parseInt(y) >= 0,
+            'result': y >= 0,
+            'Number()': Number(y),
+            'Number() result': Number(y) >= 0,
+
+            '+1 result': y + 1,
+            '+1 >=1 result': y + 1 >= 1
+        }
+    ];
+
+    console.table(data);
+    // 推荐用parseInt转换下，再比较，更加符合预期结果(另外2种比较方式错误地将 '' / null === 0 ) todo !!
+    // (或者用typeof var === 'number'判断下，再去比较) todo !!
+    // 直接比较与Number转换再比较一样的结果，可能是js引擎隐式调用了Number转换
+</script>
+
+</body>
+</html>

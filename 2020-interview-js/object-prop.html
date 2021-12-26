@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        let a = {},
+          b = '0',
+          c = 0;
+        a[b] = 'es5';
+        a[c] = 'es6';
+        console.log(a, a[b]);
+      })();
+      //
+      (function () {
+        let a = {},
+          b = Symbol('0'),
+          c = Symbol('0');
+        a[b] = 'es5';
+        a[c] = 'es6';
+        console.log(a, a[b]);
+      })();
+      //
+      (function () {
+        let a = {},
+          b = { n: 1 },
+          c = { n: 2 };
+        a[b] = 'es5';
+        a[c] = 'es6';
+        console.log(a, a[b]);
+      })();
+    </script>
+  </body>
+</html>

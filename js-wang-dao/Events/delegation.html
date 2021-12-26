@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<ul id="ul" style="padding: 20px;">
+    <li id="li1" style="padding: 0;">列表项1</li>
+    <li id="li2" style="padding: 20px 0;">列表项2</li>
+    <li id="li3" style="padding: 20px 0;">列表项3</li>
+    <li id="li4" style="padding: 0;">列表项4</li>
+</ul>
+<script>
+    // 做事件的代理
+    // 由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，
+    // 由父节点的监听函数统一处理多个子元素的事件。
+    var ul = document.querySelector('ul');
+    ul.addEventListener('click', function(evt) {
+        var target = evt.target;
+        console.log('target => ', target, target.id);
+    })
+</script>
+
+
+<div id="parent" style="background: pink; width:200px;height: 200px;">
+    <p id="child" style="background: red; width:100px;height: 100px;">点击子元素 捕获</p>
+</div>
+<script>
+    var parent = document.querySelector('#parent');
+    var child = document.querySelector('#child');
+    parent.addEventListener('click', function(evt) {
+        evt.stopPropagation(); // 阻止捕获
+        console.log('parent');
+    }, true);
+    child.addEventListener('click', function(evt) {
+        console.log('child');
+    }, true);
+</script>
+
+
+<div id="parent2" style="background: pink; width:200px;height: 200px;">
+    <p id="child2" style="background: red; width:100px;height: 100px;">点击子元素 冒泡</p>
+</div>
+<script>
+    var parent2 = document.querySelector('#parent2');
+    var child2 = document.querySelector('#child2');
+    parent2.addEventListener('click', function() {
+        console.log('parent2');
+    }, false);
+    child2.addEventListener('click', function(evt) {
+        evt.stopPropagation(); // 阻止冒泡
+        console.log('child2');
+    }, false);
+
+
+    child2.addEventListener('click', function(evt) {
+        // evt.stopImmediatePropagation(); // 不再触发后面所有click的监听函数
+        console.log('child2--1');
+    }, false);
+
+    child2.addEventListener('click', function(evt) {
+        console.log('child2--2');
+    }, false);
+</script>
+
+
+</body>
+</html>

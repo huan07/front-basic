@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // todo ... 复杂
+      // https://www.bilibili.com/video/BV1ek4y1r7GT?p=4&spm_id_from=pageDriver
+      // https://mp.weixin.qq.com/s/QvkOhX0hQs8O15tlB6cm9Q
+      function Foo() {
+        getName = function () {
+          console.log(1);
+        };
+        return this;
+      }
+
+      Foo.getName = function () {
+        console.log(2);
+      };
+
+      Foo.prototype.getName = function () {
+        console.log(3);
+      };
+
+      var getName = function () {
+        // 变量提升后的定义
+        console.log(4);
+      };
+
+      function getName() {
+        console.log(5);
+      }
+
+      Foo.getName(); // 2
+      getName(); // 4
+      Foo().getName(); // 3 ?
+      getName(); // 1
+
+      new Foo.getName(); // 3
+      new Foo().getName(); // 3
+
+      new new Foo().getName();
+    </script>
+
+    <script>
+      const person = {
+        address: {
+          country: 'china',
+          city: 'hangzhou',
+        },
+        say: function () {
+          console.log(`it's ${this.name}, from ${this.address.country}`);
+        },
+        setCountry: function (country) {
+          this.address.country = country;
+        },
+      };
+
+      const p1 = Object.create(person);
+      const p2 = Object.create(person);
+
+      p1.name = 'Matthew';
+      p1.setCountry('American');
+
+      p2.name = 'Bob';
+      p2.setCountry('England'); // 原型属性 被多个实例属性 共享
+
+      console.log(p1, p2);
+
+      p1.say();
+      p2.say();
+    </script>
+
+    <script>
+      // todo ...
+    </script>
+
+    <script>
+      // TODO ...
+      // 考察原型的动态性
+      function A() {}
+
+      A.prototype.n = 1;
+      var b = new A(); // 此处已创建好实例对象，// todo
+
+      A.prototype = {
+        n: 2,
+        m: 3,
+      };
+      var c = new A();
+
+      console.log('b => ', b, b.n, b.m); // 1, undefined
+      console.log('c => ', c, c.n, c.m); // 2, 3
+
+      // 题目2
+      var F = function () {};
+      Object.prototype.a = function () {
+        console.log('a');
+      };
+      Function.prototype.b = function () {
+        console.log('b');
+      };
+      var f = new F();
+      console.log('f => ', f);
+      console.log('F => ', F);
+
+      f.a();
+      // f.b(); // error // todo 注意
+      F.a();
+      F.b();
+    </script>
+
+    <script>
+      var arr = [];
+      var obj = {};
+      var fn = function () {};
+
+      console.log(arr, arr instanceof Array); // 数组的原型是数组
+      console.log(obj, obj instanceof Object); // 对象的原型是对象
+      console.log(fn, fn instanceof Function); // 函数的原型是函数
+    </script>
+
+    <script>
+      (() => {
+        var a = {},
+          b = Object.prototype;
+        console.log(
+          [a.prototype === b, Object.getPrototypeOf(a) === b],
+          '\n',
+          'a =>',
+          a,
+          '\n',
+          'b =>',
+          b
+        );
+      })();
+    </script>
+  </body>
+</html>

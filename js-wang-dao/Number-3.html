@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <script>
+      // 任何类型的值转为数值
+      // Number(),
+      // +
+      console.log('number => ', Number(123));
+      console.log('string => ', Number('324'));
+      console.log('boolean => ', Number(true));
+
+      // !
+      // !
+      console.log('NaN result => ', Number(undefined), Number('324abc'), Number({}));
+      console.log('0 result by Number => ', Number(null), Number(''), Number(false), Number([]));
+
+      //
+      console.log('NaN result by parseInt =>', parseInt(''), parseInt(false), parseInt(null));
+      console.log('1 result by parseInt =>', parseInt('  1'));
+    </script>
+
+    <script>
+      // Number() 将字符串转为数值， 整体转换
+      // parseInt针对字符串（非字符串先被转换为字符串）， 逐 个 解 析 字 符(隐式转换，逐位比较，遇到非数字就返回)
+
+      // parseInt的第二个参数，缺省是10，默认将十进制的字符串转为十进制的数字
+      // parseInt的结果要么是数字，要么是NaN // !
+      console.warn('Number =>', Number('324abc'));
+      console.log('parseInt =>', parseInt('324abc'), parseInt('a324abc'), parseInt(true));
+
+      // example used
+      var margin = '123px';
+      var marginUpdated = parseInt(margin) + 10;
+      console.log('margin =>', margin, marginUpdated);
+    </script>
+
+    <script>
+      // isNaN 只对数值有效，对于非数值，先做一次隐式类型转换为数值 // todo 隐式转换
+      // isNaN 为 true 的值，有可能不是 NaN，而是一个字符串  // todo !!
+      console.log('isNaN true result => ', isNaN(NaN), isNaN('hello'));
+      console.log(isNaN(12));
+
+      // 空数组和只有一个数值成员的数组，isNaN 返回 false todo !!!
+      console.log('isNaN false result => ', isNaN([]), isNaN([2]), isNaN(['2']));
+
+      // 判断 NaN 的方法
+      // 因此，使用 isNaN 之前，最好判断一下数据类型 // todo better
+      function myIsNaN(value) {
+        return typeof value === 'number' && isNaN(value);
+      }
+
+      {
+        console.log('myIsNaN => ', myIsNaN(NaN), myIsNaN('hello'));
+        console.log(myIsNaN(12));
+        console.log('myIsNaN => ', myIsNaN([]), myIsNaN([2]), myIsNaN(['2']));
+      }
+
+      // 判断NaN的方法 更可靠 todo best
+      function myIsNaNBest(value) {
+        return value !== value;
+      }
+
+      {
+        console.log('myIsNaNBest => ', myIsNaNBest(NaN), myIsNaNBest('hello'));
+        console.log(myIsNaNBest(12));
+        console.log('myIsNaNBest => ', myIsNaNBest([]), myIsNaNBest([2]), myIsNaNBest(['2']));
+      }
+
+      // isFinite
+      // 表示某个值是否为正常的数值
+      console.log(
+        'isFinite false result => ',
+        isFinite(Infinity),
+        isFinite(-Infinity),
+        isFinite(NaN),
+        isFinite(undefined)
+      );
+
+      console.log(
+        'isFinite true result => ',
+        isFinite(''),
+        isFinite(null),
+        isFinite(false),
+        isFinite(true),
+        isFinite(-1),
+        isFinite(1)
+      );
+      // '', null, false, true 居然为正常的数值 todo ???
+    </script>
+
+    <script>
+      // Number方法的参数是对象时，将返回NaN，除非是包含单个数值的数组。
+      var obj = { a: 1 };
+      console.warn('object =>', Number(obj));
+      console.error(Number([1, 2, 3]), Number([1]));
+
+      function myNumber(obj) {
+        var _value = obj.valueOf();
+        console.error('obj.valueOf() =>', _value);
+        if (typeof _value === 'object') {
+          var _string = obj.toString();
+          if (typeof _string === 'object') {
+            console.error('');
+          }
+          return Number(_string);
+        }
+        return Number(_value);
+      }
+
+      var obj2 = {
+        valueOf: function () {
+          return {};
+        },
+        toString: function () {
+          return {};
+        },
+      };
+
+      // console.log(myNumber(obj2)); // error
+
+      console.log(
+        myNumber({
+          // 2
+          valueOf: function () {
+            return 2;
+          },
+        })
+      );
+
+      console.log(
+        myNumber({
+          // 0
+          valueOf: function () {
+            return '';
+          },
+        })
+      );
+
+      console.log(
+        myNumber({
+          // 0
+          valueOf: function () {
+            return false;
+          },
+        })
+      );
+
+      console.log(
+        myNumber({
+          // 333 // ! 因为返回了自身，自身是一个对象，所以再调用 toString() 方法
+          toString: function () {
+            return 333;
+          },
+        })
+      );
+
+      console.log(
+        myNumber({
+          // 2
+          valueOf: function () {
+            return 2; // 优先调用
+          },
+          toString: function () {
+            return 333;
+          },
+        })
+      );
+    </script>
+
+    <script>
+      var number = 10.346;
+      var result = number.toFixed(2);
+      console.log('toFixed 四舍五入小数，返回字符串 => ', result, typeof result);
+
+      var ten = 10;
+      var tenStr10 = ten.toString();
+      var tenStr10_ = ten.toString(10);
+      var tenStr2 = ten.toString(2);
+      var tenStr8 = ten.toString(8);
+      var tenStr16 = ten.toString(16);
+      console.log(
+        'toString 转换为相应进制，返回字符串 => ',
+        tenStr10,
+        tenStr10_,
+        tenStr2,
+        tenStr8,
+        tenStr16
+      );
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<input type="text" id="input"><br><br><br>
+<script>
+    // keydown
+    // keypress 有值的键，才触发
+    // keyup
+    var $ele = document.querySelector('#input');
+
+    $ele.addEventListener('keydown', function(evt) {
+        console.log('keydown => ', evt.type, evt.target.value);
+    });
+
+    $ele.addEventListener('keypress', function(evt) {
+        console.log('keypress => ', evt.type, evt.target.value);
+    });
+
+    $ele.addEventListener('keyup', function(evt) { // 取值输入框的值
+        console.log('keyup => ', evt.type, evt.target.value);
+    });
+</script>
+
+
+<input type="text" id="input2">
+<script>
+    var $ele2 = document.querySelector('#input2');
+    $ele2.addEventListener('keydown', function(evt) {
+        console.log('keydown => ', evt.type);
+
+        console.log('evt.code => ', evt.code);
+        console.log('evt.key => ', evt.key);
+        console.log('evt.location => ', evt.location);
+        console.log('evt.repeat => ', evt.repeat);
+
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>doing</title>
+</head>
+<body id="foo" class="bar fooBar">
+
+<script>
+    // id属性可读写
+    // id属性值大小写敏感
+    var body = document.querySelector('body');
+
+    console.log('body.id => ', body.id, body.tagName, body.nodeName);
+
+    setTimeout(function() {
+        body.id = 'fooChanged';
+    }, 3000);
+</script>
+
+<button id="btn"></button>
+<script>
+    var btn = document.querySelector('#btn');
+
+    setTimeout(function() {
+        btn.accessKey = 'b';
+    }, 2000);
+</script>
+
+<div id="testTabindex">
+    <input tabindex="-2" /><br>
+
+    <input tabindex="-1" /><br>
+
+    <input tabindex="2" /><br>
+
+    <input tabindex="3" /><br>
+</div>
+<script>
+    // todo tabindex ???
+</script>
+
+<br><br>
+<div id="myDiv"> testHidden</div>
+<button id="testHidden"> 点我！</button>
+<script>
+    var myDiv = document.querySelector('#myDiv');
+    var btn = document.querySelector('#testHidden');
+
+    btn.addEventListener('click', function() {
+        myDiv.hidden = !myDiv.hidden; // 与 CSS 设置是互相独立的，CSS 的优先级更高 todo !!!
+    }, false);
+</script>
+
+
+<div contenteditable>123</div>
+<script>
+
+</script>
+
+<script>
+    var attributes = body.attributes;
+    console.log('attributes => ', attributes);
+
+    var className = body.className;
+    var classList = body.classList;
+    console.log('className => ', className);
+    console.log('classList => ', classList, classList.toString());
+</script>
+
+<br>
+<br>
+<div
+    data-columns="columns"
+    data-index-2="index-2"
+    data-index-number="indexNumber"
+    data-Parent="Parent"
+    id="testDataset"
+>
+    data-
+</div>
+<script>
+    // 自定义data-属性，用来添加数据
+    var testDataset = document.querySelector('#testDataset');
+    var dataset = testDataset.dataset;
+    console.log('dataset => ', dataset);
+    console.log(dataset.columns);
+    console.log(dataset['index-2'], testDataset.getAttribute('data-index-2')); // todo !!!
+    console.log(dataset.indexNumber); // todo !!!
+    console.log(dataset.parent); // todo !!!
+
+    testDataset.dataset.wfoo = 'wfoo';
+    console.log(testDataset.getAttribute('data-wfoo'));
+</script>
+
+<script>
+    // todo ??? innerHTML outerHTML
+</script>
+
+
+</body>
+</html>

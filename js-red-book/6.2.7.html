@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6.2.7稳妥构造函数模式</title>
+  </head>
+  <body>
+    <!-- x3 -->
+    <script>
+      // 稳妥对象，指的是没有公共属性，其方法也不引用 this 对象
+      // 稳妥对象适合在安全环境中（禁止使用 this，new）使用；防止数据被其他应用程序改动
+
+      // 与寄生构造函数模式区别，
+      // 1)新创建对象的实例方法不引用 this
+      // 2)不使用 new 操作符调用构造函数
+      function Person(name, age, job) {
+        var o = new Object();
+
+        // 定义私有变量和函数
+
+        o.age = age;
+
+        o.sayAge = function () {
+          console.log(age); // 闭包的 age 数据保留在内存中
+        };
+
+        return o;
+      }
+
+      var friend = Person('yh', 33, 'a engineer');
+      console.log(friend);
+      friend.sayAge();
+    </script>
+  </body>
+</html>

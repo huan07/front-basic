@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>done</title>
+</head>
+<body>
+
+<div id="idDiv">idDiv</div>
+
+<ul id="myList"></ul>
+
+<script>
+    console.log('createElement, createAttribute, createTextNode, createComment, createDocumentFragment  =  =  =  =  ');
+    console.log('appendChild, insertBefore, replaceChild, removeChild  =  =  =  =  '); // all used in parentNode todo !!!
+
+
+    var element = document.createElement('div');
+
+    // 1.
+    element.id = 'idCreated';
+    element.className = 'classCreated';
+
+    // 2.
+    var attr = document.createAttribute('my-attribute');
+    attr.value = 'my-value';
+    element.setAttributeNode(attr);
+
+    // 3.
+    element.setAttribute('my-attribute-2', 'my-value-2');
+
+
+    var textNode = document.createTextNode('hello javascript');
+    element.appendChild(textNode);
+    document.body.appendChild(element);
+
+
+    //
+    var comment = document.createComment('创建注释节点');
+    document.body.appendChild(comment);
+    // document.body.appendChild(comment);
+    // appendChild之后，comment就消失了一样，任何DOM节点不能同时出现在文档中的多个位置 todo !!!
+
+    var comment_2 = document.createComment('创建另一注释节点测试 之前');
+    comment.parentNode.insertBefore(comment_2, comment);
+
+    var comment_3 = document.createComment('创建另一注释节点测试 之后');
+    comment.parentNode.appendChild(comment_3);
+</script>
+
+
+<script>
+    // 自定义insertAfter, 在指定的两个元素之间添加；考题 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+    function myInsertAfter(targetEle, newEle) {
+        var parent = targetEle.parentNode;
+        if (parent.lastChild === targetEle) { // 要考虑下空白节点
+            parent.appendChild(newEle);
+        } else {
+            parent.insertBefore(newEle, targetEle.nextSibling);
+        }
+    }
+
+    var targetEle = document.getElementById('idDiv');
+    var newEle = document.createElement('p');
+    myInsertAfter(targetEle, newEle);
+
+
+    // 4. 练习 添加列表项  考题 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+    var fragment = document.createDocumentFragment();
+    // 文档片段 不属于当前文档， todo !!!
+    // 因为DocumentFragment不属于当前文档，对它的任何改动，都不会引发网页的重新渲染，better
+    // 比直接修改当前文档的 DOM 有更好的性能表现。
+
+    var myList = document.getElementById('myList');
+    var liNode = null;
+    var textNode = null;
+    for (var i = 0; i <= 3; i++) {
+        liNode = document.createElement('li');
+        textNode = document.createTextNode('Item' + (i + 1));
+        liNode.appendChild(textNode);
+        fragment.appendChild(liNode);
+    }
+    myList.appendChild(fragment); // 子节点转移到ul元素，并且从文档片段删除
+
+
+    // 4.2 练习 反转列表项  考题 ！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+    var myList = document.getElementById('myList');
+
+    var _childNodes = myList.childNodes;  // 参照md/10.html （可以用 children ）
+    for (var i = _childNodes.length - 1; i >= 0; i--) {
+        fragment.appendChild(_childNodes[i]); // 子元素appendChild到文档片段后 会从myList中被移除
+        // DOM节点不能同时出现在文档的多个位置上
+    }
+    myList.appendChild(fragment);
+</script>
+
+</body>
+</html>

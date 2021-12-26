@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // scroll
+    // 在文档/文档元素滚动时触发
+    // todo
+
+
+</script>
+
+<script>
+    // resize
+    // 改变浏览器窗口大小时触发，主要发生在windowd对象上，会连续地大量触发
+    // 通过throttle函数控制事件触发频率
+
+    var resizeMethod = function() {
+        if (document.body.clientWidth < 768) { // todo attention 窗口的宽度
+            console.log('移动设备');
+        }
+    };
+
+    window.addEventListener('resize', resizeMethod);
+</script>
+
+
+</body>
+</html>

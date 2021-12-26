@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.3.5寄生式继承</title>
+</head>
+<body>
+
+<!-- x3 -->
+<script>
+    function createAnother(original) {
+        var clone = Object.create(original); // 1.接收到的参数为基础创建一个新对象
+        clone.sayHi = function() {    // 2.增强这个对象
+            console.log('hi ' + clone.friends.length); // 问题：不能做到函数复用而降低效率
+        };
+        return clone; // 3.返回这个对象
+    }
+
+    var person = {
+        name: 'ycg',
+        friends: ['friend', 'friend2', 'friend3']
+    };
+
+    var anotherPerson = createAnother(person);
+    console.log(anotherPerson);
+    anotherPerson.sayHi();
+</script>
+
+</body>
+</html>

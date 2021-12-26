@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>13.4.2 .3</title>
+    <link rel="stylesheet" type="text/css" href="10.1.css">
+</head>
+<body>
+
+<input type="text" />
+
+<div id="id">事件发生时，鼠标指针在 视口的位置clientX</div>
+
+<div id="id2"> 鼠标指针在 页面的位置pageX 兼容处理pageX(ie8及早版本不支持)</div>
+
+<div id="id3"> 鼠标指针在 屏幕的坐标screenX；修改键</div>
+
+<script>
+    // focus blur 不冒泡
+    // focusin focusout 可冒泡
+
+    // focusout blur
+    // focusin focus
+    var input = document.getElementsByTagName('input')[0];
+    input.focus();
+    console.log(document.hasFocus(), document.activeElement);
+</script>
+
+<script>
+    //
+    var div = document.getElementById('id');
+    div.addEventListener('click', function(event) {
+        var clientX = event.clientX; // 不包括页面滚动的距离
+        var clientY = event.clientY;
+
+        var pageX = event.pageX; //  ie8不支持，（在页面没有滚动的情况，pageX === clientX）
+        var pageY = event.pageY;
+        console.log('clientX, clientY, pageX, pageY => ', clientX, clientY, pageX, pageY);
+    }, false);
+
+
+    var div = document.getElementById('id2');
+    div.addEventListener('click', function(event) { // 兼容ie8的页面坐标处理方式
+        var pageX = event.pageX;
+        var pageY = event.pageY;
+        if (pageX === undefined) {
+            pageX = event.clientX + (document.body.scrollLeft || document.documentElement.scrollLeft);
+        }
+        if (pageY === undefined) {
+            pageY = event.clientY + (document.body.scrollTop || document.documentElement.scrollTop);
+        }
+        console.log('pageX, pageY => ', pageX, pageY);
+    }, false);
+</script>
+
+<script>
+    var div = document.getElementById('id3');
+    div.addEventListener('click', function(event) {
+        var screenX = event.screenX;
+        var screenY = event.screenY;
+
+        console.log('screenX, screenY => ', screenX, screenY);
+
+        var keys = [];
+        if (event.shiftKey) {
+            keys.push('shift');
+        }
+        if (event.ctrlKey) {
+            keys.push('ctrl');
+        }
+        if (event.altKey) {
+            keys.push('alt');
+        }
+        if (event.metaKey) {
+            keys.push('cmd');
+        }
+        console.log(keys);
+    }, false);
+</script>
+
+</body>
+</html>

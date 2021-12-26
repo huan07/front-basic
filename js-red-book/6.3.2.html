@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6.3.2借用构造函数 继承</title>
+  </head>
+  <body>
+    <!-- x3 -->
+    <script>
+      function SuperType() {
+        this.colors = ['red', 'blue', 'green'];
+      }
+
+      function SubType() {
+        SuperType.call(this); // 继承方式：在子类型构造函数的内部调用超类型构造函数
+        // 解决了引用类型值被共享的问题（每个实例都会具有自己的属性副本）
+      }
+
+      var instance1 = new SubType();
+      instance1.colors.push('black');
+
+      var instance2 = new SubType();
+
+      console.log(instance1, instance1.colors);
+      console.log(instance2, instance2.colors);
+    </script>
+
+    <script>
+      function Super2Type(name) {
+        this.name = name;
+      }
+
+      Super2Type.prototype.xx = function () {
+        console.log('不能被子类实例所用');
+      };
+
+      function Sub2Type() {
+        Super2Type.call(this, 'child'); // 在创建子类型的实例时，可以向超类型的构造函数中传递参数
+        this.age = 29;
+      }
+
+      var instance = new Sub2Type();
+      console.log(instance);
+
+      var instanceParent = new Super2Type('parent');
+      console.log(instanceParent);
+
+      // 问题：
+      // 1.方法都在构造函数中定义，无法实现函数复用
+      // 2.超类型的原型方法对子类型是不可用的
+    </script>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<input type="button" value="click me" onclick="alert('Clicked')" /> <!-- 1.内联模型 -->
+<input type="button" value="click me2" onclick="showMessage()" />
+<input type="button" value="click me3" onclick="xx()">
+<input type="button" value="click me4" onclick="try{xx();}catch(ex){}"><br><br>
+
+<!-- 局部变量event 事件对象 可以直接访问的 -->
+<!-- this === 事件的目标元素 -->
+<input type="button" value="click me 局部变量event"
+       onclick="console.log(this === event.target, this, event.target.value)" /><br><br>
+
+
+<!-- 动态创建函数 with扩展作用域 to add-->
+
+
+<!-- DOM0级事件处理程序 -->
+<input type="button" value="click DOM0级" id="btnDOM0" /><br>
+
+<!-- DOM2级事件处理程序 -->
+<input type="button" value="click DOM2级" id="btnDOM2" /><br>
+
+<!-- IE事件处理程序 -->
+<input type="button" value="click IE" id="btnIE" /><br>
+
+<!-- 跨浏览器的处理程序 -->
+<input type="button" value="click 跨浏览器" id="btnCross" />
+
+
+<script type="text/javascript">
+    function showMessage() {
+        alert("hello baidu");
+    }
+</script>
+
+
+<script>
+    /* 2.脚本模型 */
+    var btn = document.getElementById('btnDOM0');
+
+    btn.onclick = function(event) {
+        console.log(this.id); // a.在元素的作用域中运行 this引用当前元素 c.在冒泡阶段被处理 // todo !!
+        console.log(this === event.target); // true
+    };
+
+    // btn.onclick = null;
+</script>
+
+<script>
+    var btn = document.getElementById('btnDOM2');
+
+    var alertFun = function() {
+        console.log('-- ');
+    };
+
+    btn.addEventListener('click', alertFun, false); // a.在元素的作用域中运行
+
+    btn.addEventListener('click', function(event) { // b.事件 从上到下 执行
+        console.log(this.id);
+        console.log(this === event.target); // true
+    }, false); // c.false 在冒泡阶段被处理 // todo !!
+
+    // btn.removeEventListener('click', alertFun, false);
+</script>
+
+<script>
+    var btn = document.getElementById('btnIE');
+
+    var attchFun = function() {
+        console.log('- ');
+    };
+
+    btn.attachEvent('onclick', attchFun);  // a.在全局作用域执行 ！！btn.attachEvent undefined TypeError when at chrome
+
+    btn.attachEvent('onclick', function() { // b.事件 从下到上 执行
+        console.log(this.id);
+    }); // c.只支持事件冒泡
+
+    // btn.detachEvent('onclick', attchFun);
+</script>
+
+<script>
+    var EventUtil = {
+        addHandler: function(element, type, handler) {
+            if (element.addEventListener) {
+                element.addEventListener(type, handler, false);
+            } else if (element.attachEvent) {
+                element.attachEvent('on' + type, handler);
+            } else {
+                element['on' + type] = handler;
+            }
+        },
+        removeHandler: function(element, type, handler) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type, handler, false);
+            } else if (element.detachEvent) {
+                element.detachEvent('on' + type, handler);
+            } else {
+                element['on' + type] = null;
+            }
+        }
+    };
+
+
+    // test
+    var btn = document.getElementById('btnCross');
+    var btnHandler = function() {
+        console.log('btnCross test');
+    };
+    EventUtil.addHandler(btn, 'click', btnHandler);
+    //EventUtil.removeHandler(btn, 'click', btnHandler);
+</script>
+
+</body>
+</html>

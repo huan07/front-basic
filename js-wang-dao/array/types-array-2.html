@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      var arr = new Array(2);
+      var arr_ = Array(2); // 不同的参数，会导致它的行为不一致
+      // var arr2 = new Array(3.3); // error
+      // var arr3 = new Array(-3);  // error
+      var arr4 = new Array('3.3');
+
+      var arr5 = new Array(1, 2, 3); // bad
+      var arrBetter = [4, 5]; // good
+      console.log(arr, arr_, arr4, arr5, arrBetter);
+
+      //
+      var a = new Array(3);
+      var b = [undefined, undefined, undefined];
+      console.warn('取不到键名 => ', a, a[0], a.length, 0 in a); // false 虽然可以取到length属性，但是取不到键名
+      console.log(b, b[0], b.length, 0 in b);
+    </script>
+
+    <script>
+      // 静态方法
+      // Array.isArray
+      var arr = [1, 2, 3];
+      console.log(typeof arr, Array.isArray(arr));
+    </script>
+
+    <script>
+      // 实例方法
+      // 数组末尾执行 // !
+      // push 进 （返回数组的长度）
+      // pop 出  （返回出来的值）（ // todo 与push结合，后进先出 的栈结构）
+      var arr = [];
+      arr.push(1);
+      var count = arr.push(true, 'str', {});
+      console.warn('push 从last进 => ', arr, count);
+
+      var arr2 = [1, 2, 'lastValue'];
+      var lastItem = arr2.pop();
+      console.log('pop 从lastItem出 =>', arr2, lastItem, [].pop());
+    </script>
+    <script>
+      // 数组首项执行 // !
+      // unshift 进 （返回数组的长度）
+      // shift  出  （返回出来的值）（ // todo 与push结合，先进先出 的队列结构）
+      var arr2 = [];
+      arr2.unshift('one');
+      var count = arr2.unshift(true, 'str', {});
+      console.log('unshift 从first进 =>', arr2, count);
+
+      var arr = ['firstValue', 1, 2];
+      var firstItem = arr.shift();
+      console.log('shift 从firstItem出 arr元素减少 =>', firstItem, arr);
+    </script>
+    <script>
+      // reverse 改变原数组
+      var arr = [1, 2];
+      var result = arr.reverse();
+      console.log('reverse =>', arr, result);
+    </script>
+    <script>
+      // splice 对数组的删改增 arr.splice(start, count, addElement1, addElement2, ...); 包括start位置
+      // 返回值是被删除的元素
+      var arr = ['a', 'b', 'c'];
+      var deleted = arr.splice(1, 2);
+      console.log('splice 删 => ', deleted, arr);
+
+      var arr2 = ['a', 'b', 'c'];
+      var deleted2 = arr2.splice(1, 2, 11, 22);
+      console.log('splice 改 => ', deleted2, arr2);
+
+      var arr3 = ['a', 'b', 'c'];
+      var deleted3 = arr3.splice(1, 0, 33, 44);
+      console.log('splice 增 => ', deleted3, arr3);
+    </script>
+    <script>
+      // sort 对数组成员进行排序，返回对该数组的引用
+      // 默认按 字典顺序 逐位排序（数值会先被隐式转成字符串）// todo 隐式转换
+      var arr = ['d', 'e', 'a', 'b'];
+      arr.sort();
+
+      var arr2 = [11, 101];
+      arr2.sort();
+
+      var arr3 = [11, 101];
+      arr3.sort(function (a, b) {
+        // 自定义方式排序，按数字升序，整个值比较
+        return a - b; // 更好的写法，而不是用 return a > b ;
+      });
+
+      console.warn('sort default =>', arr, arr2);
+      console.log('sort callback =>', arr3);
+    </script>
+
+    <!-- ! 以下 返回新数组，原数组不变 -->
+    <script>
+      // join
+      var arr = [1, 2, 3];
+      console.warn('join =>');
+      console.log(arr.join(), arr.join(',')); // 缺省参数，以 , 分隔
+      console.log(arr.join(' '));
+
+      var arr2 = [undefined, null, , 1]; // undefined/null/空位 被转换为空字符串
+      console.log(arr2.join('#'), arr2.join('|'));
+
+      // 可用于 字符串、类似数组的对象
+      var str = 'hello';
+      var obj = { 0: 'a', 1: 'b', length: 2 };
+      console.log(Array.prototype.join.call(str, '#'), Array.prototype.join.call(obj, '#'));
+    </script>
+
+    <script>
+      // concat 返回新数组
+      var arr = [1, 2];
+      var arr_ = arr.concat();
+      var arr2 = arr.concat(3);
+      var arr3 = arr.concat(3, [4, 5]);
+      console.warn('concat =>');
+      console.log(arr, arr_);
+      console.log(arr2, arr3);
+
+      // 浅拷贝 拷贝的是对象的引用 // !
+      var obj = { a: 1 };
+      var originArr = [obj];
+
+      var targetArr = originArr.concat();
+      obj.b = 2;
+      console.log('shallow copy =>', originArr, targetArr);
+    </script>
+    <script>
+      // slice 返回新数组 [start,end) 不包括end位置
+      // 应用：将类似数组的对象转为真正的数组
+      var arr = ['x', 'y', 'z', 'w'];
+      var arr_ = arr.slice();
+      var arr_2 = arr.slice(0);
+
+      var arr1 = arr.slice(0, 1);
+      var arr2 = arr.slice(0, 2);
+      console.warn('slice =>');
+      console.log(arr, arr_, arr_2);
+      console.log(arr1, arr2);
+    </script>
+    <script>
+      // map 返回新的数组
+      var numbers = [11, 22, 33];
+      var numbersUpdated = numbers.map(function (item, index, arr) {
+        console.error('map回调函数 =>', item, index, arr);
+        return item + 100;
+      });
+      console.log('map =>', numbers, numbersUpdated);
+
+      // map, forEach 还可以接受第二个参数，用来绑定回调函数内部的this变量
+    </script>
+    <script>
+      // forEach 没有返回值，只用来操作数据
+      // 无法中断执行，总是会将所有成员遍历完（ 中断遍历，要使用for循环 ）
+    </script>
+
+    <script>
+      // filter 过滤数组成员，返回 满足条件的成员 组成的新数组
+      var arr = [1, 2, 3, 4, 5];
+      var filterResult = arr.filter(function (item) {
+        return item > 4;
+      });
+      console.log('filter => ', arr, filterResult);
+    </script>
+
+    <script>
+      // some/every 返回boolean
+      var arr = [1, 2, 3, 4, 5];
+      var cb = function (item) {
+        return item > 2;
+      };
+      console.log('  some every =>', arr.some(cb), arr.every(cb));
+      console.log('[]some/every => false/true, []不去执行回调函数', [].some(cb), [].every(cb)); // !!
+    </script>
+
+    <script>
+      // reduce / reduceRight 依次处理数组的每个成员，最终累计为一个值
+      var arr = [1, 2, 3];
+      var reduceResult = arr.reduce(function (result, curr, currIndex, origin) {
+        console.log('curr, currIndex =>', result, curr, currIndex, origin);
+        return result + curr;
+      });
+
+      var reduceResult2 = arr.reduce(function (result, curr, currIndex, origin) {
+        console.warn('curr, currIndex =>', result, curr, currIndex, origin);
+        return result + curr;
+      }, 0);
+      console.log('reduce result =>', reduceResult, reduceResult2);
+
+      // 对于空数组
+      var arr2 = [];
+      /*
+    var arr2Reduce = arr2.reduce(function (prev, curr){
+        return prev + curr;
+    });
+    */
+      // 由于空数组取不到累积变量的初始值，reduce()方法会报错  // error
+
+      var arr2ReduceFixed = arr2.reduce(function (prev, curr) {
+        return prev + curr;
+      }, 999);
+      console.log('[].reduce 需要第二个参数 =>', arr2ReduceFixed);
+
+      // 应用
+      // 找出数组中字符长度最长的成员
+      var arr = ['aaa', 'bb', 'aabbbbbb'];
+      var maxItem = arr.reduce(function (longest, entry) {
+        return longest.length > entry.length ? longest : entry;
+      }, arr[0]);
+      console.log('maxItem by reduce =>', maxItem);
+    </script>
+
+    <script>
+      // indexOf / lastIndexOf  返回给定元素在数组中第一次出现的位置 或者 -1(没有搜索到)
+      // 方法内部使用 ===
+      // 不能用来搜索NaN的位置
+    </script>
+  </body>
+</html>

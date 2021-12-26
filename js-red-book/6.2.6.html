@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6.2.6寄生构造函数模式</title>
+  </head>
+  <body>
+    <!-- x3 -->
+    <script>
+      function Person(name, age, job) {
+        // 1.首字母大写
+        var o = new Object();
+        o.job = job;
+        o.sayJob = function () {
+          console.log(this.job);
+        };
+        return o;
+      }
+
+      var friend = new Person('yh', 30, 'a engineer'); // 2.用 new 调用。 除了1，2之外的区别，和工厂模式是一样的
+      console.log(friend);
+      friend.sayJob();
+
+      // 不能直接修改原生对象的构造函数，可以用这个模式
+      // 返回的对象与 构造函数、构造函数的原型属性之间没有关系 不能依赖 instanceof 来确定对象类型
+      function SpecialArray() {
+        var values = new Array();
+
+        values.push.apply(values, arguments); // !!
+
+        values.toPipedString = function () {
+          return this.join('|');
+        };
+
+        return values;
+      }
+
+      var colors = new SpecialArray('red', 'blue', 'green');
+      var colorsJoin = colors.toPipedString();
+
+      console.warn('colors =>', colors, colorsJoin);
+
+      console.log(colors instanceof SpecialArray);
+      console.log(
+        Object.getPrototypeOf(colors),
+        Object.getPrototypeOf(colors) === SpecialArray.prototype
+      );
+    </script>
+  </body>
+</html>

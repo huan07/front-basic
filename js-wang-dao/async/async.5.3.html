@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script src="asyncFoo.js"></script>
+    <script>
+      // TODO ...
+      // 3.并行与串行的结合
+      // 设置一个门槛，每次最多只能并行执行n个异步任务，这样就避免了过分占用系统资源 // !!
+
+      var items = [1, 2, 3, 4];
+      var results = [];
+
+      var running = 0;
+      var limit = 2;
+
+      function launcher() {
+        while (running < limit && items.length > 0) {
+          var item = items.shift();
+
+          console.warn('item => ', item, running);
+
+          asyncFoo(item, function (result) {
+            results.push(result);
+            running--;
+
+            console.log(running);
+
+            if (items.length > 0) {
+              launcher();
+            } else if (running === 0) {
+              final(results);
+            }
+          });
+
+          running++;
+        }
+      }
+
+      launcher();
+    </script>
+  </body>
+</html>

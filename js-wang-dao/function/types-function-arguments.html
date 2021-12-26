@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 没有办法只省略靠前的参数，而保留靠后的参数
+      // 靠前的参数必须显式传undefined
+      function fun(a, b) {
+        console.log('a =>', a, 'b =>', b);
+      }
+
+      // fun(, 11); // todo !! error
+      fun(undefined, 22);
+    </script>
+
+    <script>
+      // 原始类型的值 传值
+      // 在函数体内修改参数值，不会影响到函数外部 // !
+      var p = 2;
+
+      function f(p) {
+        p = 3;
+      }
+
+      f(p);
+      console.log('p =>', p);
+
+      // 复合类型的值 传址
+      // 会影响到原始值（函数内部修改的，是参数对象的某个属性）// ! 1.
+      var obj = { p: 2 };
+
+      function foo(o) {
+        o.q = 3;
+      }
+
+      foo(obj);
+      console.warn('obj 添加了属性 =>', obj);
+
+      // 复合类型的值 传址
+      // 不会影响到原始值（函数内部修改的，是替换掉整个参数）// ! 2.
+      var array = [1, 2, 3];
+
+      function bar(arr) {
+        arr = [4, 5]; // 无需再定义一个变量，var arr2 = arr; 这种傻操作 // todo better
+      }
+
+      bar(array);
+      console.log('入参在函数体内被替换 =>', array);
+
+      // 形式参数（arr）的值实际是参数array的地址，重新对arr赋值导致arr指向另一个地址，
+      // 保存在原地址上的值当然不受影响。
+
+      // todo 参照考题
+    </script>
+  </body>
+</html>

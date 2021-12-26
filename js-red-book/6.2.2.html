@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6.2.2构造函数模式</title>
+  </head>
+  <body>
+    <!-- x3 -->
+    <script>
+      function Person(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.sayName = function () {
+          // 每个方法都要在每个实例上重新创建一遍，完成的是相同的任务，函数无法复用
+          console.log(this.name + '-' + this.age);
+        };
+      }
+
+      var person = new Person('person', 30, 'software engineer');
+      var person2 = new Person('person2', 40, 'a beautifull woman');
+      person.sayName();
+      person2.sayName();
+
+      console.log(person.sayName, person.sayName === person2.sayName); // 问题：不同实例上的同名函数是不相等的 // todo x
+      console.log(person);
+    </script>
+
+    <script>
+      var sayName2 = function () {
+        // 指向函数的指针 被 person1、person2 对象共享；
+        // 但是作为全局函数被用作 对象的方法 不合适；
+        // 对象有很多方法，就需要定义很多的全局函数，这样的话，自定义的引用类型没有封装性；// todo x
+        console.log(this.name + '-' + this.job);
+      };
+
+      function Person2(name, age, job) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+        this.sayName = sayName2;
+      }
+
+      var person = new Person2('person8', 80, 'job');
+      var person2 = new Person2('person9', 90, 'job2');
+
+      person.sayName();
+      person2.sayName();
+      console.log(person.sayName, person.sayName === person2.sayName); // 比较的是内存地址
+      console.log(person);
+    </script>
+  </body>
+</html>

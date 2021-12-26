@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>doing</title>
+</head>
+<body style="width:2000px;height: 2000px;">
+
+<div id="clientTest" style="background-color: #00C37E;width:250px;height: 250px;padding: 50px;border:10px solid gray;">
+</div>
+<br>
+<br>
+
+<span id="clientTestSpan"
+      style="background-color: #00C37E;width:250px;height: 250px;padding: 0px;border:10px solid gray;">
+clientTestSpan
+</span>
+
+<div style="position: absolute;">
+    <p id="offsetParentTestP">
+        <span id="offsetParentTestSpan">Hello</span>
+    </p>
+</div>
+
+<script>
+    var div = document.getElementById('clientTest');
+    var span = document.getElementById('clientTestSpan');
+    console.log('div clientTest => ', div.clientHeight, div.clientWidth); // todo ？？如果有滚动条？需要减去
+    console.log('span clientTest => ', span.clientHeight, span.clientWidth);
+
+
+    var htmlClientHeight = document.documentElement.clientHeight;
+    var bodyClientHeight = document.body.clientHeight;
+    console.log('1.1 document.documentElement.clientHeight 视口高度 / 浏览器窗口的高度 => ', htmlClientHeight);
+    console.log('1.2 document.body 网页实际高度 => ', bodyClientHeight);
+
+
+    var divClientLeft = div.clientLeft;
+    var spanClientLeft = span.clientLeft;
+
+    var divClientTop = div.clientTop;
+    var spanClientTop = span.clientTop;
+    console.log('clientLeft => ', divClientLeft, spanClientLeft);
+    console.log('clientTop => ', divClientTop, spanClientTop);
+
+
+    var htmlScrollHeight = document.documentElement.scrollHeight;
+    var bodyScrollHeight = document.body.scrollHeight;
+    console.log('2.1 document.documentElement.scrollHeight 网页的总高度 => ', htmlScrollHeight);
+    console.log('2.1 document.body 网页的总高度 => ', bodyScrollHeight);
+
+
+    var htmlScrollLeft = document.documentElement.scrollLeft;
+    var htmlScrollTop = document.documentElement.scrollTop;
+    console.log('3.1 document.documentElement.scrollLeft 整张网页的水平、垂直滚动距离 => ', htmlScrollLeft, htmlScrollTop);
+</script>
+
+<script>
+    var offsetParentTestP = document.getElementById('offsetParentTestP').offsetParent;
+    var offsetParentTestSpan = document.getElementById('offsetParentTestSpan').offsetParent;
+    console.log('offsetParentTestP => ', offsetParentTestP);
+    console.log('offsetParentTestSpan => ', offsetParentTestSpan);
+
+
+    // 元素左上角相对于整张网页的坐标
+    function getElementPosition(e) {
+        var x = 0;
+        var y = 0;
+        while (e !== null) {
+            x += e.offsetLeft;
+            y += e.offsetTop;
+            e = e.offsetParent;
+        }
+        return { x: x, y: y };
+    }
+
+    var position = getElementPosition(offsetParentTestSpan);
+    console.log('position => ', position);
+</script>
+
+
+</body>
+</html>

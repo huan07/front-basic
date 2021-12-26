@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        .box {
+            width: 200px;
+            height: 60px;
+            background: red;
+        }
+
+        .box2 {
+            width: 200px;
+            height: 100px;
+            background: lightblue;
+
+            /* margin-top: 10px; */
+            margin-top: 10px;
+        }
+
+        .box3 {
+            width: 200px;
+            height: 60px;
+            background: lightgrey;
+
+            /* margin-top: 20px; */
+            margin-top: 20px;
+            display: inline-block; /* 可以给父元素设置吗？todo */
+        }
+    </style>
+</head>
+<body>
+<!--
+todo 行内块元素，BFC 的特点
+-->
+
+<div class="box">
+    box
+</div>
+<div class="box2">
+    <div class="box3">box3</div>
+</div>
+
+</body>
+</html>

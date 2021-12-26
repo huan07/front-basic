@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // ! 的优先级更高
+    console.log([] == ![])
+    console.log([] == false)
+    console.log(Number([]))
+
+
+    // 题目2
+    // + 字符串拼接的优先级更高
+    var val = 'smtg';
+    console.log('Value is ' + (val === 'smtg') ? 'Something' : 'Nothing');
+
+
+    // 题目3
+    console.log(
+        "b" + "a" + +"a" + "a",
+        "b" + "a" + (+"a") + "a"
+    )
+
+    console.log(+'a')
+
+
+    // 题目4
+    const name = 'TianTianUp'
+    console.log(!typeof name === 'string', false === 'string')
+    console.log(!typeof name === 'object', false === 'object')
+
+    // todo atten 检测一个类型的值话，我们应该使用 !== 而不是 !typeof
+
+
+    // 题目5
+
+</script>
+
+</body>
+</html>

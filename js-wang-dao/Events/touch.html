@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // Touch
+    // TODO 鼠标事件 + 触摸事件
+    // event.preventDefault方法阻止发出鼠标事件
+</script>
+
+<div id="div1" style="background: pink; width:200px;height: 200px;">
+</div>
+<br>
+<br>
+<script>
+    var $ele = document.querySelector('#div1');
+    $ele.addEventListener('touchmove', function(evt) {
+        var changedTouches = evt.changedTouches;
+        for (var i = 0, len = changedTouches.length; i < len; i++) {
+            console.log('changedTouches[i] => ', i, changedTouches[i], changedTouches[i].identifier);
+        }
+    });
+</script>
+
+
+<div id="div2" style="background: hotpink; width:600px;height: 600px;">
+</div>
+<script>
+    var rotate = function(evt) {
+        console.log('evt => ', evt);
+        console.log('evt.type => ', evt.type);
+        var touch = evt.changedTouches.item(0);
+        var src = evt.target;
+        evt.preventDefault();
+
+        src.style.width = touch.radiusX * 20 + 'px';
+        src.style.height = touch.radiusY * 20 + 'px';
+        src.style.transform = 'rotate(' + touch.rotationAngle + 'deg)';
+
+    };
+
+    var $ele2 = document.querySelector('#div2');
+    $ele2.addEventListener('touchstart', rotate);
+    $ele2.addEventListener('touchmove', rotate);
+    $ele2.addEventListener('touchend', rotate);
+</script>
+
+
+</body>
+</html>

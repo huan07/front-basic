@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      function f() {
+        console.warn('0 =>');
+      }
+
+      setTimeout(f, 0);
+      setTimeout(f); // 第二个参数 缺省为0
+
+      //
+      setTimeout(
+        function (a, b) {
+          console.log('a, b =>', a, b);
+        },
+        10,
+        '第1个参数',
+        '第2个参数'
+      );
+    </script>
+
+    <script>
+      // 回调函数是对象的方法，this 的指向 // !!
+      var x = 1;
+      var obj = {
+        x: 2,
+        y: function () {
+          console.error(this.x, this);
+        },
+      };
+      setTimeout(obj.y, 10); // 10ms后运行时 this => window (非严格模式下)
+
+      // fixed1
+      setTimeout(function fixed() {
+        // 使得obj.y在obj的作用域执行
+        obj.y();
+      }, 11);
+
+      // fixed2 方法内部的this始终绑定在obj对象
+      setTimeout(obj.y.bind(obj), 12);
+    </script>
+
+    <script>
+      // setInterval 指定的是“开始执行”之间的间隔，并不考虑 每次任务执行本身所消耗的时间 。
+
+      // example   // ! bad
+      // 后一个间隙调用可能会在前一个间隙调用结束之前执行
+      var num = 0;
+      var max = 5;
+
+      function incrementNum() {
+        num++;
+        // console.log('num =>', num, intervalId);
+        if (num === max) {
+          clearInterval(intervalId);
+          // console.log('num === max clearInterval =>', num);
+        }
+      }
+
+      var intervalId = setInterval(incrementNum, 1000);
+
+      // 为了确保两次执行之间有固定的间隔 用 setTimeout 模拟 setInterval // ! better
+      // 优势：
+      // 没必要跟踪超时调用ID, 执行一次后，调用就会自动停止
+      var num2 = 0;
+      var max2 = 5;
+
+      function func() {
+        num2++;
+        console.warn('num2 =>', num2);
+        if (num2 < max2) {
+          setTimeout(func, 2000); // 再设置一次超时调用
+        } else {
+          console.warn('num2 === max2 setTimeout =>', num2);
+        }
+      }
+
+      // 模拟 setInterval
+      setTimeout(func, 2000);
+    </script>
+
+    <!-- <script>
+      // TODO ...
+      // 取消当前所有的setTimeout定时器
+      (function () {
+        // 每轮事件循环检查一次
+        var gid = setInterval(clearAllTimeouts, 0);
+        console.log('gid =>', gid);
+
+        function clearAllTimeouts() {
+          var id = setTimeout(function () {}, 0);
+          console.log('id =>', id);
+
+          while (id > 0) {
+            if (id !== gid) {
+              clearTimeout(id);
+            }
+            id--;
+          }
+        }
+      })();
+    </script> -->
+  </body>
+</html>

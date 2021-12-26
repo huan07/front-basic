@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>y</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        .wrapper {
+            width: 400px;
+
+            height: 800px;
+            background: pink;
+        }
+
+        .box {
+            width: 90%;
+
+            height: 200px;
+            background: wheat;
+        }
+
+        .box2 {
+            width: 92%;
+
+            background: grey;
+        }
+
+        /**/
+        .wrapper {
+            display: flex;
+            flex-direction: column; /* 左侧固定-右侧自适应，换成容器主轴为垂直方向 */
+        }
+
+        .box2 {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="box">box</div>
+    <div class="box2">box2</div>
+</div>
+
+</body>
+</html>

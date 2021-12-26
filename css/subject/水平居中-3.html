@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      div {
+        width: 200px;
+        height: 200px;
+        background: wheat;
+        float: left;
+
+        /* 注意： 绝对定位的元素忽略float属性！利用这一点就可以实现对浮动元素用定位方式垂直居中 */
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .div2 {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 浮动的元素 水平居中 -->
+
+    <div></div>
+
+    <div class="div2"></div>
+  </body>
+</html>

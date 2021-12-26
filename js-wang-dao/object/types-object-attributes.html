@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // Object.getOwnPropertyDescriptor: 对象自身的属性
+      var obj = { p: 'a' };
+
+      var des = Object.getOwnPropertyDescriptor(obj, 'p'); // 1. 默认writable, enumerable, configurable 全是true // !!
+      var desUndefined = Object.getOwnPropertyDescriptor(obj, 'toString'); // 不能获取继承的属性 undefined
+      console.log('des =>', des, desUndefined);
+
+      // Object.defineProperty()
+      // 如果属性已经存在，Object.defineProperty()方法相当于更新该属性的属性描述对象。
+      var obj_ = Object.defineProperty({}, 'p', {
+        value: 'a',
+        writable: true,
+        enumerable: false, // 2. 缺省 元属性 值都是false // !!
+      });
+      console.log('obj_ =>', obj_, Object.getOwnPropertyDescriptor(obj_, 'p'));
+    </script>
+
+    <script>
+      // 存取器
+      var obj_k = Object.defineProperty({}, 'p', {
+        get: function () {
+          return 'getter';
+        },
+        set: function (value) {
+          console.log('setter: ' + value);
+        },
+      });
+      console.warn('obj_k.p =>', obj_k.p);
+      obj_k.p = 123;
+
+      // 等价写法，对象字面量创建对象
+      var obj_k2 = {
+        get p() {
+          return 'getter2';
+        },
+        set p(value) {
+          console.log('setter2: ' + value);
+        },
+      };
+      console.log('obj_k2.p =>', obj_k2.p);
+      obj_k2.p = 123;
+
+      // 用于
+      // 属性的值依赖对象内部数据的场合
+      var obj_k3 = {
+        $n: 5,
+        get next() {
+          return this.$n;
+        },
+        set next(n) {
+          if (n >= this.$n) {
+            this.$n = n;
+          } else {
+            console.log('n => ', n);
+            console.log('this.$n => ', this.$n);
+            throw new Error('新的值必须大于当前值');
+          }
+        },
+      };
+      console.warn('obj_k3.next => ', obj_k3.next);
+
+      //obj_k3.next = 4;
+      console.log(obj_k3.next);
+
+      obj_k3.next = 6;
+      console.log(obj_k3.next);
+    </script>
+  </body>
+</html>

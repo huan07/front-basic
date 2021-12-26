@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <!-- !
+      结合考题 file:///Users/yanghuan/FrontBasic/front-basic/2020-interview-js/+.html
+    -->
+    <script>
+      var str = 'str';
+      var num = 1;
+      var bool = true;
+
+      var arr = [1, 2, 3];
+      var obj = {};
+      var foo = function () {};
+
+      //
+      // Object.prototype.valueOf(), 返回一个对象的“值”, 默认情况下返回 对象本身（如：数组，布尔值）// !
+      console.log('arr.valueOf() =>', arr.valueOf() === arr);
+      console.log('obj.valueOf() =>', obj.valueOf() === obj);
+      console.log('foo.valueOf() =>', foo.valueOf() === foo);
+
+      var obj_str = new String(str);
+      var obj_num = new Number(num);
+      var obj_bool = new Boolean(bool);
+      console.log('obj_str.valueOf() === str =>', obj_str.valueOf() === str, obj_str);
+      console.log('obj_num.valueOf() === num =>', obj_num.valueOf() === num, obj_num);
+      console.log('obj_bool.valueOf() === bool =>', obj_bool.valueOf() === bool, obj_bool);
+
+      //
+      // 主要用途：
+      // 数据类型自动转换会默认调用
+      var addResult = 1 + obj;
+
+      var obj2 = {
+        valueOf: function () {
+          // 自定义方法，可以让对象在自动类型转换时，得到想要的值。
+          return 2;
+        },
+      };
+      var addResult2 = 2 + obj2;
+
+      console.log(obj.valueOf(), obj.toString(), obj2.valueOf(), obj2.toString());
+      console.log(addResult, addResult2);
+    </script>
+
+    <script>
+      // Object.prototype.toString(), 返回一个对象的字符串形式，默认情况下返回 类型字符串 // !!
+      //
+      // 字符串、
+      // 数组(返回数组的字符串形式)、 // !!
+      // 函数、
+      // Date 对象、
+      // Number对象、
+      // 等 都分别部署了自定义的toString方法，覆盖了Object.prototype.toString方法，不会返回"[object Object]"
+      console.warn('obj.toString() default =>', obj.toString());
+
+      // example
+      console.log('调用的是自定义toString() 方法 =>');
+      console.log(str.toString());
+      console.error(arr.toString(), Object.prototype.toString.call(arr)); // !
+      console.log(foo.toString());
+      console.log(new Date().toString());
+      console.log(num.toString());
+
+      //
+      // 主要用途：
+      // 1.数据类型自动转换会默认调用
+      // 2.判断数据类型
+
+      // 2.example
+      var reg = /\[object (.*?)\]/;
+      var type = function (value) {
+        var s = Object.prototype.toString.call(value);
+
+        var matched = s.match(reg);
+        console.log('value => => => =>', value, matched);
+
+        return s;
+      };
+      console.log(type(num), type(str), type(bool), type(arr), type(obj), type(foo));
+      console.log(type(null), type(undefined));
+
+      //
+      var myTypeBetter = function (value) {
+        return Object.prototype.toString.call(value).slice(8, -1);
+      };
+
+      console.log('myTypeBetter = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =');
+      console.log(
+        myTypeBetter(num),
+        myTypeBetter(str),
+        myTypeBetter(bool),
+        myTypeBetter(arr),
+        myTypeBetter(obj),
+        myTypeBetter(foo)
+      );
+      console.log(myTypeBetter(null), myTypeBetter(undefined));
+    </script>
+  </body>
+</html>

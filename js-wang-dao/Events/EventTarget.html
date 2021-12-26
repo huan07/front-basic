@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<button id="btn">btn</button>
+<br>
+<br>
+
+<a href="http://www.baidu.com" id="link">测试 监听函数不会调用事件的preventDefault方法</a>
+<br>
+<br>
+
+<button id="btn2">btn2</button>
+<br>
+<br>
+
+
+<button id="btn3">btn3</button>
+<br>
+<br>
+
+<p id="para">点我 测试this</p>
+
+<script>
+    function hello() {
+        console.log('hello');
+    }
+
+    var btn = document.getElementById('btn');
+    btn.addEventListener('click', hello, false); // false 缺省值，指的是监听函数在冒泡阶被触发
+
+
+    var link = document.getElementById('link');
+    link.addEventListener('click', {
+        handleEvent: function(event) {
+            console.log(event, 'click', 'passive: true 不管用呢');
+        }
+    }, {
+        capture: false,
+        once: true,
+        passive: true  // 不管用呢 ? ?
+    });
+</script>
+
+<script>
+    // 当前对象的同一个事件，添加多个不同的监听函数。
+    var btn2 = document.getElementById('btn2');
+    btn2.addEventListener('click', hello, false);
+    btn2.addEventListener('click', function() {
+        console.log('world');
+    }, false);
+
+
+    // 多次添加同一个监听函数，该函数只会执行一次
+    var btn3 = document.getElementById('btn3');
+    btn3.addEventListener('click', hello, false);
+    btn3.addEventListener('click', hello, false); //
+</script>
+
+<script>
+    // 监听函数内部的this，指向当前事件所在的那个对象
+    var para = document.getElementById('para');
+    para.addEventListener('click', function(event) {
+        console.log(this, this === event.target, this.nodeName, this.id);
+    });
+
+
+    // removeEventListener方法移除的监听函数必须是与addEventListener同一个函数，并且第三个参数也是一样的(都是显示的false)
+</script>
+
+<script>
+    // dispatchEvent TODO
+
+</script>
+
+
+</body>
+</html>

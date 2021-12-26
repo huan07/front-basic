@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        .wrapper {
+            height: 200px;
+            background: pink;
+        }
+
+        .box {
+            width: 160px;
+            height: 160px;
+            background: wheat;
+        }
+
+        .box2 {
+            height: 180px;
+            background: grey;
+        }
+
+        /**/
+        .box2 {
+            margin-left: 160px; /* 160px 写死不够灵活 todo */
+            margin-right: 160px;
+        }
+
+        /**/
+        .wrapper_2 {
+            position: relative;
+        }
+
+        .BOX {
+            position: absolute;
+        }
+
+        .BOX_right {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper BFC_3_1">
+    <div class="box pull-left">box</div>
+    <div class="box2">box2</div>
+    <div class="box pull-right">box 实现不了</div> <!-- 浮动的元素 在高度上 不会超过它之前的元素 -->
+</div>
+
+<hr>
+
+<div class="wrapper wrapper_2">
+    <div class="box BOX">box</div>
+    <div class="box2">box2</div>
+    <div class="box BOX_right">box</div>
+</div>
+
+</body>
+</html>

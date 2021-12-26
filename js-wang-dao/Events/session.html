@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // 点击“前进/后退”按钮时，浏览器从缓存加载页面
+    // pageshow:
+    // 页面每次加载（第一次加载 / 从缓存加载）都运行代码；
+    // event.persisted: 第一次加载，返回false；从缓存加载，返回true
+
+    // 页面包含<frame>或<iframe>元素，则<frame>页面的pageshow事件和pagehide事件，都会在主页面之前触发
+    window.addEventListener('pageshow', function(event) {
+        console.log('pageshow => ', event, event.type);
+        alert('pageshow => ' + event.type + ' , ' + event.persisted);
+    });
+
+    window.addEventListener('pagehide', function(event) {
+        event.persisted = true;
+        alert('pagehide => ' + event.type + ' , ');
+    });
+</script>
+
+<script>
+    //
+    window.onpopstate = function(event) {
+        console.log('state => ', event, event.state);
+    };
+
+    history.pushState({ page: 1 }, 'title 1', '?page=1');
+    history.pushState({ page: 2 }, 'title 2', '?page=2');
+    history.replaceState({ page: 3 }, 'title 3', '?page=3');
+
+    history.back();
+    history.back();
+    history.go(2);
+</script>
+
+<script>
+    //
+    window.addEventListener('hashchange', myFunction);
+
+    function myFunction(e) {
+        console.log('hashchange => ', e.oldURL, e.newURL);
+    }
+
+    location.hash = 'part2';
+</script>
+
+</body>
+</html>

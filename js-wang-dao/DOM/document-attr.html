@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>done</title>
+</head>
+<body>
+
+<script>
+    // document对象继承了EventTarget接口、Node接口、ParentNode接口。
+
+    var documentElement = document.documentElement;
+    var head = document.head || document.getElementsByTagName('head')[0]; // document.head ie会报错
+    var body = document.body;
+
+    console.log('document => ', document, window.document, documentElement.parentNode);
+    console.log(head.ownerDocument, body.ownerDocument, head.getRootNode(), body.getRootNode());
+
+    console.log('documentElement / <html>节点 => ', documentElement, document.firstElementChild, document.lastElementChild);
+    console.log('<head>节点 => ', head);
+    console.log('<body>节点 => ', body);
+</script>
+
+</body>
+</html>

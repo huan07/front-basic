@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>10.1</title>
+  </head>
+  <body>
+    <!-- 有一段注释测试 -->
+    <div id="eleNode">textNode</div>
+
+    <div id="idDiv" class="myClass classDefine"><span>div span text</span></div>
+    <div class="myClass">myClass</div>
+    <div class="myClass">myClass</div>
+
+    <form action="">
+      <input type="radio" value="male" name="gender" /> Male
+      <input type="radio" checked="checked" value="female" name="gender" /> Female
+    </form>
+    <form action="">
+      <input type="radio" value="male" name="gender" /> Male
+      <input type="radio" checked="checked" value="female" name="gender" /> Female
+    </form>
+    <img src="https://www.baidu.com/img/bd_logo1.png" alt="百度图标" width="90" />
+    <img src="https://www.baidu.com/img/bd_logo1.png" alt="百度图标" width="90" />
+    <a href="http://www.baidu.com">跳转到百度首页</a>
+    <a href="http://www.baidu.com">跳转到百度首页</a>
+
+    <div
+      id="myId"
+      class="myClass"
+      my_special_attr="my_special_value"
+      data-attr="my-data-value"
+      data-Attr2="my-data-Value2"
+      dataAttr3="my-dataValue3"
+      style="background-color: red"
+      onclick="console.log(event.type)"
+    >
+      getAttribute测试
+    </div>
+
+    <ul id="myList"></ul>
+
+    <script>
+      var eleNode = document.getElementById('eleNode');
+      var textNode = eleNode.childNodes[0];
+      console.log('nextElementSibling => ', eleNode.nextElementSibling); // 忽略空文本节点
+      console.log(eleNode, eleNode.previousSibling, eleNode.nextSibling); // 不忽略空文本节点
+    </script>
+
+    <script>
+      var idEle = document.getElementById('idDiv'); // 表单的name属性值为myId，也会被返回，ie低版浏览器怪异
+
+      var classEles = document.getElementsByClassName('myClass');
+
+      var divEles = document.getElementsByTagName('div');
+      var allEles = document.getElementsByTagName('*');
+
+      var radioNameEles = document.getElementsByName('gender'); // 表单元素name属性值
+      console.log('getElementById  =  =  =  =  =  =  =  =  =  =  ');
+      console.log(idEle, classEles, divEles, radioNameEles, radioNameEles[0]);
+
+      console.log(idEle.id, idEle.className, idEle.innerHTML, idEle.innerText); // 用于固有特性读值，写值
+      /*    idEle.id = 'id';
+     idEle.className = 'className className2';
+     idEle.title = 'title';
+     idEle.lang = 'fr';
+     idEle.dir = 'rtl';*/
+
+      console.log('document.forms  =  =  =  =  =  =  =  =  =  =  ');
+      console.log(document.forms, document.getElementsByTagName('form'));
+      console.log(document.images, document.getElementsByTagName('img'));
+      console.log(document.links, document.getElementsByTagName('a'));
+    </script>
+
+    <script>
+      console.log(
+        'getAttribute,  setAttribute,  removeAttribute,  attributes  =  =  =  =  =  =  =  =  =  =  '
+      );
+      var myEle = document.getElementById('myId');
+      console.log(myEle, myEle.getAttribute('id'), myEle.getAttribute('class'));
+      console.log(myEle.getAttribute('my_special_attr'), myEle.getAttribute('data-attr'));
+
+      console.log('特殊的特性，两种方式取值的结果不一样');
+      console.log(myEle.style, myEle.getAttribute('style'));
+      console.log(myEle.onclick, myEle.getAttribute('onclick'));
+      // DOM元素属性: 适用于以编程方式操作DOM，对于自定义特性操作会有浏览器的差异，慎用到自定义特性
+      // getAttribute: 多用于自定义特性
+
+      myEle.setAttribute('id', 'id1');
+      myEle.setAttribute('myColor', 'myRed');
+      myEle.removeAttribute('my_special_attr');
+      // 按h5规范，自定义特性格式为data-小写字母（浏览器会解析为小写属性名）
+
+      var attributes = myEle.attributes;
+      var idAttributeNode = attributes.getNamedItem('id');
+      console.log(
+        attributes,
+        attributes.item(0),
+        attributes['id'],
+        attributes[0],
+        attributes.length
+      );
+    </script>
+
+    <script>
+      // 5.
+      var head = document.head || document.getElementsByTagName('head')[0]; // document.head ie会报错
+      var body = document.body;
+
+      function loadScript() {
+        var script = document.createElement('script');
+        script.type = 'text/javascript'; // ! 默认值，可以不写的
+        script.src = '//' + window.location.host + '/js-basic/10.1.js';
+        body.appendChild(script);
+      }
+
+      function loadScript2(src, done) {
+        // 包含成功失败的回调函数，推荐用
+        var js = document.createElement('script');
+        js.src = src;
+        js.onload = function () {
+          done();
+        };
+        js.onerror = function () {
+          done(new Error('Failed to load script ' + src));
+        };
+        document.head.appendChild(js);
+      }
+
+      function loadLink() {
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = '//' + window.location.host + '/js-basic/10.1.css';
+        head.appendChild(link);
+      }
+
+      window.onload = function () {
+        loadLink();
+        loadScript();
+        loadScript2(
+          'file:///Users/yanghuan/FrontBasic/front-basic/js-wang-dao/DOM/10.1.js',
+          console.log
+        );
+        loadScript2(
+          'file:///Users/yanghuan/FrontBasic/front-basic/js-wang-dao-test/DOM/10.1.js',
+          console.warn
+        );
+      };
+    </script>
+
+    <script>
+      // cloneNode
+      var myList = document.getElementById('myList');
+      var deepList = myList.cloneNode(true);
+      var shallowList = myList.cloneNode();
+      console.log(deepList, shallowList);
+    </script>
+  </body>
+</html>

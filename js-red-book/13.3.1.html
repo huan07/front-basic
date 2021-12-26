@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x3</title>
+</head>
+<body>
+
+<!-- DOM0 DOM2的事件对象 -->
+<input type="button" value="click me btnDOM0" id="btnDOM0" />
+<input type="button" value="click me btnDOM2" id="btnDOM2" />
+
+<input type="button" value="click 一个函数处理多个事件时" id="btn3" /><br><br>
+
+<a href="http://www.baidu.com" id="link" target="_blank">跳转到百度首页</a><br>
+<a href="http://www.baidu.com" id="link2" target="_blank">跳不到百度首页，阻止了默认行为</a><br>
+<a href="http://www.baidu.com" id="link3" target="_blank">跳不到百度首页，阻止了默认行为，并且停止了事件在DOM层的传播（冒泡，捕获）</a><br>
+
+<script>
+    // this === event.currentTarget => 恒等
+    var btn = document.getElementById('btnDOM0');
+    btn.onclick = function(event) {
+        console.log(event);
+        console.log(this, this === event.target, this === event.currentTarget);
+    };
+
+    var btn2 = document.getElementById('btnDOM2');
+    btn2.addEventListener('click', function(event) {
+        console.log(this, this === event.target, this === event.currentTarget);
+    }, false);
+
+    document.body.onclick = function(event) { // 冒泡啦 input => body
+        console.warn('冒泡到 document.body，event.target =>', event.target);
+        console.warn(this, this === event.target, this === event.currentTarget);
+    };
+
+    // 一个函数处理多个事件时，type属性
+    var btn = document.getElementById('btn3');
+    var handler = function(event) {
+        switch (event.type) {
+            case 'click':
+                alert('clicked');
+                break;
+            case 'mouseover':
+                event.target.style.backgroundColor = 'red';
+                break;
+            case 'mouseout':
+                event.target.style.backgroundColor = 'black';
+                break;
+        }
+    };
+    btn.onclick = handler;
+    btn.onmouseover = handler;
+    btn.onmouseout = handler;
+</script>
+
+<script>
+    var link2 = document.getElementById('link2');
+    link2.onclick = function(event) {
+        alert('event.cancelable  =  ' + event.cancelable); // 是否可以取消默认行为
+        event.preventDefault();
+    };
+
+    var link3 = document.getElementById('link3');
+    link3.onclick = function(event) {
+        alert('event.cancelable  =  ' + event.cancelable);
+        event.preventDefault();
+
+        alert('event.bubbles  =  ' + event.bubbles); // 是否冒泡
+        event.stopPropagation(); // 取消事件冒泡／捕获   document.body.onclick不会被触发
+    };
+</script>
+
+</body>
+</html>

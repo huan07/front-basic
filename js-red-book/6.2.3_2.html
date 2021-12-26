@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>6.2.3_2</title>
+  </head>
+  <body>
+    <!-- x3 -->
+    <script>
+      function Person() {}
+
+      console.log(
+        '重写整个原型对象之前 =>',
+        Person.prototype,
+        Person.prototype.constructor === Person
+      );
+
+      Person.prototype = {
+        // constructor: Person, // 手动设置变成可以枚举
+        name: 'people_name',
+        age: 'people_age',
+        job: 'people_job',
+        sayName: function () {
+          console.log(this.name + '-' + this.age);
+        },
+      };
+      console.log(
+        '重写整个原型对象之后 =>',
+        Person.prototype,
+        Person.prototype.constructor === Person,
+        Person.prototype.constructor === Object // 搜索到原型链上的 constructor 值: Object // todo
+      );
+    </script>
+
+    <script>
+      // 原型的动态性
+      function People() {}
+
+      var friend = new People();
+
+      People.prototype.sayHi = function () {
+        // 创建实例后，添加原型方法，实例和原型的松散连接 // todo attention
+        console.log('sayHi //' + this.name + '//' + this.age + '//' + this.job);
+      };
+      console.log('friend =>', friend);
+      friend.sayHi();
+
+      //
+      // 重写整个原型对象
+      function People2() {}
+
+      var friend2 = new People2(); // 它们引用的仍然是最初的原型 // todo 因为实例对象已生成 ？？
+
+      People2.prototype = {
+        // 切断了 现有原型 与 之前已经存在的实例对象 之间的联系 // todo attention
+        sayHi: function () {
+          console.log('sayHi //' + this.name + '//' + this.age + '//' + this.job);
+        },
+      };
+      console.log('friend2 =>', friend2);
+      friend2.sayHi();
+
+      // 原生对象的原型
+    </script>
+
+    <script>
+      // 原型对象的问题：所有实例在 默认情况下都将取得 相同的属性值
+      // 共享对函数非常适用
+      // 对于包含引用类型值的属性，问题突出 // todo x
+      function Person2() {}
+
+      Person2.prototype = {
+        constructor: Person2,
+        name: 'name',
+        friends: ['friend1', 'friend2'],
+        sayName: function () {
+          console.log(this.name + '-' + this.friends.length);
+        },
+      };
+      var person = new Person2();
+      var person2 = new Person2();
+      person2.friends.push('friend3');
+
+      console.log('原型对象的问题 =>', person, person2, person.friends === person2.friends);
+      person.sayName();
+      person2.sayName();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <style type="text/css">
+      div {
+        width: 200px;
+        height: 200px;
+        border: 1px solid wheat;
+
+        position: relative;
+      }
+
+      span {
+        /* todo 当作小图标吧 */
+        width: 100px;
+        height: 100px;
+        background: black;
+
+        position: absolute;
+        top: 50%; /* 1.子元素顶部相对于父元素顶部向下偏移50%，子元素再向上移动自身大小的50% */
+        left: 50%;
+        transform: translate(-50%, -50%); /* 2.元素大小是固定的话，可以用margin */
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+todo 针对非文本的布局??
+6.position 相对父元素定位
+优点：容易上手
+缺点：脱离文档流
+-->
+
+    <div>
+      <span></span>
+    </div>
+  </body>
+</html>

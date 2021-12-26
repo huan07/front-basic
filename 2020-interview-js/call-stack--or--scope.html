@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> https://www.bilibili.com/video/av59715096?p=165 </title>
+</head>
+<body>
+
+<script>
+    // todo ??
+    console.log('g b i => ', i);
+    var i = 1;
+    foo(1);
+
+    function foo(i) {
+        if (i === 4) {
+            return;
+        }
+
+        console.log('f() b i => ', i);
+        foo(i + 1);
+        console.log('f() end i => ', i); // todo better 函数执行结束后出栈 后进先出
+    }
+
+    console.log('g end i => ', i); // todo !! 1
+</script>
+
+<script>
+    // todo ??
+    function bar() {
+        console.log(myName);
+    }
+
+    function fool() {
+        var myName = 'fool inner myName';
+        bar(); // todo !! 去执行bar() bar函数入栈，从 全局执行上下文 访问myName
+        console.log('fool inner myName =>', myName); // todo !! 从 fool函数执行上下文 访问myName
+    }
+
+    var myName = 'fool outer myName';
+    fool();
+</script>
+
+</body>
+</html>

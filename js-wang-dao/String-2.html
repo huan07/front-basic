@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>done-构造函数</title>
+</head>
+<body>
+
+<script>
+    // TODO
+    // String 静态方法
+    // 不支持 Unicode 码点大于0xFFFF的字符
+    console.log('String.fromCharCode , 返回码点组成的字符串 => ');
+    console.log(String.fromCharCode(), String.fromCharCode(97), String.fromCharCode(98, 99));
+
+
+    // 实例属性 String.prototype.length
+    var str = 'abc';
+    var strLen = str.length;
+    console.log('strLen => ', strLen);
+
+
+    // 实例方法
+    var s = new String('abc');
+    console.log('charAt => ', s.charAt(0), s.charAt(1));
+    console.log(s[0], s[1]);
+
+    console.log('charCodeAt => ', s.charCodeAt(0), s.charCodeAt());
+    console.log(s.charCodeAt(1));
+
+
+    // concat 参数非字符串，会被转换为字符串，再连接，不改变原字符串
+    var s1 = 'abc';
+    var s2 = 'def';
+    var s3 = s1.concat(s2);
+    var s4 = s1.concat(s2, 345);
+    console.log('concat => ', s1, s3, s4);
+    console.log('+ => ', 1 + '2', 3 + 4); // todo +连接字符串，操作数都是数字时，不会转化为字符串
+
+
+    // slice 取出子字符串并返回，[start,end)，不改变原字符串
+    var s5 = s1.slice(0);
+    var s6 = s1.slice(1, 2);
+    console.log('slice => ', s5, s6); // 优先使用slice todo !!!
+    console.log('substring => ', s1.substring(0), s1.substring(1, 2));
+
+
+    // substr 取出子字符串并返回，[start,count]，不改变原字符串
+    var s7 = s1.substr(0);
+    var s8 = s1.substr(1, 2);
+    console.log('substr => ', s7, s8);
+
+
+    // indexOf, lastIndexOf
+
+
+    // trim 去除空格、制表符（\t、\v）、换行符（\n）和回车符（\r），不改变原字符串
+    var str2 = 'hello world\t\t';
+    var str3 = 'hello world\v\v';
+    var str4 = 'hello world\n\n';
+    var str5 = 'hello world\r\r';
+    var str = 'hello world';
+    console.log('str2 => ', str2, str2);
+    console.log(str2);
+
+    console.log('str3 => ', str3, str3);
+    console.log(str3);
+
+    console.log('str4 => ', str4, str4);
+    console.log(str4);
+
+    console.log('str5 => ', str5, str5);
+    console.log(str5);
+
+    console.log(str);
+    console.log(str2.trim(), str3.trim(), str4.trim(), str5.trim());
+</script>
+
+<script>
+    // toLowerCase, toUpperCase  不改变原字符串
+    var str = 'Hello World';
+    var lower = str.toLowerCase();
+    var upper = str.toUpperCase();
+    console.log(lower, upper);
+</script>
+
+<script>
+    // todo ???
+    // match 原字符串是否匹配某个子字符串，返回一个数组，成员为匹配的第一个字符串。
+    //                如果没有找到匹配，则返回null
+    // 还可以使用正则表达式作为参数
+    var str = 'cat, bat, sat, fat';
+    var matchResult = str.match('at');
+    var matchResult2 = str.match('xat');
+    console.log('match => ', matchResult, matchResult2);
+
+
+    // search          是返回值为匹配的第一个位置。
+    // 如果没有找到匹配，则返回-1。
+    // 还可以使用正则表达式作为参数
+    var searchResult = str.search('at');
+    var searchResult2 = str.search('xat');
+    console.log('search => ', searchResult, searchResult2);
+
+
+    // replace 替换匹配的子字符串，一般情况下只替换第一个匹配（除非使用带有g修饰符的正则表达式）。
+    var replaceResult = str.replace('at', 'atReplaced');
+    var replaceResult2 = str.replace(/at/g, 'atReplaced');
+    console.log('replace => ', replaceResult, replaceResult2);
+
+
+    // split, 返回数组
+    var str = 'a|b|c';
+    var splitResult = str.split('|');
+    var splitResult2 = str.split('');
+    var splitResult3 = str.split();
+    console.log('split => ', splitResult, splitResult2, splitResult3);
+</script>
+
+</body>
+</html>

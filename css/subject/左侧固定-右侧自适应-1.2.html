@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        .wrapper {
+            height: 200px;
+            background: pink;
+        }
+
+        .box {
+            width: 160px;
+            height: 160px;
+            background: wheat;
+        }
+
+        .box2, .box3, .box4 {
+            height: 180px;
+            background: grey;
+        }
+
+        /**/
+        .box2 {
+            margin-left: 160px; /* 160px 写死不够灵活 todo */
+        }
+
+        /**/
+        .wrapper_2 {
+            position: relative;
+        }
+
+        .BOX {
+            position: absolute;
+        }
+
+        /* todo bad 用了内边距 背景颜色漏出来了呢 */
+        .box3 {
+            padding-left: 160px;
+        }
+
+        /* 也行吧，也是一种方法 */
+        .box4 {
+            position: absolute;
+            left: 160px;
+            right: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<!--
+左边元素脱离文档流，
+1.2.都需要设置的 => 右边元素设置 margin-left（不够灵活，要写死距离，左边块的宽度）
+1.左边元素设置 float: left 浮动
+2.左边元素设置 position: absolute 定位，父元素设置 position: relative 定位
+-->
+
+<div class="wrapper BFC_3_1">
+    <div class="box pull-left">box</div>
+    <div class="box2">box2</div>
+</div>
+
+<hr>
+
+<div class="wrapper wrapper_2">
+    <div class="box BOX">box</div>
+    <div class="box2">box2</div>
+</div>
+
+
+<hr>
+<hr>
+<div class="wrapper wrapper_2">
+    <div class="box BOX">box</div>
+    <div class="box3">box3 bad 背景颜色漏出来了</div>
+</div>
+<hr>
+
+<div class="wrapper wrapper_2">
+    <div class="box">box</div>
+    <div class="box4">box4</div>
+</div>
+
+</body>
+</html>

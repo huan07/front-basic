@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 1.Object当作 工具函数 使用，将 任意值 转为对象
+      var obj = Object();
+      var obj_2 = Object(null);
+      var obj_3 = Object(undefined);
+      var obj_4 = Object({});
+      console.log('1.工具函数 =>', obj, obj_2, obj_3, obj_4);
+
+      // 参数是基本类型的值
+      var obj_num = Object(33);
+      console.log('obj_num =>', obj_num, obj_num instanceof Number, obj_num instanceof Object);
+
+      var obj_str = Object('33');
+      console.log('obj_str =>', obj_str, obj_str instanceof String, obj_str instanceof Object);
+
+      var obj_bool = Object(true);
+      console.log('obj_bool =>', obj_bool, obj_bool instanceof Boolean, obj_bool instanceof Object);
+
+      // 参数是对象，返回该对象，即不用转换 // !
+      var arr = [];
+      var obj_arr = Object(arr);
+      console.warn('obj_arr =>', obj_arr, obj_arr === arr);
+
+      // 用处
+      // 判断变量是否为对象
+      function isObject(value) {
+        return value === Object(value);
+      }
+
+      console.warn(
+        'isObject =>',
+        isObject([]),
+        isObject({}),
+        isObject(function () {})
+      );
+      console.log(isObject(2), isObject('2'), isObject(true), isObject(undefined), isObject(null));
+    </script>
+
+    <script>
+      // 2.Object当作 构造函数 使用，生成新对象
+      var obj = new Object();
+      var obj_2 = {};
+      console.log('2.构造函数 =>', obj, obj_2);
+
+      var o1 = { a: 1 };
+      var o2 = new Object(o1); // 参数是对象，直接返回这个对象
+      console.log('o1 === o2 =>', o1 === o2);
+
+      var obj2 = new Object(123); // 参数是原始类型的值，返回原始类型的包装对象
+      console.log(obj2);
+    </script>
+  </body>
+</html>

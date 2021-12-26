@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // 容易混淆
+      // https://mp.weixin.qq.com/s/6TbV-WlXi7btB4b3nfHIIQ
+      // 首先，array 的 sort 方法对原始数组进行排序，并返回对该数组的引用
+      // 当你比较对象时，数组的排序顺序并不重要
+
+      const arr1 = ['a', 'b', 'c'];
+      const arr2 = ['b', 'c', 'a'];
+      // 依次
+      // 指向内存中的同一对象
+      // 指向内存中的同一对象
+      // 指向内存中的不同对象
+      console.log(arr1.sort() === arr1, arr2.sort() == arr2, arr1.sort() === arr2.sort());
+    </script>
+  </body>
+</html>

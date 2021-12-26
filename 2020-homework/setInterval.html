@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更新图片</title>
+</head>
+<body>
+
+<img src="../images/image.jpg" alt="Smiley face" width="200" height="200">
+
+<button type="button" id="btn">开启!</button>
+<button type="button" id="btnCancel">取消</button>
+
+<script>
+    var img = document.querySelector('img');
+    var btn = document.getElementById('btn');
+    var btnCancel = document.getElementById('btnCancel');
+
+    var imgArray = ['icon-correct', 'icon-wyz-logo', 'pic_160'];
+    var imgArrayLen = imgArray.length;
+    var index = 0;
+
+    var timer;
+
+    btn.onclick = function() {
+        clearInterval(timer); // 在开启定时器之前，需要将当前元素上的其他定时器关闭，避免频繁操作 // todo !!
+        timer = setInterval(function() {
+            img.src = '../images/' + imgArray[index] + '.png';
+
+            index++;
+            index %= imgArrayLen;
+
+        }, 1000);
+    };
+
+    btnCancel.onclick = function() {
+        clearInterval(timer);
+    };
+
+</script>
+
+</body>
+</html>

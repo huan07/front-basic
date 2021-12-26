@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="0.css" />
+    <style type="text/css">
+      .input,
+      .input-2 {
+        font-size: 3em;
+        width: 200px;
+        height: 36px;
+      }
+
+      .input:out-of-range {
+        background: gold;
+      }
+
+      .input-2:out-of-range:focus {
+        /* todo 可以与多个伪类拼接 */
+        background: lightpink;
+      }
+
+      /*
+      与content结合使用        
+      */
+      .input-2:out-of-range + h2::after {
+        content: '超出范围';
+      }
+
+      /**/ /**/
+      .checkbox {
+        width: 60px;
+        height: 60px;
+      }
+
+      .checkbox::after {
+        content: '已勾选';
+        display: none;
+        /*
+        width: 32px;
+        height: 32px;
+        */
+      }
+
+      /**/ /**/
+      .checkbox:checked::after {
+        display: block;
+      }
+
+      /**/ /**/
+      #divContainer {
+        overflow: auto;
+        height: 160px;
+        width: 260px;
+        background-color: red;
+      }
+
+      #divContainer::-webkit-scrollbar {
+        border-width: 1px; /* 有什么用呢 */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>请输入数字</h1>
+    <input type="number" min="1" max="10" class="input" />
+    <input type="number" min="1" max="10" class="input-2" />
+    <h2>结果：</h2>
+    <hr />
+    <hr />
+
+    <input type="checkbox" class="checkbox" />
+    <input type="checkbox" class="checkbox" />
+    <input type="checkbox" class="checkbox" />
+    <hr />
+    <hr />
+
+    <iframe
+      width="100%"
+      height="100"
+      frameborder="0"
+      src="https://"
+      allowfullscreen="allowfullscreen"
+    >
+    </iframe>
+    <hr />
+    <hr />
+
+    <div id="divContainer">
+      在这里滚动鼠标<br />
+      -------------<br />
+      头部<br />
+      123<br />
+      123<br />
+      123<br />
+      -------------<br />
+      123<br />
+      123<br />
+      123<br />
+      123<br />
+      -------------<br />
+      123<br />
+      123<br />
+      123<br />
+      123<br />
+      -------------<br />
+      123<br />
+      123<br />
+      123<br />
+      123<br />
+      123<br />
+      -------------<br />
+      123<br />
+      123<br />
+      尾部<br />
+    </div>
+  </body>
+</html>

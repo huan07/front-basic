@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <style>
+      input {
+        width: 80%;
+      }
+
+      body {
+        height: 2000px;
+        background: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <input type="text" class="keyup" value="test" /><br />
+    <input type="text" class="test-debounce" value="test-debounce" /><br /><br />
+
+    <script>
+      function ajaxAction(event) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', '../ajax_info.json?requestData=' + event.target.value, false);
+        xhr.send(null);
+        console.log('ajaxAction finished ! !', Date.now());
+      }
+
+      document.querySelector('.keyup').onkeyup = ajaxAction;
+
+      // better
+      // 不希望回调函数被频繁调用，
+
+      // 正确的做法应该是，设置一个门槛值，表示两次 Ajax 通信的最小间隔时间。
+      // 如果在间隔时间内，发生新的 keydown 事件，则不触发 Ajax 通信，并且重新开始计时。
+      // 如果过了指定时间，没有发生新的 keydown 事件，再将数据发送出去。
+      function debounce(fn, delay) {
+        // debounce 是“防抖”，要连续操作结束后再执行
+        var timer = null; //
+        return function () {
+          console.log('timer =>', timer, Date.now());
+
+          timer && clearTimeout(timer); //
+          timer = setTimeout(() => {
+            fn.apply(this, arguments);
+          }, delay);
+        };
+      }
+
+      function throttle(fn, delay) {
+        // throttle 是“节流”，确保一段时间内只执行一次
+        var time = Date.now(); //
+        return function () {
+          console.log(Date.now() - time, delay);
+
+          if (Date.now() - time > delay) {
+            fn();
+            time = Date.now(); //
+          }
+        };
+      }
+
+      var wait = 1000;
+
+      document.querySelector('.test-debounce').onkeyup = debounce(ajaxAction, wait);
+
+      window.addEventListener(
+        'scroll',
+        throttle(function () {
+          console.log('test throttle');
+        }, wait),
+        false
+      );
+
+      // 以网页滚动为例，
+      // debounce 要等到用户停止滚动后才执行回调函数，
+      // throttle 则是如果用户一直在滚动网页，那么在滚动过程中还是会执行回调函数
+    </script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <script>
+      // typeof 返回字符串
+      var foo = function () {};
+
+      console.log(typeof undefined, typeof '12', typeof 12, typeof true);
+      console.log(typeof null, typeof {}, typeof [], typeof new Date(), typeof new RegExp(''));
+      console.warn(typeof foo);
+
+      // 用处，检查一个没有声明的变量，而不报错
+
+      /*
+    if(!v){ // todo error
+         console.log('vwei');
+     }
+
+    if(v === undefined){ // todo error 可能 v 未定义呢
+        console.log('vwei');
+    }
+    */
+
+      if (typeof v === 'undefined') {
+        // todo better
+        console.log('v undefined');
+      }
+    </script>
+
+    <script>
+      // 数据类型，只有1个值，可以用 === 判断 // good
+      // undefined
+      // null
+
+      var a = undefined;
+      var b = null;
+
+      console.log(a === undefined, b === null); // 如果 a 未定义的话，报错哦
+      console.log(a !== undefined, b !== null);
+    </script>
+  </body>
+</html>

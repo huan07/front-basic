@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    // 由
+    // AJAX 请求、
+    // <img>、
+    // <audio>、
+    // <video>、
+    // <style>、
+    // <link>
+    // 等外部资源的加载触发
+</script>
+
+<img id="img" src="https://www.runoob.com/try/demo_source/smiley-2.gif" width="42" height="42"><br><br>
+
+<img id="img2" src="/smiley-2.gif" width="42" height="42"><br><br>
+
+<!-- better 发生加载错误时百分之百会执行 -->
+<img id="img3" src="/smiley-2.gif" width="42" height="42"
+     onerror="console.log('$img3 error');this.style.background='pink';">
+<br><br>
+<script>
+    var $img = document.querySelector('#img');
+    var $img2 = document.querySelector('#img2');
+
+    $img.addEventListener('load', function(event) {
+        console.log('$img load');
+        $img.style.background = 'red';
+    });
+    $img.addEventListener('error', function(event) { // 不冒泡 ! ! !
+        $img.style.background = 'black';
+    });
+
+
+    // better 先判断图片是否加载完成 ! ! !
+    if ($img2.complete) {
+        $img2.addEventListener('load', function(event) {
+            $img2.style.background = 'red';
+        });
+        $img2.addEventListener('error', function(event) { // TODO
+            console.log('$img2 error');
+            $img2.style.background = 'black';
+        });
+    }
+</script>
+
+
+<img id="img4" src="/smiley-2.gif" width="42" height="42"><br><br>
+<script>
+    // loadend 取代abort事件、load事件、error事件的监听函数，
+    // 因为它总是在这些事件之后发生。
+    var $img4 = document.querySelector('#img4');
+
+    $img4.addEventListener('loadend', function(evt) { // TODO
+        console.log('$img4 loadend => ', evt);
+    });
+</script>
+
+<script>
+    // example
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('progress', updateProgress, false);
+    xhr.addEventListener('load', transferComplete, false);
+    xhr.addEventListener('error', transferFailed, false);
+    xhr.addEventListener('abort', transferCanceled, false);
+
+    xhr.open();
+
+    function updateProgress(e) {
+        if (e.lengthComputable) {
+            var percentComplete = e.loaded / e.total;
+        } else {
+            console.log('不能计算进度');
+        }
+    }
+
+    function transferComplete(e) {
+        console.log('传输结束');
+    }
+
+    function transferFailed(evt) {
+        console.log('传输过程中发生错误');
+    }
+
+    function transferCanceled(evt) {
+        console.log('用户取消了传输');
+    }
+</script>
+
+
+</body>
+</html>

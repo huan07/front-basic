@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.3.4原型式继承</title>
+</head>
+<body>
+
+<!-- x3 -->
+<script>
+    // 借助原型可以基于已有的对象创建对象，不需要创建自定义类型
+    function object(o) {
+        function F() {
+
+        }
+
+        F.prototype = o; // 浅复制，替换了默认恒等规则
+        return new F();
+    }
+
+    var person = {
+        name: 'ycg',
+        friends: ['friend', 'friend2', 'friend3']
+    };
+
+    var person2 = object(person);
+    person2.name = 'name2';
+    person2.friends.push('friendX');
+
+    var person3 = object(person);
+    person3.name = 'name3';
+    person3.friends.push('friendY'); // 问题：传入的对象，如果有引用类型值属性，会被多个实例共享
+
+    console.log('person =>', person);
+    console.log('person2 =>', person2);
+    console.log('person3 =>', person3);
+</script>
+
+<script>
+    // Object.create()规范化了原型式继承，
+    // 优势：不需要通过创建构造函数去创建对象
+    var people = {
+        name: 'ddn',
+        friends: ['friend', 'friend2', 'friend3']
+    };
+
+    var people2 = Object.create(people);
+    people2.name = 'name2';
+    people2.friends.push('friendX');
+
+    var people3 = Object.create(people);
+    people3.name = 'name3';
+    people3.friends.push('friendY');
+
+    console.warn('people Object.create =>', people);
+    console.log('people2 =>', people2);
+    console.log('people3 =>', people3);
+
+    console.log(Object.create(null));
+</script>
+
+<script>
+    var peop = {
+        name: 'yh',
+        friends: ['friend', 'friend2', 'friend3']
+    };
+
+    Object.defineProperties(peop, {
+        age: {
+            value: 31,
+            enumerable: true,
+        }
+    });
+
+    var peop2 = Object.create(peop, { // 返回对象，第一个参数用作这个对象的原型对象，第二个参数用作实例对象
+        job: {
+            value: 'soft engineer'
+        }
+    });
+
+    console.log('peop =>', peop);
+    console.log('peop2 =>', peop2);
+</script>
+
+</body>
+</html>

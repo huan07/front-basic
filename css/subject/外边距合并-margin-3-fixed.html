@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>y</title>
+    <link rel="stylesheet" type="text/css" href="../0.css">
+    <style type="text/css">
+        * {
+            font-size: 12px;
+        }
+
+        .box {
+            background: black;
+            width: 400px;
+            height: 100px;
+            color: white;
+        }
+
+        .box2 {
+            background: pink;
+            width: 200px;
+            height: 50px;
+            color: black;
+
+            margin-top: 50px;
+        }
+
+        .fixed {
+            border-top: 1px solid yellow;
+        }
+
+        .fixed2 {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<!--
+不满足场景需求，
+设置父元素的 border 或者 padding，不让父子元素的margin相邻
+设置子元素的 border 或者 padding 无效，因为 margin 还是相邻的 // todo
+-->
+
+<div class="box fixed">
+    <div class="box2">
+        设置父元素的 border
+    </div>
+</div>
+<hr>
+
+<div class="box fixed2">
+    <div class="box2">
+        设置父元素的 padding
+    </div>
+</div>
+<hr>
+
+<div class="box">
+    <div class="box2 fixed">
+        设置子元素的 border，<br />不生效，<br />因为 margin 还是相邻的
+    </div>
+</div>
+<hr>
+
+<div class="box ">
+    <div class="box2 fixed2">
+        设置子元素的 padding，<br />不生效，<br />因为 margin 还是相邻的
+    </div>
+</div>
+
+</body>
+</html>

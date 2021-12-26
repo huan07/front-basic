@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+</head>
+<body>
+
+<script>
+    // 仅针对最内层的循环 // todo !!
+    // break语句用于跳出代码块或循环，跳出while, for循环
+    // continue 终止本轮循环，执行下一轮的循环
+    for (var j = 0; j < 4; j++) {
+        if (j === 1) {
+            break;
+        }
+        console.log('break j 当前为 => ' + j);
+    }
+
+    for (var jj = 0; jj < 4; jj++) {
+        if (jj === 1) {
+            continue;
+        }
+        console.log('continue jj 当前为 => ' + jj);
+    }
+</script>
+
+<script>
+    // label 跳出循环 TODO
+</script>
+
+</body>
+</html>

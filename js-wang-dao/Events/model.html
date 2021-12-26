@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body onload="myDo('body do')">
+<div id="testClick">测试 触发事件click _2</div>
+<br>
+<br>
+<script>
+    document.getElementById('testClick').setAttribute('onclick', 'myDo("div do")');
+
+    function myDo(value) {
+        console.log(value);
+    }
+</script>
+
+<div onclick="console.log('div onclick 触发事件')">测试 触发事件click</div>
+<br>
+<br>
+
+
+<script>
+    // 1. HTML 的 on- 属性
+    // 监听函数，只会在冒泡阶段触发
+</script>
+<div onclick="console.log('parent')" style="background: pink; width:200px;height: 200px;">
+    <div onclick="console.log('child')" style="background: red; width:100px;height: 100px;">点击子元素</div>
+</div>
+<br>
+<br>
+
+</body>
+</html>

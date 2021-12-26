@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x2</title>
+</head>
+<body>
+
+<script>
+    // 1.表达式还是语句
+    // { foo:123};
+    // JavaScript 引擎的做法是，如果遇到这种情况，无法确定是对象还是代码块，一律解释为  代码块  。
+    {
+        console.log(123)
+    }
+
+    // 如果要解释为对象，开发者最好手动加上(), 因为()里面只能是表达式， // todo better
+    var obj = ({ foo: 123 });
+    console.log(obj);
+    // ({ console.log(123) }); // error
+</script>
+
+<script>
+    // JavaScript 会自动添加句末的分号，导致一些难以察觉的错误
+    // 1.建议 { 不要换一行 // todo !!
+    // 2.语句末尾手动加上 ; // todo !!
+    if (true) {
+        console.log(true);
+    }
+
+    function foo() {
+        return { // todo better
+            foo: 'foo'
+        };
+    }
+
+    function bar() {
+        return // todo bad js 会自动在此处添加 ;
+        {
+            bar:'bar'
+        }
+    }
+
+    console.log(foo(), bar());
+</script>
+
+</body>
+</html>

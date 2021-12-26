@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>x4</title>
+</head>
+<body>
+
+<a href="https://www.bilibili.com/video/BV1u4411p7jn?p=13" target="_blank">链接</a>
+
+<script>
+    function queryURLParameter(search = window.location.search) {
+        return search.substring(1).split('&').reduce(function(result, curr) { // todo better
+            const [name, value] = curr.split('=');
+            result[name] = decodeURIComponent(value);
+            return result;
+        }, {});
+    }
+
+    var test = queryURLParameter();
+    console.log(test);
+
+    // 用正则匹配
+    // ? 0个或1个
+    // * 0个或多个 // todo !!
+    // + 1个及以上
+    function foo(name) { // TODO ... RegExp 正则匹配 再研究下
+        var _search = window.location.search;
+
+        var re = new RegExp(`[?&]${name}=(.*)(&?)`); // 写得不好
+
+        var matched = _search.match(re);
+
+        console.log(_search, re, matched && decodeURIComponent(matched[1]))
+
+        return matched && decodeURIComponent(matched[1]);
+    }
+
+    foo('name');
+    foo('_ijt');
+</script>
+
+</body>
+</html>

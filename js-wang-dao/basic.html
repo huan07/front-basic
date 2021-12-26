@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      var a = 1;
+      var b;
+
+      console.log(a);
+      console.log(b, typeof b);
+    </script>
+
+    <script>
+      // console.log('g =>', g); // todo error 使用了未声明（未定义）的变量，js 执行会报错。参照变量提升考题
+      g = 'global'; // 未用 var, 声明的是全局变量 // todo bad
+      console.log('g =>', g);
+    </script>
+
+    <script>
+      // 对于 var 命令来说，JavaScript 的区块不构成单独的作用域 // todo !!
+      {
+        var foo = 'bar';
+      }
+      console.log('foo =>', foo);
+    </script>
+
+    <script>
+      var x = 1;
+      var x; // var 重新声明一个已经存在的变量，是无效的
+      console.log('x =>', x);
+
+      //
+      var y = 1;
+      var y = 99; // 第二次声明的时候还进行了赋值，则会覆盖掉前面的值 // todo !!
+      console.log('y =>', y);
+    </script>
+  </body>
+</html>

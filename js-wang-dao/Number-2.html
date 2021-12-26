@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>done-构造函数</title>
+</head>
+<body>
+
+<script>
+    // 实例方法
+    var num = 10;
+    console.log(
+        num,
+        num.toString(2),
+        num.toString(8),
+        num.toString(10),
+        num.toString(),
+        num.toString(16)
+    );
+
+    // console.log(10.toString()); // todo error
+
+    // or
+    console.log(
+        10['toString'](2),
+        10['toString'](8),
+        10['toString'](10),
+        10['toString'](),
+        10['toString'](16)
+    );
+
+
+    // foFixed() 返回指定位数的小数，字符串形式
+    // 浮点数的原因，小数5的四舍五入是不确定 todo 不可靠
+    console.log(
+        'toFixed => ',
+        10.055.toFixed(2),
+        10.005.toFixed(2)
+    );
+</script>
+
+</body>
+</html>

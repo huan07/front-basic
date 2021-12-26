@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>10.2</title>
+    <link rel="stylesheet" type="text/css" href="10.1.css">
+</head>
+<body>
+<div id="box" title="标题" class="bbb">
+    <p>测试box</p> <!-- 有的浏览器会将空白部分作为节点 处理兼容性方式 -->
+</div>
+
+<div id="box2" title="标题" class="bbb">
+    <p>测试box2</p> <!-- 有的浏览器会将空白部分作为节点 处理兼容性方式 -->
+</div>
+
+<script>
+    // 浏览器兼容处理 子节点获取，有的浏览器将空白部分当作节点，有的不是
+    // 1. 忽略空白文本节点
+    function filterWhiteNode(node) {
+        var ret = [];
+        for (var i = 0, len = node.length; i < len; i++) { // len提前取值适用于node是固定的数组长度
+            if (node[i].nodeType === 3 && /^\s+$/.test(node[i].nodeValue)) {
+                continue;
+            }
+            ret.push(node[i]);
+        }
+        return ret;
+    }
+
+    var boxEle = document.getElementById('box');
+    console.log(boxEle.childNodes);
+    console.log(filterWhiteNode(boxEle.childNodes));
+
+
+    // 2. 移除空白文本节点
+    function removeWhiteNode(node) {
+        var _childNodes = node.childNodes; // 怪怪的方式 childNodes的大小在变化的
+        for (var i = 0; i < _childNodes.length;) {
+            var childI = _childNodes[i];
+            if (childI.nodeType === 3 && /^\s+$/.test(childI.nodeValue)) {
+                childI.parentNode.removeChild(childI);
+                continue;
+            }
+            i++;
+        }
+        return node;
+    }
+
+    var box2Ele = document.getElementById('box2');
+    console.log(box2Ele.childNodes);
+    console.log(removeWhiteNode(box2Ele).childNodes);
+
+</script>
+
+</body>
+</html>

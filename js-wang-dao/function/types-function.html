@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 函数的重复声明
+      function foo() {
+        return 'foo';
+      }
+
+      function foo() {
+        return 'bar here'; // 声明重复，后者覆盖了前者 // !!
+      }
+
+      console.log(foo());
+    </script>
+
+    <script>
+      // 同名变量声明提升，优先级：
+      // 先执行变量提升，再执行函数提升 // todo
+      var bar = function () {
+        // 声明提升之后，此处赋值覆盖了 函数的声明 // todo !!
+        return 'bar express here';
+      };
+
+      function bar() {
+        return 'bar statement';
+      }
+
+      console.log('priority =>', bar());
+
+      // todo !! 参照考题，加强理解 hoisting
+    </script>
+
+    <script>
+      // 函数：第一等公民
+      // 只是一个可以执行的值
+      function add(x, y) {
+        return x + y;
+      }
+
+      var operator = add; // 1.将函数赋值给一个变量 / 对象的属性
+
+      function a(op) {
+        // 2.将函数作为参数 / 返回值
+        return op;
+      }
+      console.log(operator(2, 3), a(add)(2, 3));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 闭包 就是能够读取 其他函数内部变量 的函数
+
+      // 闭包的最大用处有两个：
+      // 1.可以读取外层函数内部的变量（ 子函数读取 父函数内部的变量 ） // !
+      // 2.让这些变量始终保持在内存中（ 父函数的变量 ） // !
+      function createIncre(start) {
+        return function () {
+          // 内部函数 引用了外部函数变量 start，形成闭包 closure // !!
+          return start++;
+        };
+      }
+
+      var increResult = createIncre(10);
+      var result_0 = increResult(); // 沿着作用域链查找变量，可以访问 createIncre 函数内部的变量
+      var result_1 = increResult();
+      var result_2 = increResult();
+
+      var increResult2 = createIncre(10);
+      var result2_0 = increResult2();
+      var result2_1 = increResult2();
+
+      console.log(result_0, result_1, result_2);
+      console.log(result2_0, result2_1);
+
+      // 3.封装对象的私有属性和私有方法（ 封装私有变量 ） // !
+      function Person(name) {
+        var _age;
+
+        function setAge(n) {
+          _age = n;
+        }
+
+        function getAge() {
+          return _age;
+        }
+
+        // 向外暴露对象（ 给外部使用 ）
+        return {
+          name: name,
+          setAge: setAge,
+          getAge: getAge,
+        };
+      }
+
+      var p1 = Person('张三');
+      p1.setAge(33);
+      console.log(p1, 'getAge =>', p1.getAge());
+
+      // 外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。
+      var p2 = Person('李四');
+      p2.setAge(34);
+      console.log(p2, 'getAge =>', p2.getAge());
+    </script>
+  </body>
+</html>

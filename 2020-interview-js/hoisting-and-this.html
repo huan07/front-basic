@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    // 容易迷惑的考点 群里面截图的
+    var a = 11;
+
+    function Test1() {
+        this.a = 22;
+        let b = function() {
+            console.log('this.a => ', this.a);
+        };
+        b();
+    }
+
+    var x = new Test1();
+</script>
+
+</body>
+</html>

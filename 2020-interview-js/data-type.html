@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <body>
+    <script>
+      (() => {
+        // https://www.bilibili.com/video/BV1dJ411E7Hd/?spm_id_from=333.788.videocard.1
+        var a = { n: 1 };
+        var b = a; // todo ... 拷贝的是对象的引用
+        a.x = a = { n: 2 };
+
+        console.log('a', a, a.x);
+        console.log('b', b, b.x);
+      })();
+
+      // todo ...
+    </script>
+
+    <script>
+      // https://www.bilibili.com/video/BV1nZ4y1u7x7?p=1
+      let a = typeof typeof typeof [12, 23];
+      console.log(a); // 'string'
+
+      (() => {
+        let res = parseFloat('left:200px');
+        if (res === 200) {
+          alert(200);
+        } else if (res === NaN) {
+          alert(NaN);
+        } else if (typeof res === 'number') {
+          console.log('number');
+        } else {
+          alert('Invalid Number');
+        }
+      })();
+
+      (() => {
+        let res = 10 + false + undefined + [] + 'str' + null + true + {};
+        console.warn(res); // NaNstrnulltrue[object Object] // todo !!
+        console.log(Number(false), Number([]), Number(undefined));
+      })();
+
+      (() => {
+        var a = 12;
+        var b = a;
+        b = 13;
+        console.warn(a); // 12
+
+        //
+        var a2 = { n: 12 };
+        var b2 = a2;
+        b2['n'] = 13;
+        console.log(a2.n); // 13
+
+        //
+        var a3 = { n: 12 };
+        var b3 = a3;
+        b3 = { n: 13 };
+        console.log(a3.n); // 12
+      })();
+    </script>
+
+    <script>
+      // https://www.bilibili.com/video/BV1nZ4y1u7x7?p=3
+      // 46s
+
+      var obj = {
+        name: 'name',
+        fn: (function (x) {
+          console.log(x);
+          return x + 10;
+        })(obj.name),
+      };
+      console.log(obj.fn); // TODO ...
+      /*
+       * 1.创建值
+       *   开辟一个堆 AAAFFF000
+       *   存储键值对
+       *   name:'name'
+       *   fn:立即调用的函数表达式，需要把obj.name的值当作实参传递进来，=> undefined.name error
+       * */
+    </script>
+
+    <script>
+      (function () {
+        function changeObjProperty(o) {
+          o.siteURL = 'http://';
+          o = new Object();
+          o.siteURL = 'https://again';
+        }
+
+        let webSite = new Object();
+        changeObjProperty(webSite);
+        console.warn(webSite);
+      })();
+
+      (() => {
+        // https://www.bilibili.com/video/BV1nZ4y1u7x7?p=4  这个链接不合适相似题目
+        var arr = [1, 2, 3, 4];
+
+        function fn3(arr) {
+          arr[0] = 0;
+          arr = [0];
+          arr[0] = 100;
+          return arr;
+        }
+
+        var result = fn3(arr);
+        console.log(arr); // [0, 2, 3, 4]
+        console.log(result); // [100]
+      })();
+    </script>
+
+    <script>
+      (() => {
+        Array.prototype.myPush = function (value) {
+          this[this.length] = value; // todo 数组的 length 属性可动态更改
+        };
+
+        var obj = {
+          2: 3,
+          3: 4,
+          length: 2,
+          push: Array.prototype.push,
+        };
+
+        obj.push(1); // => obj[2] = 1
+        obj.push(2); // => obj[3] = 2
+        obj.push(6); // => obj[4] = 6, length = 5
+
+        console.log(obj);
+      })();
+    </script>
+  </body>
+</html>

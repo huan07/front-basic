@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <script>
+      // 隐式转换
+      // 1.自动转换为字符串
+      // 不同类型的数据互相运算
+      console.log('1' + '2'); // 12, 其一是字符串，按字符串拼接
+
+      var num = 3 + 5 + '1';
+
+      console.log(num); // 81
+
+      // 2.自动转换为布尔值
+      // 对非布尔值类型的数据求布尔值，比如 if 语句的条件部分
+      if ('0') {
+        console.log(0);
+      }
+
+      // 3.非数值类型的值使用一元运算符（即+和-），转换为数值，系统内部会自动调用Number函数
+      var number = +{ foo: 'bar' };
+      var number2 = -[1];
+      var number3 = -[1, 2];
+      console.warn(number, number2, number3);
+    </script>
+
+    <script>
+      // 参照面试题+
+    </script>
+  </body>
+</html>
+··

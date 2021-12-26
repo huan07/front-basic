@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>12</title>
+  </head>
+  <body>
+    <script>
+      // 属性可以动态创建，不必在对象声明时就指定
+      var obj = {
+        a: 'a', // 对象的所有键名都是字符串，所以加不加引号都可以
+      };
+
+      obj.b = 'b';
+      console.log('obj =>', obj);
+    </script>
+
+    <script>
+      // 合成类型的值：对象的引用（指向同一个内存地址）
+      var o1 = {};
+      var o2 = o1;
+      o1.a = 1;
+      console.log('对象的引用 o1, o2 =>', o1, o2);
+
+      // 原始类型的值：值的拷贝
+      var x = 11;
+      var y = x;
+      x = 22;
+      console.log('值的拷贝 x, y =>', x, y);
+    </script>
+
+    <script>
+      // 读对象属性：点表示法(不能用数值)，[字符串/数字值, 变量名, 表达式]
+      // 写对象属性：点表示法，[]
+      // []用于：属性名包含特殊字符，如-, _, 空格等
+      var person = {
+        age: 31, // key都是字符串，加不加引号都行；数字键名，只能使用方括号运算符 // todo !!
+        1: 1,
+      };
+      var agePropertyName = 'age';
+
+      console.log(person.age);
+      console.log(
+        person['age'],
+
+        person['1'],
+        person[1],
+        person[agePropertyName],
+        person['a' + 'ge']
+      );
+    </script>
+
+    <script>
+      // 对象自身属性的操作
+      var obj = {
+        key1: 1,
+        key2: 2,
+      };
+      var keys = Object.keys(obj);
+      console.log('keys => ', keys);
+
+      delete obj.key1; // 只能删除对象本身的属性
+      var keys_ = Object.keys(obj);
+      console.log('keys delete after keys_ => ', keys_, obj.key1);
+    </script>
+
+    <script>
+      // 可遍历的 自身+继承 属性
+      var obj = {
+        key: 'value',
+      };
+      for (var prop in obj) {
+        console.log('prop => ', prop);
+      }
+
+      // 结合hasOwnProperty，可遍历的 自身属性 // todo better
+      for (var ownProp in obj) {
+        if (obj.hasOwnProperty(ownProp)) {
+          console.log('ownProp => ', ownProp);
+        }
+      }
+    </script>
+
+    <script>
+      // with语句
+    </script>
+  </body>
+</html>

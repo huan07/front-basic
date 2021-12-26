@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+    (() => {
+        var a = 0, b = 0; // todo 这句没用，迷惑人的
+
+        function A(a) {
+            A = function(b) {
+                console.warn(a + b++); // 入参数 a 一直保存在内存中，有闭包
+            };
+            console.warn(a++); // 100
+        }
+
+        A(100);
+        A(2); // 101+2
+        A(2); // 101+2
+
+    })();
+</script>
+
+<script>
+    // https://www.bilibili.com/video/BV1hV411679v?p=8
+    var n = 123;
+
+    function f1() { // todo 直接执行函数，就是在window环境执行的
+        console.log(n); // 123
+    }
+
+    function f2() {
+        var n = 456;
+        f1();
+    }
+
+    f2();
+    console.log(n); // 123
+
+    // 题目2
+    // https://www.bilibili.com/video/BV1dJ411E7Hd?p=2
+    (() => {
+        let a = 12, b = 12;
+
+        function fn() {
+            console.log(a, b); // error let a 没有变量提升
+            let a = b = 13;
+            console.log(a, b);
+        }
+
+        fn();
+        console.log(a, b);
+
+    })();
+</script>
+
+</body>
+</html>
