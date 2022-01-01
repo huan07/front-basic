@@ -16,7 +16,14 @@
       // !
       // !
       console.log('NaN result => ', Number(undefined), Number('324abc'), Number({}));
-      console.log('0 result by Number => ', Number(null), Number(''), Number(false), Number([]));
+      console.log(
+        '0 result by Number => ',
+        Number(),
+        Number(null),
+        Number(''),
+        Number(false),
+        Number([])
+      );
 
       //
       console.log('NaN result by parseInt =>', parseInt(''), parseInt(false), parseInt(null));
