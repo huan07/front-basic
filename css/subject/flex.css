@@ -1,162 +1,149 @@
 .flex-container {
-    display: -webkit-flex;
-    display: flex;
+  display: -webkit-flex;
+  display: flex;
 
-    width: 400px;
-    height: 150px;
-    background-color: lightgrey;
+  width: 400px;
+  height: 100px;
+  background-color: lightgrey;
 }
 
 .flex-item {
-    width: 100px;
-    /*
+  width: 100px;
+  /*
     项目的排列方向是水平方向，
     可以指定项目的width,
-    不指定的话就是内容撑开的大小，弹性布局，指定项目属性放大缩小，最终宽度是可以调整的，
+    不指定的话就是内容撑开的大小，
+    弹性布局，指定项目属性放大缩小，最终宽度是可以调整的，
     todo
     */
-    height: 100px;
-    margin: 10px;
-    background-color: cornflowerblue;
+  height: 60px;
+  background-color: cornflowerblue;
+  margin: 10px;
 }
 
 /**/
 .flex-direction-row {
-    -webkit-flex-direction: row;
-    flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
 }
 
 .flex-direction-column {
-    -webkit-flex-direction: column;
-    flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
 }
 
 /**/
 .flex-wrap-nowrap {
-    flex-wrap: nowrap;
+  flex-wrap: nowrap;
 }
 
 .flex-wrap-wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 /**/
 .flex-flow-row-nowrap {
-    flex-flow: row nowrap;
+  flex-flow: row nowrap;
 }
 
 .flex-flow-nowrap {
-    flex-flow: row-reverse nowrap;
+  flex-flow: row-reverse nowrap;
 }
 
 .flex-flow-wrap {
-    flex-flow: row-reverse wrap;
+  flex-flow: row-reverse wrap;
 }
 
 /**/
 .justify-content-flex-start {
-    justify-content: flex-start;
+  justify-content: flex-start;
 }
 
 .justify-content-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .justify-content-space-between {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .justify-content-space-around {
-    justify-content: space-around;
+  justify-content: space-around;
 }
 
 /**/
 .align-items-stretch {
-    align-items: stretch;
+  align-items: stretch;
 }
 
 .align-items-flex-start {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .align-items-center {
-    align-items: center;
+  align-items: center;
 }
 
 .align-items-baseline {
-    align-items: baseline;
+  align-items: baseline;
 }
 
-/**//**//**//**//**//**//**//**//**//**//**//**/
-/**//**//* 项目水平显示，有flex-grow, flex-basis 就不要写width todo */
-.flex-item-w {
-    /* width: 100px; */
-    height: 100px;
-    margin: 10px;
-    background-color: cornflowerblue;
-}
+/**/
+/**/
+/**/
+/**/
+/* 项目水平显示，有flex-grow, flex-basis 就不要写width todo */
 
-/**//**/
-.order {
-    order: 0;
-}
-
-.order-5 {
-    order: 5;
-}
-
-.order-3 {
-    order: 3;
-}
-
-/**//**/
-.flex-grow-0 {
-    flex-grow: 0;
+.flex-grow-de {
+  flex-grow: 0; /*默认值，不放大*/
 }
 
 .flex-grow-1 {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .flex-grow-2 {
-    flex-grow: 2;
+  flex-grow: 2;
 }
 
-/**//**/
-.flex-shrink-1 {
-    flex-shrink: 1;
+/**/
+/**/
+.flex-shrink-de {
+  flex-shrink: 1; /*默认值，会缩小*/
 }
 
 .flex-shrink-0 {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
-/**//**/
-.flex-basis-auto {
-    flex-basis: auto;
+/**/
+/**/
+.flex-basis-de {
+  flex-basis: auto;
 }
 
 .flex-basis-200 {
-    flex-basis: 200px;
+  flex-basis: 200px;
 }
 
-/**//**/
-.flex {
-    flex: 0 1 auto; /* 不放大，将缩小 */
+/**/
+/**/
+.flex-de {
+  flex: 0 1 auto; /* 不放大，会缩小 */
 }
 
 .flex-auto {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 .flex-auto_short {
-    flex: auto;
+  flex: auto; /**/
 }
 
 .flex-none {
-    flex: 0 0 auto;
+  flex: 0 0 auto;
 }
 
 .flex-none_short {
-    flex: none;
+  flex: none; /**/
 }

@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>x4</title>
-</head>
-<body>
-
-<script>
-    // if
-    if (typeof x === 'undefined') {
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <script>
+      // if
+      if (typeof x === 'undefined') {
         console.log(typeof x === 'undefined');
-    }
-</script>
+      }
+    </script>
 
-<script>
-    // if...else
-    var fruit = 'bananaX';
-    if (fruit === 'banana') {
+    <script>
+      // if...else
+      var fruit = 'bananaX';
+      if (fruit === 'banana') {
         console.log(fruit === 'banana', fruit);
-    } else {
-        console.log('default => ', fruit);
-    }
+      } else {
+        console.log('default =>', fruit);
+      }
 
+      // 三元运算符 express ? result1 : result2 （二者区别：表达式，具有返回值）
+      // 如果第一个表达式的布尔值为true，// ！隐式转换
+      // 则返回第二个表达式的值，否则返回第三个表达式的值
+      //
+      // 被视为if...else的简写形式               （二者区别：语句，没有返回值）
+      var n = 1;
+      var odd = n % 2 === 1 ? true : false;
+      var odd_better = !!(n % 2 === 1);
+      console.log('odd =>', odd, odd_better);
 
-    // 三元运算符 express ? result1 : result2 （二者区别：表达式，具有返回值）
-    // 如果第一个表达式的布尔值为true，// todo 隐式转换
-    // 则返回第二个表达式的值，否则返回第三个表达式的值
-    //
-    // 被视为if...else的简写形式               （二者区别：语句，没有返回值）
-    var n = 1;
-    var odd = n % 2 === 1 ? true : false;
-    var odd_better = !!(n % 2 === 1);
-    console.log('odd => ', odd, odd_better);
+      var rowClassName = n % 2 === 1 ? 'row-odd' : 'row-even';
+      console.log('rowClassName =>', rowClassName);
+    </script>
 
-    var rowClassName = n % 2 === 1 ? 'row-odd' : 'row-even';
-    console.log('rowClassName => ', rowClassName);
-</script>
-
-<script>
-    // if...else if...else
-    var fruit = 'banana';
-    if (fruit === 'banana') {
+    <script>
+      // if...else if...else
+      var fruit = 'banana';
+      if (fruit === 'banana') {
         console.log(fruit === 'banana', fruit);
-    } else if (fruit === 'apple') {
+      } else if (fruit === 'apple') {
         console.log(fruit === 'apple', fruit);
-    } else {
+      } else {
         console.log('default => ', fruit);
-    }
-</script>
-
-</body>
+      }
+    </script>
+  </body>
 </html>

@@ -1,82 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>x2</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        .box {
-            width: 200px;
-            height: 60px;
-            background: red;
-        }
+      .box {
+        width: 200px;
+        height: 60px;
+        background: red;
+      }
 
-        .box2 {
-            width: 200px;
-            height: 100px;
-            background: lightblue;
+      .box2 {
+        width: 200px;
+        height: 120px;
+        background: lightblue;
 
-            /* margin-top: 10px; */
-            position: relative;
-            top: 10px;
-        }
+        /* margin-top: 10px; */
+        position: relative;
+        top: 10px;
+      }
 
-        .box3 {
-            width: 200px;
-            height: 60px;
-            background: lightgrey;
+      .box3 {
+        width: 200px;
+        height: 60px;
+        background: lightgrey;
 
-            /* margin-top: 20px; */
-            position: absolute;
-            top: 20px; /* 也可以用margin-top */
-        }
+        /* margin-top: 20px; */
+        position: absolute;
+        top: 20px; /* 也可以用margin-top */
+      }
 
-        /**//**/
-        .box11 {
-            width: 200px;
-            height: 60px;
-            background: red;
-        }
+      /**/
+      /**/
+      .box11 {
+        width: 200px;
+        height: 60px;
+        background: red;
+      }
 
-        .box22 {
-            width: 200px;
-            height: 100px;
-            background: lightblue;
+      .box22 {
+        width: 200px;
+        height: 120px;
+        background: lightblue;
 
-            /* margin-top: 20px; */
-            margin-top: 10px; /* 也可以用margin-top */
-        }
+        /* margin-top: 20px; */
+        margin-top: 10px; /* 也可以用margin-top */
+      }
 
-        .box33 {
-            width: 200px;
-            height: 60px;
-            background: lightgrey;
+      .box33 {
+        width: 200px;
+        height: 60px;
+        background: lightgrey;
 
-            /* margin-top: 20px; */
-            position: relative;
-            top: 20px; /* 这个时候就不能用margin-top, 因为相对定位元素处在文档流中 todo */
-        }
+        /* margin-top: 20px; */
+        position: relative;
+        top: 20px; /* 这个时候就不能用margin-top, 因为相对定位元素处在文档流中 todo */
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- todo -->
+    <div class="box">box</div>
+    <div class="box2">
+      <div class="box3">子元素用绝对定位方式</div>
+    </div>
+    <br />
+    <hr />
 
-<div>子元素用绝对定位方式</div><!-- todo -->
-<div class="box">
-    box
-</div>
-<div class="box2">
-    <div class="box3">box3</div>
-</div>
-<br>
-<hr>
-
-<div>子元素用相对定位方式</div><!-- todo -->
-<div class="box11">
-    box
-</div>
-<div class="box22">
-    <div class="box33">box3</div>
-</div>
-
-</body>
+    <!-- todo -->
+    <div class="box11">box</div>
+    <div class="box22">
+      <div class="box33">子元素用相对定位方式</div>
+    </div>
+  </body>
 </html>

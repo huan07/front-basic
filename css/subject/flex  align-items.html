@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>x2</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
-    <link rel="stylesheet" type="text/css" href="flex.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
+    <link rel="stylesheet" type="text/css" href="flex.css" />
     <style>
-        .test {
-            height: auto; /* 如果项目（子元素）未设置高度或设为auto，将占满整个容器的高度 todo */
-        }
+      .test {
+        height: auto; /* 如果项目（子元素）未设置高度或设为auto，将占满整个容器的高度 todo */
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="flex-container align-items-stretch">
+      <div class="flex-item">flex item</div>
+      <div class="flex-item">flex item</div>
+    </div>
+    <hr />
+    <div class="flex-container align-items-stretch">
+      <!-- 
+        如果项目未设置高度或设为auto，将占满整个容器的高度 
+        todo 
+      -->
+      <div class="flex-item test">flex item</div>
+      <div class="flex-item test">flex item</div>
+    </div>
+    <hr />
 
-<div class="flex-container align-items-stretch">
-    <div class="flex-item">flex item</div>
-    <div class="flex-item">flex item</div>
-</div>
-<hr>
+    <div class="flex-container align-items-flex-start">
+      <div class="flex-item">flex item</div>
+      <div class="flex-item">flex item</div>
+    </div>
+    <hr />
 
-<div class="flex-container align-items-flex-start">
-    <div class="flex-item">flex item</div>
-    <div class="flex-item">flex item</div>
-</div>
-<hr>
+    <div class="flex-container align-items-center">
+      <div class="flex-item">flex item</div>
+      <div class="flex-item">flex item</div>
+      <div class="flex-item">flex item</div>
+    </div>
+    <hr />
 
-<div class="flex-container align-items-center">
-    <div class="flex-item">flex item</div>
-    <div class="flex-item">flex item</div>
-    <div class="flex-item">flex item</div>
-</div>
-<hr>
-
-<div class="flex-container align-items-baseline">
-    <!-- baseline：项目的第一行文字的基线对齐 todo -->
-    <div class="flex-item" style="font-size: 12px;">flex item</div>
-    <div class="flex-item" style="font-size: 18px;">flex item</div>
-    <div class="flex-item" style="font-size: 22px;">flex item</div>
-</div>
-<hr>
-
-<div class="flex-container align-items-stretch">
-    <!-- 如果项目未设置高度或设为auto，将占满整个容器的高度 todo -->
-    <div class="flex-item test">flex item</div>
-    <div class="flex-item test">flex item</div>
-</div>
-
-</body>
+    <div class="flex-container align-items-baseline">
+      <!-- 
+        baseline：项目的第一行文字的基线对齐 
+        todo 
+      -->
+      <div class="flex-item" style="font-size: 12px">flex item</div>
+      <div class="flex-item" style="font-size: 18px">flex item</div>
+      <div class="flex-item" style="font-size: 22px">flex item</div>
+    </div>
+  </body>
 </html>

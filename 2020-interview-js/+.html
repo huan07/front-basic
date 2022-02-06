@@ -2,15 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>1</title>
+    <title>2</title>
   </head>
   <body>
     <script>
-      // 1.如果有一个操作数是字符串，那么把另一个操作数（隐式转换）转成字符串执行连接
+      // 1.如果有一个操作数是字符串，那么把另一个操作数（隐式转换）转成 字符串 执行连接
 
-      // 2.如果有一个操作数是对象，那么调用对象的valueOf方法转成 原始值 ，如果没有该方法或调用后仍是 非原始值 ，则调用toString方法
+      // !
+      // 2.如果有一个操作数是对象，那么调用对象的valueOf方法转成 原始值 ，
+      // 如果没有该方法或调用后仍是 非原始值 ，则调用toString方法
 
-      // 3.其他情况下，两个操作数都会被转成数字执行加法操作
+      // 3.其他情况下，两个操作数都会被转成 数字执行加法操作
 
       console.log('1' + 3); // '13'
       // 对象的处理方式
@@ -24,6 +26,7 @@
     </script>
 
     <script>
+      // 什么破题目
       // https://mp.weixin.qq.com/s/6gtfge3akJMlNr6HQbb-XQ
       console.log('b' + 'a' + +'a' + 'a');
     </script>

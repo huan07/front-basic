@@ -13,7 +13,7 @@
       // 2.让这些变量始终保持在内存中（ 父函数的变量 ） // !
       function createIncre(start) {
         return function () {
-          // 内部函数 引用了外部函数变量 start，形成闭包 closure // !!
+          // 内部函数 引用了外部函数变量 start，形成闭包 closure // !
           return start++;
         };
       }
@@ -30,9 +30,9 @@
       console.log(result_0, result_1, result_2);
       console.log(result2_0, result2_1);
 
-      // 3.封装对象的私有属性和私有方法（ 封装私有变量 ） // !
+      // 3.封装对象的私有属性和私有方法（封装私有变量） // !
       function Person(name) {
-        var _age;
+        var _age; // 外部无法访问的
 
         function setAge(n) {
           _age = n;
@@ -42,7 +42,7 @@
           return _age;
         }
 
-        // 向外暴露对象（ 给外部使用 ）
+        // 向外暴露对象（给外部使用）
         return {
           name: name,
           setAge: setAge,
@@ -58,6 +58,8 @@
       var p2 = Person('李四');
       p2.setAge(34);
       console.log(p2, 'getAge =>', p2.getAge());
+
+      // 4.用来自定义js模块 // !
     </script>
   </body>
 </html>

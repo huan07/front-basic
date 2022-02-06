@@ -1,59 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>y</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        .box {
-            background: black;
-            width: 400px;
-            height: 100px;
-            color: white;
-        }
+      .box {
+        background: black;
+        width: 400px;
+        height: 100px;
+        color: white;
+      }
 
-        .box2 {
-            background: pink;
-            width: 200px;
-            height: 50px;
-            color: black;
+      .box2 {
+        background: pink;
+        width: 200px;
+        height: 50px;
+        color: black;
 
-            margin-top: 50px;
-        }
+        margin-top: 50px;
+      }
 
-        .min {
-            margin-top: 10px;
-        }
+      .min {
+        margin-top: 10px;
+      }
 
-        .max {
-            margin-top: 100px;
-        }
+      .max {
+        margin-top: 100px;
+      }
     </style>
-</head>
-<body>
-
-<div class="box">
-    <div class="box2">
-        一个块元素
+  </head>
+  <body>
+    <div class="box">
+      <div class="box2">一个块元素</div>
+      父元素没有margin-top，取子元素margin-top值
     </div>
-    父元素没有margin-top，取子元素margin-top值
-</div>
-<hr>
+    <hr />
 
-<div class="box min">
-    <div class="box2">
-        一个块元素
+    <div class="box min">
+      <div class="box2">一个块元素</div>
+      父子元素的外边距取最大值给父元素
     </div>
-    父子元素的外边距取最大值给父元素
-</div>
-<hr>
+    <hr />
 
-<div class="box max">
-    <div class="box2">
-        一个块元素
+    <div class="box max">
+      <div class="box2">一个块元素</div>
+      父子元素的外边距取最大值给父元素
     </div>
-    父子元素的外边距取最大值给父元素
-</div>
-
-</body>
+  </body>
 </html>

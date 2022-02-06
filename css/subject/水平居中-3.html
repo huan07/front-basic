@@ -11,7 +11,7 @@
         background: wheat;
         float: left;
 
-        /* 注意： 绝对定位的元素忽略float属性！利用这一点就可以实现对浮动元素用定位方式垂直居中 */
+        /* 注意： 相对定位的元素忽略float属性！利用这一点就可以实现对浮动元素用定位方式垂直居中 */
         position: relative;
         left: 50%;
         transform: translateX(-50%);
@@ -27,9 +27,7 @@
   </head>
   <body>
     <!-- 浮动的元素 水平居中 -->
-
     <div></div>
-
     <div class="div2"></div>
   </body>
 </html>

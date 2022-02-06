@@ -61,7 +61,7 @@
       // reverse 改变原数组
       var arr = [1, 2];
       var result = arr.reverse();
-      console.log('reverse =>', arr, result);
+      console.log('reverse =>', arr, result, arr === result);
     </script>
     <script>
       // splice 对数组的删改增 arr.splice(start, count, addElement1, addElement2, ...); 包括start位置
@@ -80,7 +80,7 @@
     </script>
     <script>
       // sort 对数组成员进行排序，返回对该数组的引用
-      // 默认按 字典顺序 逐位排序（数值会先被隐式转成字符串）// todo 隐式转换
+      // 默认按 字典顺序(unicode编码升序？) 逐位排序（数值 会先被隐式转成 字符串）
       var arr = ['d', 'e', 'a', 'b'];
       arr.sort();
 
@@ -158,7 +158,7 @@
     </script>
     <script>
       // forEach 没有返回值，只用来操作数据
-      // 无法中断执行，总是会将所有成员遍历完（ 中断遍历，要使用for循环 ）
+      // 无法中断执行，总是会将所有成员遍历完（中断遍历，要使用for循环）
     </script>
 
     <script>

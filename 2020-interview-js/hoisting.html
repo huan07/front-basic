@@ -2,9 +2,88 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>y</title>
+    <title>1</title>
   </head>
   <body>
+    <script>
+      // https://www.bilibili.com/video/BV1hV411679v?p=11
+      var a2 = 10;
+
+      function test() {
+        a2 = 100;
+        console.warn('a2', a2); // 100
+        console.log(this.a2); // 10，因为this.a2是全局执行上下文的值，并不是函数执行上下文的值
+        var a2; // 变量声明提升了
+        console.log(a2); // 100
+      }
+
+      test();
+    </script>
+
+    <script>
+      // https://www.bilibili.com/video/BV1hV411679v?p=5
+      (() => {
+        function fun(n) {
+          // var n = undefined; n = n; // !
+          console.warn(n); // 123
+          var n = 456; // 修改n // !
+          console.warn(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+
+      // 改动后
+      (() => {
+        function fun() {
+          console.log(n); // undefined
+          var n = 456;
+          console.log(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+
+      // 再改动
+      (() => {
+        function fun() {
+          console.log(n); // 123
+          n = 456; // ! 在函数里，修改全局n
+          console.log(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+    </script>
+
+    <script>
+      // 变量提升（注意：在if条件语句，不会有函数提升）
+      (function m() {
+        console.log(a1);
+        console.log(a2);
+        console.log(b1);
+        console.log(b2);
+
+        if (false) {
+          function b1() {}
+          var a1 = 100;
+        }
+
+        if (true) {
+          function b2() {} // 没有变量提升
+          var a2 = 10;
+        }
+
+        console.log(a1);
+        console.log(a2); // 10
+        console.log(b1);
+        console.log(b2); // function
+      })();
+    </script>
+
     <script>
       var name = 'World!';
       (function () {
@@ -26,6 +105,10 @@
           console.log('Hello ' + name); //
         }
       })(str);
+    </script>
+
+    <script>
+      // todo ...
     </script>
 
     <script>
@@ -57,15 +140,10 @@
     </script>
 
     <script>
-      // todo ...
-    </script>
-
-    <script>
-      // y
       function a() {}
 
       var a;
-      console.log(typeof a); // 'function'
+      console.warn(typeof a); // 'function'
 
       // 题目2
       if (!(b in window)) {
@@ -81,7 +159,11 @@
         console.log('c =>', c);
       }
 
-      c(2); // todo error 声明提升之后，因为c=1赋值覆盖了函数c的声明
+      c(2); // error， 声明提升之后，因为c=1赋值覆盖了函数c的声明
+    </script>
+
+    <script>
+      // todo ...
     </script>
 
     <script>
@@ -104,61 +186,6 @@
 
         console.log(y, z); // 4, 4
       })();
-    </script>
-
-    <script>
-      // https://www.bilibili.com/video/BV1hV411679v?p=5
-      // y
-      (() => {
-        function fun(n) {
-          console.warn(n); // 123
-          var n = 456;
-          console.warn(n); // 456
-        }
-
-        var n = 123;
-        fun(n);
-      })();
-
-      // 改动后
-      (() => {
-        function fun() {
-          console.log(n); // undefined
-          var n = 456;
-          console.log(n); // 456
-        }
-
-        var n = 123;
-        fun(n);
-      })();
-
-      // 再改动
-      (() => {
-        function fun() {
-          console.log(n); // 123
-          n = 456;
-          console.log(n); // 456
-        }
-
-        var n = 123;
-        fun(n);
-      })();
-    </script>
-
-    <script>
-      // https://www.bilibili.com/video/BV1hV411679v?p=11
-      // y
-      var a2 = 10;
-
-      function test() {
-        a2 = 100;
-        console.warn('a2', a2); // 100
-        console.log(this.a2); // 10，因为this.a2是全局执行上下文的值，并不是函数执行上下文的值
-        var a2; // 变量声明提升了
-        console.log(a2); // 100
-      }
-
-      test();
     </script>
   </body>
 </html>

@@ -30,19 +30,20 @@
 
     <script>
       // 递归：函数可以调用自身
-      function fib(num) {
+      // 斐波那契数列
+      function fibonacci(num) {
         if (num === 0) {
           return 1;
         }
         if (num === 1) {
           return 1;
         }
-        return fib(num - 2) + fib(num - 1);
+        return fibonacci(num - 2) + fibonacci(num - 1);
       }
 
-      var recursion0 = fib(0);
-      var recursion1 = fib(1);
-      var recursion4 = fib(4);
+      var recursion0 = fibonacci(0);
+      var recursion1 = fibonacci(1);
+      var recursion4 = fibonacci(4);
       // => f(2) + f(3)
       // => f(0)+f(1) + f(1)+f(2)
       // => 3 + f(0)+f(1)

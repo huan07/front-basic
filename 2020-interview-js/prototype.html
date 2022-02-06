@@ -6,7 +6,6 @@
   </head>
   <body>
     <script>
-      // todo ... 复杂
       // https://www.bilibili.com/video/BV1ek4y1r7GT?p=4&spm_id_from=pageDriver
       // https://mp.weixin.qq.com/s/QvkOhX0hQs8O15tlB6cm9Q
       function Foo() {
@@ -35,13 +34,17 @@
 
       Foo.getName(); // 2
       getName(); // 4
-      Foo().getName(); // 3 ?
+      Foo().getName(); // 1 因为this => window
       getName(); // 1
 
-      new Foo.getName(); // 3
-      new Foo().getName(); // 3
+      new Foo.getName(); // 2
+      new Foo().getName(); // 3 先找实例方法，再找原型方法，在这儿只有原型方法
 
-      new new Foo().getName();
+      new new Foo().getName(); // ? ? ?
+    </script>
+
+    <script>
+      // todo ...
     </script>
 
     <script>

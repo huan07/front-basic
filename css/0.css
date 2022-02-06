@@ -64,7 +64,7 @@ ul {
 
 /**/
 /**/
-.inline-block-pare {
+.inline-block-parent {
   font-size: 0; /* inline-block 行内块元素之间间隙问题（换行, 空格造成间隙）1. */
 }
 
@@ -123,14 +123,6 @@ ul {
 
 /**/
 /**/
-.BFC_1 {
-  position: absolute;
-}
-
-.BFC_1_2 {
-  position: fixed;
-}
-
 .BFC_2_1 {
   display: inline-block;
 }

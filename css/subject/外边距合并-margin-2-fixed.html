@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>y</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        .box, .box2 {
-            background: pink;
-            width: 100px;
-            height: 100px;
-        }
+      .box,
+      .box2 {
+        background: pink;
+        width: 100px;
+        height: 100px;
+      }
 
-        .box {
-            margin-bottom: 50px;
-        }
+      .box {
+        margin-bottom: 50px;
+      }
 
-        .box2 {
-            margin-top: 100px;
-        }
+      .box2 {
+        margin-top: 100px;
+      }
 
-        .fixed {
-            border: 1px solid red;
-        }
+      .fixed {
+        border: 1px solid red;
+      }
     </style>
-</head>
-<body>
-<!--
+  </head>
+  <body>
+    <!--
 解决方式1：其一的元素再包上父元素
 解决方式2：在相邻的2个元素之间添加1个元素
 -->
 
-<div class="box">
-    一个块元素
-</div>
-<div class="fixed">
-    <div class="box2">
-        一个块元素
+    <div class="box">一个块元素</div>
+    <div class="fixed">
+      <div class="box2">一个块元素</div>
     </div>
-</div>
-<hr>
+    <br />
+    <br />
 
-<div class="box">
-    一个块元素
-</div>
-<a class="red-color fixed2">这是一个链接 fixed2</a>
-<div class="box2">
-    一个块元素
-</div>
-
-</body>
+    <div class="box">一个块元素</div>
+    <a class="red-color fixed2">这是一个链接 fixed2</a>
+    <div class="box2">一个块元素</div>
+  </body>
 </html>

@@ -2,13 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>12</title>
+    <title>2</title>
   </head>
   <body>
     <script>
       // 构造函数的特点
       // 首字母大写
-      // 1.函数体内部使用了 this 关键字，代表了所要生成的实例对象
+      // 1.函数体内部使用了 this 关键字，代表了所要生成的 实例对象
       // 2.生成对象的时候，必须使用 new 命令
       var Vehicle = function (p) {
         this.price = p;
@@ -18,7 +18,7 @@
       console.log(v);
 
       var v2 = Vehicle(999); // 普通函数调用，不会生成实例对象；this 这时代表全局对象，将造成一些意想不到的结果。
-      console.log(v2, this.price, price, typeof v2); // 返回的是 undefined // !!
+      console.log(v2, this.price, price); // 返回的是 undefined
     </script>
 
     <script>
@@ -61,14 +61,7 @@
 
     <script>
       // new 命令的原理
-      function Foo() {}
-
-      var obj = {}; // 创建空对象
-      obj.__proto__ = Foo.prototype; // 空对象的隐式原型等于构造函数的显式原型
-      Foo.call(obj);
-
-      // 1.构造函数内部有 return obj, 则返回 obj; 否则, 返回 this 对象 // !
-      // 2.对普通函数使用 new 命令，返回 {} // !
+      // 参照手写代码
       (function example() {
         var Vehicle = function () {
           this.price = 1000;
@@ -93,6 +86,11 @@
         var msg = new getMessage();
         console.log('new ordinary function =>', msg, typeof msg);
       })();
+    </script>
+
+    <script>
+      // Object.create() 创建实例对象
+      // file:///Users/yanghuan/FrontBasic/front-basic/js-red-book/6.3.4.html
     </script>
   </body>
 </html>

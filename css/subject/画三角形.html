@@ -1,67 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>x2</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        body > div {
-            margin: 0 auto 20px 20px;
-        }
+      body > div {
+        margin: 0 auto 20px 20px;
+      }
 
-        .box {
-            width: 100px;
-            height: 100px;
-            background: wheat;
-        }
+      .box {
+        width: 100px;
+        height: 100px;
+        background: wheat;
+      }
 
-        .box-2 {
-            width: 0;
-            height: 0;
-            border: 50px solid wheat;
-        }
+      .box-2 {
+        width: 0;
+        height: 0;
+        border: 50px solid wheat;
+      }
 
-        /* todo 将一个正方形沿着对角线切割 */
-        .box-3 {
-            width: 0;
-            height: 0;
-            border: 50px solid;
-            border-color: wheat transparent transparent transparent;
-        }
+      /* todo 将一个正方形沿着对角线切割 */
+      .box-3 {
+        width: 0;
+        height: 0;
+        border: 50px solid;
+        border-color: wheat transparent transparent transparent;
+      }
 
-        .box-3-right {
-            width: 0;
-            height: 0;
-            border: 50px solid;
-            border-color: transparent wheat transparent transparent;
-        }
+      .right {
+        border-color: transparent wheat transparent transparent;
+      }
 
-        .box-3-bottom {
-            width: 0;
-            height: 0;
-            border: 50px solid;
-            border-color: transparent transparent wheat transparent;
-        }
+      .bottom {
+        border-color: transparent transparent wheat transparent;
+      }
 
-        .box-3-left {
-            width: 0;
-            height: 0;
-            border: 50px solid;
-            border-color: transparent transparent transparent wheat;
-        }
+      .left {
+        border-color: transparent transparent transparent wheat;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box-2"></div>
+    <hr />
+    <hr />
 
-<div class="box"></div>
-<div class="box-2"></div>
-<hr>
-<hr>
-
-<div class="box-3"></div>
-<div class="box-3-right"></div>
-<div class="box-3-bottom"></div>
-<div class="box-3-left"></div>
-
-</body>
+    <div class="box-3"></div>
+    <div class="box-3 right"></div>
+    <div class="box-3 bottom"></div>
+    <div class="box-3 left"></div>
+  </body>
 </html>

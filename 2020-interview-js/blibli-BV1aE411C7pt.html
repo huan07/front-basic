@@ -1,137 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>?</title>
-</head>
-<body>
+  </head>
+  <body>
+    <a href="https://www.bilibili.com/video/BV1aE411C7pt" target="_blank">视频链接</a>
 
-<a href="https://www.bilibili.com/video/BV1aE411C7pt" target="_blank">视频链接</a>
+    <div>hoisting</div>
+    <script>
+      (() => {})();
+    </script>
 
-<div>hoisting</div>
-<script>
-    (() => {
+    <div>closure</div>
+    <script>
+      (() => {})();
+    </script>
 
-    })();
-
-</script>
-
-<div>closure</div>
-<script>
-    (() => {
-
-    })();
-
-</script>
-
-<div>prototype</div>
-<script>
-    (() => {
+    <div>prototype</div>
+    <script>
+      (() => {
         function Foo() {
-            Foo.a = function() {
-                console.log(1);
-            };
+          Foo.a = function () {
+            console.log(1);
+          };
 
-            this.a = function() {
-                console.log(2);
-            }
+          this.a = function () {
+            console.log(2);
+          };
         }
 
-        Foo.prototype.a = function() {
-            console.log(3);
+        Foo.prototype.a = function () {
+          console.log(3);
         };
 
-        Foo.a = function() {
-            console.log(4);
+        Foo.a = function () {
+          console.log(4);
         };
 
         Foo.a(); // 4
         let obj = new Foo();
         obj.a(); // 2
         Foo.a(); // 1
+      })();
+    </script>
 
-    })();
+    <div>this</div>
+    <script></script>
 
-</script>
+    <div>RegExp</div>
+    <script>
+      (() => {
+        // ! done
+        var reg = /[a-z]/gi;
 
-<div>this</div>
-<script>
+        function toCase(str) {
+          // todo 用正则匹配性能较好，因为字符串里面会有不需要转换的汉字等
+          return str.replace(reg, function (item) {
+            // todo 有 g 需要匹配多个
 
+            console.warn(item);
 
-</script>
-
-<div>RegExp</div>
-<script>
-    (() => {
-        var reg = /[a-z]/ig;
-
-        function toCase(str) { // todo 用正则匹配性能较好，因为字符串里面会有不需要转换的汉字等
-            return str.replace(reg, function(item, index) { // todo 有 g 需要匹配多个
-
-                console.warn(item)
-
-                if (item === item.toLowerCase()) {
-                    return item.toUpperCase();
-                }
-                return item.toLowerCase();
-            });
+            if (item === item.toLowerCase()) {
+              return item.toUpperCase();
+            }
+            return item.toLowerCase();
+          });
         }
 
         var str = 'aBA不难';
         var str2 = '测试acD 转换为 ACd';
+
         var result = toCase(str);
         var result2 = toCase(str2);
 
         console.log(result, result2);
+      })();
 
-    })();
-
-    (() => {
-        var reg = /\b[a-z]+\b/ig; // todo ... \b 是单词边界，以单词为整体前后加上空格
+      (() => {
+        var reg = /\b[a-z]+\b/gi; // todo ... \b 是单词边界，以单词为整体前后加上空格
 
         function convert(str) {
-            return str.replace(reg, function(item) {
+          return str
+            .replace(reg, function (item) {
+              console.log('item =>', item);
 
-                console.log('item =>', item)
-
-                return ` ${item} `;
-            }).trim();
+              return ` ${item} `;
+            })
+            .trim();
         }
 
         var test = 'bAlA吧啦bA吧';
         var result = convert(test);
 
         console.log(result);
+      })();
+    </script>
 
-    })();
-
-</script>
-
-<div>Array</div>
-<script>
-    (() => {
+    <div>Array</div>
+    <script>
+      (() => {
         // 嵌套的数组扁平化，去重，并且升序排列
         let arr = [[1, 2, 2], [3, 4, 5, 5], [7, 8, 9, [11, 12, [12, 13, [14]]]], 10];
 
         function flatUniqueSortArray(arr) {
-            return (arr || []).reduce((result, curr) => {
-                if (Array.isArray(curr)) {
-                    return result.concat(flatUniqueSortArray(curr));
-                }
-                if (!result.includes(curr)) {
-                    result.push(curr);
-                }
-                return result;
-            }, []).sort((a, b) => a - b);
+          return (arr || [])
+            .reduce((result, curr) => {
+              if (Array.isArray(curr)) {
+                return result.concat(flatUniqueSortArray(curr));
+              }
+              if (!result.includes(curr)) {
+                result.push(curr);
+              }
+              return result;
+            }, [])
+            .sort((a, b) => a - b);
         }
 
         var result = flatUniqueSortArray(arr);
 
-        console.log('Array', result)
+        console.log('Array', result);
+      })();
 
-    })();
-
-    (() => {
+      (() => {
         // 插入数组
         var arr = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
         var arr2 = ['A', 'B', 'C', 'D'];
@@ -139,112 +130,108 @@
         // var result = ["A1", "A2", "A", "B1", "B2", "B", "C1", "C2", "C", "D1", "D2", "D"];
 
         function insertToArray(source, from) {
-            for (var f = 0, fLen = from.length; f < fLen; f++) {
-
-                var lastIndex = -1;
-                for (var sLen = source.length, s = sLen - 1; s >= 0; s--) {
-                    if (source[s].startsWith(from[f])) {
-                        lastIndex = s;
-                        break;
-                    }
-                }
-                if (lastIndex !== -1) {
-                    source.splice(lastIndex + 1, 0, from[f]); // TODO arr.splice 第一个参数还的加1
-                }
+          for (var f = 0, fLen = from.length; f < fLen; f++) {
+            var lastIndex = -1;
+            for (var sLen = source.length, s = sLen - 1; s >= 0; s--) {
+              if (source[s].startsWith(from[f])) {
+                lastIndex = s;
+                break;
+              }
             }
-            return source;
+            if (lastIndex !== -1) {
+              source.splice(lastIndex + 1, 0, from[f]); // TODO arr.splice 第一个参数还的加1
+            }
+          }
+          return source;
         }
 
         var result2 = insertToArray(arr, arr2);
 
-        console.log('insertToArray =>', result2)
+        console.log('insertToArray =>', result2);
+      })();
 
-    })();
-
-    (() => {
+      (() => {
         // 平移数组元素
         var arr = [1, 2, 3, 4];
         var k = 3;
 
-        function translateArray(arr, k) { // todo x 太差了
-            // todo 添加到数组原型方法，判断是数组的调用，判断 k > 0
-            var result = [];
-            for (var i = 0, len = arr.length; i < len; i++) {
-                if (i + k < len) {
-                    result[i + k] = arr[i];
-                } else {
-                    result[i + k - len] = arr[i];
-                }
+        function translateArray(arr, k) {
+          // todo x 太差了
+          // todo 添加到数组原型方法，判断是数组的调用，判断 k > 0
+          var result = [];
+          for (var i = 0, len = arr.length; i < len; i++) {
+            if (i + k < len) {
+              result[i + k] = arr[i];
+            } else {
+              result[i + k - len] = arr[i];
             }
-            return result;
+          }
+          return result;
         }
 
-        Array.prototype.translate = function(k) { // todo better
-            if (!Array.isArray(this)) {
-                throw new Error('');
-            }
+        Array.prototype.translate = function (k) {
+          // todo better
+          if (!Array.isArray(this)) {
+            throw new Error('');
+          }
 
-            var len = this.length;
+          var len = this.length;
 
-            if (k < 0 || k === 0 || k === len) {
-                return this;
-            }
-            if (k > len) {
-                k = k % len;
-            }
+          if (k < 0 || k === 0 || k === len) {
+            return this;
+          }
+          if (k > len) {
+            k = k % len;
+          }
 
-            console.warn('slice', k, this.slice(-k), this.slice(0, len - k))
+          console.warn('slice', k, this.slice(-k), this.slice(0, len - k));
 
-            return this.slice(-k).concat(this.slice(0, len - k));
+          return this.slice(-k).concat(this.slice(0, len - k));
         };
 
         var result = translateArray(arr, k);
 
         console.log('translateArray', result, arr.translate(k));
+      })();
+    </script>
 
-    })();
-
-</script>
-
-<div>Object.prototype.valueOf</div>
-<script>
-    // https://www.bilibili.com/video/BV1aE411C7pt?p=18
-    var a = {
+    <div>Object.prototype.valueOf</div>
+    <script>
+      // https://www.bilibili.com/video/BV1aE411C7pt?p=18
+      var a = {
         x: 1,
-        valueOf: function() {
-            return this.x++; // TODO ... 不是最正确的答案，还有别的答案
-        }
-    };
+        valueOf: function () {
+          return this.x++; // TODO ... 不是最正确的答案，还有别的答案
+        },
+      };
 
-    if (a == 1 && a == 2 && a == 3) {
-        console.log(a)
-    }
-</script>
+      if (a == 1 && a == 2 && a == 3) {
+        console.log(a);
+      }
+    </script>
 
-<script>
-    (() => {
+    <script>
+      (() => {
         var obj = {
-            1: 222,
-            2: 123,
-            5: 888
+          1: 222,
+          2: 123,
+          5: 888,
         };
 
         // var arr = [222, 123, null, null, 888, null, null, null, null, null, null, null];
 
-        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(function(item) { // todo 太low了
-            if (obj.hasOwnProperty(item)) {
-                return obj[item];
-            }
-            return null;
+        var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(function (item) {
+          // todo 太low了
+          if (obj.hasOwnProperty(item)) {
+            return obj[item];
+          }
+          return null;
         });
 
         var arrBetter = new Array(12).fill(null).map((item, index) => obj[index + 1] || null);
 
         console.log(arr, arrBetter);
-
-    })();
-
-</script>
-
-</body>
+      })();
+    </script>
+  </body>
 </html>

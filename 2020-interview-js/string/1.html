@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // https://mp.weixin.qq.com/s/sEpfg7QFLv3eV1gFSxBHTg
+      // 01、Javascript 反向字符串
+      function stringReverse(str) {
+        return str.split('').reverse().join('');
+      }
+      const test = stringReverse('test');
+      console.log('stringReverse() =>', stringReverse('test'));
+    </script>
+
+    <script>
+      // 计算数组中元素的出现次序
+      function charCount(arr) {
+        const result = {};
+        for (const item of arr) {
+          if (result.hasOwnProperty(item)) {
+            result[item] += 1;
+          } else {
+            result[item] = 1;
+          }
+        }
+        return result;
+      }
+      console.log(charCount([1, 2, 2, 3, 3, 3]));
+    </script>
+  </body>
+</html>

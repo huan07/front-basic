@@ -1,64 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        .jishudan {
-            width: 200px;
-            height: 200px;
-            border: 1px solid wheat;
+      .jishudan {
+        width: 200px;
+        height: 200px;
+        border: 1px solid wheat;
 
-            display: flex;
-            flex-direction: column; /* 从上往下排列，中间对齐 */
-            justify-content: center; /* 并不是 */
-        }
+        display: flex;
+        flex-direction: column; /* 从上往下排列，中间对齐 */
+        justify-content: center; /* 并不是 */
+      }
 
-        .my-test {
-            width: 200px;
-            height: 200px;
-            border: 1px solid wheat;
+      .my-test {
+        width: 200px;
+        height: 200px;
+        border: 1px solid wheat;
 
-            display: flex;
-            align-items: center; /* 主轴为水平方向，在交叉轴上的对齐方式 // TODO !! */
-            /* justify-content: center;  并不需要的 // TODO !! */
-        }
+        display: flex;
+        align-items: center; /* 主轴为水平方向，在交叉轴上的对齐方式 */
+        /* justify-content: center;  并不需要的 */
+      }
 
-        span {
-            padding: 10px;
-        }
+      span {
+        padding: 10px;
+      }
     </style>
-</head>
-<body>
-<!--
+  </head>
+  <body>
+    <!--
 todo
 3.为父元素设置弹性布局，适合多行布局
 优点：简单易懂
 缺点：ie9以上才能兼容
 -->
+    <div class="jishudan">
+      <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
+    </div>
+    <br />
 
-<div class="jishudan">
-    <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
-</div>
-<br>
+    <div class="jishudan">
+      <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
+      <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 2</span>
+    </div>
+    <br />
+    <br />
 
-<div class="jishudan">
-    <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
-    <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 2</span>
-</div>
-<br>
-<br>
+    <div class="my-test">
+      <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
+    </div>
+    <br />
 
-<div class="my-test">
-    <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
-</div>
-<br>
-
-<div class="my-test">
-    <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
-    <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 2</span>
-</div>
-
-</body>
+    <div class="my-test">
+      <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 1</span>
+      <span>充电，为爱充电 充电，为爱充电 充电，为爱充电 2</span>
+    </div>
+  </body>
 </html>

@@ -1,53 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-<script>
-    for (var i = 0; i < 5; i++) {
-        setTimeout(function() {
-            console.log('i =>', i);
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // 主线程for，
+      // 异步setTimeout放到一边，
+      // 继续执行for，
+      // for执行完毕i=5
+      for (var i = 0; i < 3; i++) {
+        setTimeout(function () {
+          console.warn('i =>', i);
         }, i * 1000);
-    }
+      }
 
-    // fixed by IIFE 内部形成了一个单独的作用域
-    (() => {
-        for (var i = 0; i < 5; i++) {
-            (function(i2) {
-                setTimeout(function() {
-                    console.log('i2 => =>', i2);
-                }, i2 * 1000);
-            })(i);
+      // fixed by IIFE 内部形成了一个单独的作用域
+      (() => {
+        for (var i = 0; i < 3; i++) {
+          (function (i2) {
+            setTimeout(function () {
+              console.log('i2 => =>', i2);
+            }, i2 * 1000);
+          })(i);
         }
+      })();
 
-    })();
-
-
-    (() => {
-        for (var i = 0; i < 5; i++) {
-            setTimeout((function(i3) {
-                return function() {
-                    console.log('i3 => => =>', i3);
-                };
-            })(i), i * 1000);
+      // fixed by let 块级作用域
+      (() => {
+        for (let i = 0; i < 3; i++) {
+          setTimeout(function () {
+            console.log('i4 => => => =>', i);
+          }, i * 1000);
         }
-
-    })();
-
-    // fixed by let 块级作用域
-    (() => {
-        for (let i = 0; i < 5; i++) {
-            setTimeout(function() {
-                console.log('i4 => => => =>', i);
-            }, i * 1000);
-        }
-
-    })();
-
-</script>
-
-</body>
+      })();
+    </script>
+  </body>
 </html>

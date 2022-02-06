@@ -5,19 +5,15 @@
     <title>1</title>
     <link rel="stylesheet" type="text/css" href="0.css" />
     <style type="text/css">
-      .box {
-        width: 300px;
-        height: 300px;
+      div {
+        width: 200px;
+        height: 200px;
         background: #bfa;
 
-        line-height: 300px;
+        line-height: 200px; /* 可以不写高度height */
       }
 
       .box2 {
-        width: 300px;
-        height: 300px;
-        background: #bfa;
-
         line-height: 100px;
         vertical-align: middle; /* 多行文本垂直居中需要添加的属性 */
       }
@@ -29,14 +25,11 @@
 可以将行高设置为和父元素的高度一致，
 这样可以是单行文本在父元素中垂直居中
 -->
-
-    <div class="box">
+    <div>
       <a href="#">我是一个超链接</a>
     </div>
     <br />
     <br />
-    <div class="box2">
-      我是一个超链接我是一个超链接我是一个超链接我是一个超链接我是一个超链接我是一个超链接我是一个超链接
-    </div>
+    <div class="box2">我是一个超链接我是一个超链接我是一个超链接我是一</div>
   </body>
 </html>

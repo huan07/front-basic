@@ -1,87 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>y 特性2：开启BFC的元素不会被浮动元素所覆盖（默认是被覆盖的）</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>特性2：开启BFC的元素不会被浮动元素所覆盖（默认是被覆盖的）</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        .box {
-            width: 200px;
-            height: 30px;
-            margin-bottom: 10px;
-        }
+      .box {
+        width: 200px;
+        height: 30px;
+        margin-bottom: 10px;
+      }
 
-        .big {
-            width: 250px;
-            height: 50px;
-        }
+      .big {
+        width: 250px;
+        height: 50px;
+      }
 
-        .box:nth-of-type(3n+1) {
-            background: red;
-        }
+      .box:nth-of-type(3n + 1) {
+        background: red;
+      }
 
-        .box:nth-of-type(3n+2) {
-            background: wheat;
-        }
+      .box:nth-of-type(3n + 2) {
+        background: wheat;
+      }
 
-        .box:nth-of-type(3n+0) {
-            background: blue;
-            border: 2px dashed black;
-        }
+      .box:nth-of-type(3n + 0) {
+        background: blue;
+        border: 2px dashed black;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="box pull-left">1.float left</div>
+    <div class="box big">2 被覆盖了</div>
+    <div class="box">3</div>
 
-<div class="box pull-left">1.float left</div>
-<div class="box big">2 被覆盖了</div>
-<div class="box">3</div>
-<br>
-<hr>
-<hr>
+    <hr />
+    <hr />
+    <hr />
+    <hr />
 
-<!-- // todo BFC 开启特性2 -->
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_1_1">2</div>
-<div class="box">3</div>
-<br>
-<br>
+    <div class="box pull-left">1.float left</div>
+    <div class="box big BFC_2_1">2</div>
+    <div class="box">3</div>
+    <br />
+    <br />
 
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_1_2">2</div>
-<div class="box">3</div>
-<br>
-<hr>
+    <div class="box pull-left">1.float left</div>
+    <div class="box big BFC_2_2">2</div>
+    <div class="box">3</div>
+    <br />
+    <hr />
 
+    <div class="box pull-left">1.float left</div>
+    <div class="box big BFC_3_1">2 best 不被覆盖</div>
+    <div class="box">3</div>
+    <br />
+    <br />
 
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_2_1">2</div>
-<div class="box">3</div>
-<br>
-<br>
+    <div class="box pull-left">1.float left</div>
+    <div class="box big BFC_3_2">2</div>
+    <div class="box">3</div>
+    <br />
+    <br />
 
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_2_2">2</div>
-<div class="box">3</div>
-<br>
-<hr>
-
-
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_3_1">2 best 不被覆盖</div>
-<div class="box">3</div>
-<br>
-<br>
-
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_3_2">2</div>
-<div class="box">3</div>
-<br>
-<br>
-
-<div class="box pull-left">1.float left</div>
-<div class="box big BFC_3_3">2</div>
-<div class="box">3</div>
-
-
-</body>
+    <div class="box pull-left">1.float left</div>
+    <div class="box big BFC_3_3">2</div>
+    <div class="box">3</div>
+  </body>
 </html>

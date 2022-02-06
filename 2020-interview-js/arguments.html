@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>?</title>
-    </head>
-    <body>
-        <script>
-            (() => {
-                var a = 4;
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      (() => {
+        var a = 4;
 
-                function b(x, y, a) {
-                    console.warn('arguments 题目2 a', a); // 3
-                    arguments[2] = 10; // todo 在非严格模式下，形参变量 与 arguments 对象 存在一一映射关系，同时变化
-                    console.log(a); // 10
-                }
+        function b(x, y, a) {
+          console.warn(a); // 3
+          arguments[2] = 10; // todo 在非严格模式下，形参变量 与 arguments 对象 存在一一映射关系，同时变化
+          console.log(a); // 10
+        }
 
-                a = b(1, 2, 3);
-                console.log(a); // undefined
-            })();
-        </script>
-    </body>
+        a = b(1, 2, 3);
+        console.log(a); // undefined
+      })();
+    </script>
+  </body>
 </html>

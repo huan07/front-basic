@@ -1,79 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>x4</title>
-</head>
-<body>
-
-<script>
-    var b = 10;
-
-    (function b() {
-        b = 20;
-        console.log('inner b =>', b); // TODO ... 太怪的题目
-    })();
-
-    console.log('b =>', b); // 10
-
-    // 改动下
-    (() => {
-        var bb = 10;
-
-        (function bb() {
-            var bb = 20;
-            console.warn('inner bb =>', bb); // 20
-        })();
-
-        console.log('bb =>', bb); // 10
-
-    })();
-</script>
-
-<script>
-    // IIFE 内部形成了一个单独的作用域，
-    // 指的是内部声明的变量不会添加为window对象的属性；this 指向的还是 window 对象
-    var a = 10;
-    (function() {
-        console.warn(a) // undefined
-        a = 5;
-
-        console.log(window, window.a, window === this) // TODO ... 10
-
-        console.log(a) // 5
-
-        var a = 20;
-        console.log(a) // 20
-    })();
-    console.log(a) // 10
-</script>
-
-<script>
-    // https://www.bilibili.com/video/BV1hV411679v?p=6
-    (() => {
-        (function() {
-            var aa = bb = 3; // 从右往左赋值
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      // https://www.bilibili.com/video/BV1hV411679v?p=6
+      (() => {
+        (function () {
+          var aa = (bb = 3); // 从右往左赋值
         })();
         console.log(bb); // 3
         console.log(aa); // error
+      })();
+    </script>
 
-    })();
-</script>
+    <script>
+      // https://www.bilibili.com/video/BV1ai4y1K756?p=7
+      (function d(num) {
+        // var num = undefined; num = num; // !!
+        console.log('num =>', num); // 100
+        var num = 10; // 修改num // !
+      })(100);
 
-<div> + 变量提升</div>
-<script>
-    // https://www.bilibili.com/video/BV1u4411p7jn
-    // 多次出现的题目了
-    var foo = 'hello';
+      //
+      (function e(num) {
+        console.log('num2 =>', num); // function num(){};
+        var num = 10;
+        function num() {}
+      })(100);
+    </script>
 
-    (function(foo) {
+    <script>
+      // 先是形参赋值，
+      (function f(num) {
+        function num() {}
+        console.log('num3 =>', num);
+        var num = 10;
+        console.log('num3 =>', num);
+      })(100);
+    </script>
+
+    <script>
+      // todo ...
+    </script>
+
+    <script>
+      var b = 10;
+
+      (function b() {
+        b = 20;
+        console.log('inner b =>', b); // TODO ... 太怪的题目
+      })();
+
+      console.log('b =>', b); // 10
+
+      // 改动下
+      (() => {
+        var bb = 10;
+
+        (function bb() {
+          var bb = 20;
+          console.warn('inner bb =>', bb); // 20
+        })();
+
+        console.log('bb =>', bb); // 10
+      })();
+    </script>
+
+    <script>
+      // IIFE 内部形成了一个单独的作用域，
+      // 指的是内部声明的变量不会添加为window对象的属性；this 指向的还是 window 对象
+      var a = 10;
+      (function () {
+        console.warn(a); // undefined
+        a = 5;
+
+        console.log(window, window.a, window === this); // TODO ... 10
+
+        console.log(a); // 5
+
+        var a = 20;
+        console.log(a); // 20
+      })();
+      console.log(a); // 10
+    </script>
+
+    <div>+ 变量提升</div>
+    <script>
+      // https://www.bilibili.com/video/BV1u4411p7jn
+      // 多次出现的题目了
+      var foo = 'hello';
+
+      (function (foo) {
         console.warn(1, foo); // hello
         var foo = foo || 'world'; // todo 已经有了形参变量（私有变量），此处可以不需要var关键字
         console.log(2, foo); // hello
-    })(foo);
+      })(foo);
 
-    console.log(3, foo); // hello
-</script>
-
-</body>
+      console.log(3, foo); // hello
+    </script>
+  </body>
 </html>

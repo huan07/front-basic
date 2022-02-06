@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>?</title>
+  </head>
+  <body>
+    <script>
+      // 容易迷惑的考点 群里面截图的
+      var a = 11;
 
-<script>
-    // 容易迷惑的考点 群里面截图的
-    var a = 11;
-
-    function Test1() {
+      function Test1() {
         this.a = 22;
-        let b = function() {
-            console.log('this.a => ', this.a);
+        let b = function () {
+          // 这个函数是在全局环境之行的，this指向window（？）
+          console.log('this.a => ', this.a);
         };
         b();
-    }
+      }
 
-    var x = new Test1();
-</script>
-
-</body>
+      var x = new Test1();
+    </script>
+  </body>
 </html>

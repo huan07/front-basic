@@ -5,6 +5,12 @@
     <title>2</title>
     <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
+      .div-2 {
+        height: 200px;
+        border: 2px solid wheat;
+        position: relative;
+      }
+
       .span-2 {
         position: absolute;
         left: 50%;
@@ -21,13 +27,12 @@
 
     <span class="text-center red-color">内联元素 并没有对齐？？</span>
     <br />
-
     <span class="text-center red-color" style="display: inline-block">
       行内块元素 并没有对齐？？
     </span>
     <hr />
 
-    <div style="height: 200px; border: 2px solid wheat; position: relative">
+    <div class="div-2">
       <span class="span-2">span 对齐了，2.用定位 position: absolute; 脱离文档流，div 可以平移</span>
     </div>
   </body>

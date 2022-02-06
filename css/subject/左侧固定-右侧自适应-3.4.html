@@ -1,53 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>x2</title>
-    <link rel="stylesheet" type="text/css" href="../0.css">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+    <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
-        .wrapper {
-            height: 200px;
-            background: pink;
-        }
+      .wrapper {
+        height: 200px;
+        background: pink;
+      }
 
-        .box {
-            width: 160px;
-            height: 160px;
-            background: wheat;
-        }
+      .box {
+        width: 160px;
+        height: 160px;
+        background: wheat;
+      }
 
-        .box2 {
-            height: 180px;
-            background: grey;
-        }
+      .box2 {
+        height: 180px;
+        background: grey;
+      }
 
-        /**/
-        .test {
-            width: calc(100% - 160px);
-        }
+      /**/
+      .test {
+        width: calc(100% - 160px);
+      }
 
-        .inline-block {
-            vertical-align: top;
-        }
+      .inline-block {
+        vertical-align: top;
+      }
     </style>
-</head>
-<body>
-<!--
+  </head>
+  <body>
+    <!--
 3.4.都需要设置的 => 右边元素的宽度用 calc() 函数计算出（不够灵活，第二个参赛要写，左边块的宽度）
 3.两个元素设置 float: left 浮动
 4.两个元素设置 行内块元素，行内块元素之间间隙问题
 -->
+    <div class="wrapper BFC_3_1">
+      <div class="box pull-left">box</div>
+      <div class="box2 pull-left test">box2</div>
+    </div>
+    <hr />
 
-<div class="wrapper BFC_3_1">
-    <div class="box pull-left">box</div>
-    <div class="box2 pull-left test">box2</div>
-</div>
-<hr>
-
-<div class="wrapper inline-block-parent">
-    <div class="box inline-block">box</div>
-    <div class="box2 inline-block test">box2</div>
-</div>
-
-</body>
+    <div class="wrapper inline-block-parent">
+      <div class="box inline-block">box</div>
+      <div class="box2 inline-block test">box2</div>
+    </div>
+  </body>
 </html>
