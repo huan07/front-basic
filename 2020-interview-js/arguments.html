@@ -11,12 +11,35 @@
 
         function b(x, y, a) {
           console.warn(a); // 3
-          arguments[2] = 10; // todo 在非严格模式下，形参变量 与 arguments 对象 存在一一映射关系，同时变化
+          arguments[2] = 10; // todo 在非严格模式下，形参变量 与 arguments对象 存在一一映射关系，同时变化
           console.log(a); // 10
         }
 
         a = b(1, 2, 3);
         console.log(a); // undefined
+      })();
+
+      // 第二题
+      // https://www.bilibili.com/video/BV1Y5411M7Vz?p=6  28分钟
+      (() => {
+        function b(x, y, a) {
+          var a = 30;
+          arguments[2] = 10;
+          console.log(a);
+        }
+        b(1, 2, 3);
+      })();
+
+      (() => {
+        function b(x, y, a) {
+          console.warn(a); // 参照 执行上下文 笔记
+          function a() {}
+
+          var a = 30;
+          arguments[2] = 10;
+          console.log(a);
+        }
+        b(1, 2, 3);
       })();
     </script>
   </body>

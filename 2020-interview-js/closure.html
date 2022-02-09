@@ -6,24 +6,24 @@
   </head>
   <body>
     <script>
-      // 变量提升，闭包
-      var scope = 'global scope';
-      function a() {
-        function b() {
-          console.log(scope); // undefined
-        }
-        return b;
-        var scope = 'local scope';
-      }
-      a()();
+      // https://www.bilibili.com/video/BV1ek4y1r7GT?p=3 40分钟
+      // ! !
+      // alert接收的参数是字符串，非字符串会被隐式转换
+      var test = (function (i) {
+        return function () {
+          // alert((i *= 2)); // test
+        };
+      })(2);
+      test(5);
+
+      // alert({ 1: 2 }); // '[object Object]'
+      // alert([]); // ''
+      // alert([4]); // '4'
+      // alert([4, 5]); // '4,5'
     </script>
 
     <script>
-      // todo ...
-    </script>
-
-    <script>
-      (function () {
+      (() => {
         var a = 0,
           b = 0;
         function A(a) {
@@ -38,18 +38,47 @@
     </script>
 
     <script>
-      // alert接收的参数是字符串，非字符串会被隐式转换 // !
-      var test = (function (i) {
-        return function () {
-          alert((i *= 2)); // todo attention alert() 弹出来的结果是字符串值
-        };
-      })(2);
-      test(5);
+      // 变量提升，闭包
+      var scope = 'global scope';
+      function a() {
+        function b() {
+          console.log(scope); // undefined
+        }
+        return b;
+        var scope = 'local scope';
+      }
+      a()();
+    </script>
 
-      //alert({ 1: 2 }); // '[object Object]'
-      //alert([]); // ''
-      //alert([4]); // '4'
-      //alert([4, 5]); // '4,5'
+    <script>
+      function fun(n, o) {
+        console.log('o => ', o);
+
+        return {
+          fun: function (m) {
+            return fun(m, n); // 闭包，是用了外部函数的n变量 // !
+          },
+        };
+      }
+
+      var a = fun(0); // o => undefined, 因为闭包里面的值是0, 一直用的是同一个闭包
+      a.fun(1); // o => 0
+      a.fun(2); // o => 0
+      a.fun(3); // o => 0
+
+      var b = fun(0).fun(1).fun(2).fun(3);
+      // o => undefined
+      // o => 0
+      // o => 1
+      // o => 2
+
+      var c = fun(0).fun(1); // o => undefined, // o => 0
+      c.fun(2); // o => 1
+      c.fun(3); // o => 1
+    </script>
+
+    <script>
+      // todo ...
     </script>
 
     <script>
@@ -97,33 +126,6 @@
       let _printName = foo();
       _printName(); // 极客邦
       bar.printName(); // 极客邦
-    </script>
-
-    <script>
-      function fun(n, o) {
-        console.log('o => ', o);
-
-        return {
-          fun: function (m) {
-            return fun(m, n); // 闭包，是用了外部函数的n变量 // todo !!
-          },
-        };
-      }
-
-      var a = fun(0); // o => undefined, 因为闭包里面的值是0, 一直用的是同一个闭包
-      a.fun(1); // o => 0
-      a.fun(2); // o => 0
-      a.fun(3); // o => 0
-
-      var b = fun(0).fun(1).fun(2).fun(3);
-      // o => undefined
-      // o => 0
-      // o => 1
-      // o => 2
-
-      var c = fun(0).fun(1); // o => undefined, // o => 0
-      c.fun(2); // o => 1
-      c.fun(3); // o => 1
     </script>
 
     <script>

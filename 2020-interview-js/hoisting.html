@@ -24,10 +24,45 @@
       // https://www.bilibili.com/video/BV1hV411679v?p=5
       (() => {
         function fun(n) {
-          // var n = undefined; n = n; // !
-          console.warn(n); // 123
-          var n = 456; // 修改n // !
-          console.warn(n); // 456
+          // 等价于
+          // var n = undefined
+          // n = 123
+          console.error(n); // 123
+          var n = 456;
+          console.log(n); // 456
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+
+      // 同上，
+      (() => {
+        function fun(n) {
+          // 等价于
+          // var n = undefined
+          // n = 123
+          // n = function () {}
+          console.warn(n);
+          function n() {}
+          console.log(n);
+        }
+
+        var n = 123;
+        fun(n);
+      })();
+
+      // 再同上，
+      (() => {
+        function fun(a) {
+          // 等价于
+          // var a = undefined
+          // a = 123
+          // a = function (params) {}
+          console.error(a); // function (params) {}
+          var a = 10;
+          function a() {}
+          console.log(a); // 10
         }
 
         var n = 123;
@@ -61,7 +96,9 @@
 
     <script>
       // 变量提升（注意：在if条件语句，不会有函数提升）
+      // 这个题目有点儿不一样哈
       (function m() {
+        console.warn('\n\r');
         console.log(a1);
         console.log(a2);
         console.log(b1);
@@ -105,6 +142,17 @@
           console.log('Hello ' + name); //
         }
       })(str);
+    </script>
+
+    <script>
+      (function () {
+        function show() {
+          console.log(a); // 报错，因为a没有声明，哪来的变量提升呢？
+          a = 99;
+        }
+
+        show();
+      })();
     </script>
 
     <script>

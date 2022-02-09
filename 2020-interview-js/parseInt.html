@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <script>
+      (() => {
+        // https://www.bilibili.com/video/BV1n64y1x7gh?p=3 10分钟左右
+        const arr = ['1', '2', '3'].map(parseInt);
 
-<script>
-    var result = "1 2 3".replace(/\d/g, parseInt);
+        // 等价于 ! ! !
+        const arr_2 = ['1', '2', '3'].map(function (item, index) {
+          return parseInt(item, index);
+        });
 
-    console.log(result)
+        console.log(arr, arr_2); // [1, NaN, NaN]
+        // parseInt('3', 2) 为 NaN
+        // 因为只有
+        // parseInt('0', 2) 为 0
+        // parseInt('1', 2) 为 1
+      })();
+    </script>
 
-    var item0 = parseInt('1', 0); // TODO 0是特殊情况
-    var item2 = parseInt('2', 2);
-    var item4 = parseInt('3', 4);
-    var itemEmpty = parseInt('', 1);
-    var itemEmpty3 = parseInt('', 3);
-    console.log(
-        item0,
-        item2,
-        item4,
-        itemEmpty,
-        itemEmpty3
-    )
+    <script>
+      // todo ...
+    </script>
 
-    // 题目2
-    var result2 = ["1", "2", "3"].map(parseInt);
+    <script>
+      var result = '1 2 3'.replace(/\d/g, parseInt);
 
-    console.log('result2 =>', result2)
+      console.log(result);
 
-    var x = parseInt('1', 0);
-    var y = parseInt('2', 1);
-    var z = parseInt('3', 2);
-
-    console.log(x, y, z)
-
-</script>
-
-</body>
+      var item0 = parseInt('1', 0); // TODO 0是特殊情况
+      var item2 = parseInt('2', 2);
+      var item4 = parseInt('3', 4);
+      var itemEmpty = parseInt('', 1);
+      var itemEmpty3 = parseInt('', 3);
+      console.log(item0, item2, item4, itemEmpty, itemEmpty3);
+    </script>
+  </body>
 </html>

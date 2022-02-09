@@ -12,35 +12,32 @@
       var Foo = function () {};
 
       var foo = new Foo();
-      console.log(Foo, Foo.prototype);
-      console.log(foo, foo.__proto__);
+      console.log(foo, foo.__proto__, foo.__proto__ === Foo.prototype);
 
       // 函数的原型是 Function.prototype // !!
-      console.warn(Object.getPrototypeOf(Foo), Object.getPrototypeOf(Foo) === Function.prototype);
+      // 因为 var Foo = new Function() {}
+      console.log(Object.getPrototypeOf(Foo) === Function.prototype); // !
 
       // 实例的原型
-      console.warn(Object.getPrototypeOf(foo), Object.getPrototypeOf(foo) === Foo.prototype);
+      console.log(Object.getPrototypeOf(foo) === Foo.prototype);
 
+      //
       //
       var a = {};
       var b = { x: 1 };
       var c = Object.setPrototypeOf(a, b);
       console.log(a, b, Object.getPrototypeOf(a) === b, c === a);
 
-      // new命令 可以使用 Object.setPrototypeOf 方法模拟 // !!
-      var F2 = function () {
-        this.foo = 'bar';
-      };
-      var f2 = new F2();
+      //
+      // new命令 可以使用 Object.setPrototypeOf 方法模拟
+      var foo_2 = Object.setPrototypeOf({}, Foo.prototype);
+      Foo.call(foo_2);
 
-      var f2_ = Object.setPrototypeOf({}, F2.prototype);
-      F2.call(f2_);
-
-      console.log('new 命令的工作原理 =>', f2, f2_);
+      console.log('new 命令的工作原理 =>', foo, foo_2);
     </script>
 
     <script>
-      // Object.create() 以 现有的对象作 为模版，生成新的实例对象（ 原型对象是现有的对象 ）
+      // Object.create() 以 现有的对象作 为模版（原型对象），生成 新的实例对象
       var A = {
         print: function () {
           return 'print hello';

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>2</title>
+    <title>用来判断 引用数据类型</title>
   </head>
   <body>
     <script>
@@ -39,17 +39,6 @@
 
       console.log('isObject =>', isObject({}), isObject(null));
       console.log('isObjectSelfDefine =>', isObjectSelfDefine({}), isObjectSelfDefine(null));
-    </script>
-
-    <script>
-      // 用处，
-      // 判断值的类型，只能适用于对象 // todo !!
-      console.log(
-        [] instanceof Array,
-        {} instanceof Object,
-        undefined instanceof Object,
-        null instanceof Object
-      );
     </script>
   </body>
 </html>

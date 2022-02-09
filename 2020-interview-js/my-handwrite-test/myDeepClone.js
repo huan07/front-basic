@@ -1,7 +1,4 @@
 (function () {
-  // test
-  console.warn('test myDeepClone = = = = = = = = = = = = = = = = = = =');
-
   var u = undefined;
   var n = null;
   var fun = function () {};
@@ -15,7 +12,7 @@
   var testArr = [u, n, fun, arr, obj, date, regex];
   var testObj = { u, n, fun, arr, obj, date, regex };
 
-  // 浅拷贝 test
+  // 浅拷贝
   // JSON.parse(JSON.stringify(testObj)) 是深拷贝，但是有缺陷，undefined, 函数类型的值被忽略了，等等
   {
     console.log(
@@ -54,8 +51,8 @@
   }
 
   console.log('testArr, testObj =>', testArr, testObj);
-  console.warn('myDeepClone =>', myDeepClone(testArr), myDeepClone(testObj));
+  console.log('myDeepClone =>', myDeepClone(testArr), myDeepClone(testObj));
 
-  testArr[5][2] = 2020;
+  testArr[3][2] = 2020;
   testObj.obj[2] = 2020;
 })();

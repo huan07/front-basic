@@ -20,7 +20,7 @@
       );
 
       console.log(f.call(obj) === obj); // call传入对象
-      console.log(f.call(5)); // call方法的参数是一个原始值，那么 这个原始值会自动转成 对应的包装对象
+      console.log(f.call(5)); // call方法的参数是一个原始值，那么 这个原始值 会自动转成 对应的包装对象
     </script>
 
     <script>
@@ -32,7 +32,7 @@
 
       //
       // call应用
-      // 调用对象的原生方法 // !
+      // 调用对象的原生方法
       var obj = {};
       console.log('自定义方法 before =>', obj.hasOwnProperty('toString')); // false
 
@@ -45,6 +45,7 @@
       // 无论 obj 上有没有同名方法，都不会影响结果 // !
       console.log('调用对象的原生方法 =>', Object.prototype.hasOwnProperty.call(obj, 'toString')); // false
 
+      //
       // apply应用
       // 1.找出最大值
       var a = [11, 12, 99];
@@ -83,7 +84,6 @@
       console.log('bind =>', counter.count, xx.count);
 
       //
-      //
       // bind() 还可以接受更多的参数，将这些参数绑定 原函数的参数
       var add = function (x, y) {
         return this.m + this.n + x + y;
@@ -99,10 +99,9 @@
       console.log('bind value =>', value);
 
       //
-      //
       // 注意点
       // 1.每一次返回一个新函数, 事件解绑 // !
-      // 2.结合回调函数使用( 数组forEach, map的回调函数内部this => window ) // !
+      // 2.结合回调函数使用（数组forEach, map的回调函数内部this => window） // !
       var counter2 = {
         count: 88,
         inc: function () {

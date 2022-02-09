@@ -2,9 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title></title>
+    <title>2</title>
   </head>
   <body>
+    <script>
+      // https://www.bilibili.com/video/BV1hV411679v?p=8
+      var n = 123;
+
+      function f1() {
+        // ! 直接执行函数，就是在window环境执行的
+        console.log(n); // 123
+      }
+
+      function f2() {
+        var n = 456;
+        f1();
+      }
+
+      f2();
+      console.log(n); // 123
+    </script>
+
+    <script>
+      // todo ...
+    </script>
+
     <script>
       (() => {
         var a = 0,
@@ -24,23 +46,6 @@
     </script>
 
     <script>
-      // https://www.bilibili.com/video/BV1hV411679v?p=8
-      var n = 123;
-
-      function f1() {
-        // todo 直接执行函数，就是在window环境执行的
-        console.log(n); // 123
-      }
-
-      function f2() {
-        var n = 456;
-        f1();
-      }
-
-      f2();
-      console.log(n); // 123
-
-      // 题目2
       // https://www.bilibili.com/video/BV1dJ411E7Hd?p=2
       (() => {
         let a = 12,
