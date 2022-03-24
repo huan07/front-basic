@@ -6,20 +6,20 @@
     <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
       .wrapper {
-        height: 200px;
+        height: 140px;
         background: pink;
       }
 
       .box {
         width: 160px;
-        height: 160px;
+        height: 100px;
         background: wheat;
       }
 
       .box2,
       .box3,
       .box4 {
-        height: 180px;
+        height: 120px;
         background: grey;
       }
 
@@ -67,9 +67,10 @@
     <br />
 
     <div class="wrapper wrapper_2">
-      <div class="box BOX">box</div>
+      <div class="box BOX">box 脱离文档流</div>
       <div class="box2">box2</div>
     </div>
+    <br />
     <br />
     <br />
 
@@ -78,11 +79,10 @@
       <div class="box3">box3 bad 背景颜色漏出来了</div>
     </div>
     <br />
-    <br />
 
     <div class="wrapper wrapper_2">
       <div class="box">box</div>
-      <div class="box4">box4</div>
+      <div class="box4">box4 脱离文档流也行吧</div>
     </div>
   </body>
 </html>

@@ -18,65 +18,45 @@
     */
   height: 60px;
   background-color: cornflowerblue;
+
   margin: 10px;
 }
 
 /**/
-.flex-direction-row {
-  -webkit-flex-direction: row;
-  flex-direction: row;
-}
-
 .flex-direction-column {
   -webkit-flex-direction: column;
   flex-direction: column;
 }
 
 /**/
-.flex-wrap-nowrap {
-  flex-wrap: nowrap;
-}
-
 .flex-wrap-wrap {
   flex-wrap: wrap;
 }
 
 /**/
-.flex-flow-row-nowrap {
-  flex-flow: row nowrap;
+.flex-flow-row-wrap {
+  flex-flow: row wrap;
 }
 
-.flex-flow-nowrap {
-  flex-flow: row-reverse nowrap;
+.flex-flow-column-wrap {
+  flex-flow: column wrap;
 }
 
-.flex-flow-wrap {
-  flex-flow: row-reverse wrap;
-}
-
-/**/
-.justify-content-flex-start {
-  justify-content: flex-start;
-}
-
+/* 主轴的对齐方式 */
 .justify-content-center {
   justify-content: center;
 }
 
-.justify-content-space-between {
+.justify-content-between {
   justify-content: space-between;
 }
 
-.justify-content-space-around {
+.justify-content-around {
   justify-content: space-around;
 }
 
-/**/
-.align-items-stretch {
-  align-items: stretch;
-}
-
-.align-items-flex-start {
+/* 交叉轴的对齐方式 */
+.align-items-start {
   align-items: flex-start;
 }
 
@@ -90,13 +70,7 @@
 
 /**/
 /**/
-/**/
-/**/
-/* 项目水平显示，有flex-grow, flex-basis 就不要写width todo */
-
-.flex-grow-de {
-  flex-grow: 0; /*默认值，不放大*/
-}
+/*默认值0，不放大*/
 
 .flex-grow-1 {
   flex-grow: 1;
@@ -108,9 +82,7 @@
 
 /**/
 /**/
-.flex-shrink-de {
-  flex-shrink: 1; /*默认值，会缩小*/
-}
+/*默认值1，会缩小*/
 
 .flex-shrink-0 {
   flex-shrink: 0;
@@ -118,9 +90,7 @@
 
 /**/
 /**/
-.flex-basis-de {
-  flex-basis: auto;
-}
+/*默认值auto*/
 
 .flex-basis-200 {
   flex-basis: 200px;
@@ -128,22 +98,20 @@
 
 /**/
 /**/
-.flex-de {
-  flex: 0 1 auto; /* 不放大，会缩小 */
-}
+/* 默认不放大，会缩小 */
 
 .flex-auto {
-  flex: 1 1 auto;
+  flex: 1 1 auto; /*放大，缩小*/
 }
 
 .flex-auto_short {
-  flex: auto; /**/
+  flex: auto;
 }
 
 .flex-none {
-  flex: 0 0 auto;
+  flex: 0 0 auto; /*不放大，不缩小*/
 }
 
 .flex-none_short {
-  flex: none; /**/
+  flex: none;
 }

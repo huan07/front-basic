@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1</title>
+  </head>
+  <body>
+    <script>
+      (() => {
+        // https://www.bilibili.com/video/BV1ek4y1r7GT?p=8
+        // 数组扁平化、去重、升序排列
+        const arr = [[1, 2, 2], [3, 4, 5, 5], [7, 8, 9, [11, 12, [12, 13, [14]]]], 10];
+
+        function flatUniqueSortArray(arr) {
+          return (arr || [])
+            .reduce((result, curr) => {
+              if (Array.isArray(curr)) {
+                return result.concat(flatUniqueSortArray(curr));
+              }
+              if (!result.includes(curr)) {
+                result.push(curr);
+              }
+              return result;
+            }, [])
+            .sort((a, b) => a - b);
+        }
+
+        var result = flatUniqueSortArray(arr);
+        console.log('flatUniqueSortArray =>', result);
+      })();
+    </script>
+
+    <script></script>
+
+    <script></script>
+  </body>
+</html>

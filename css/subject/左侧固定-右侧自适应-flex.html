@@ -6,18 +6,18 @@
     <link rel="stylesheet" type="text/css" href="../0.css" />
     <style type="text/css">
       .wrapper {
-        height: 200px;
+        height: 140px;
         background: pink;
       }
 
       .box {
-        width: 160px;
-        height: 160px;
+        width: 160px; /**/
+        height: 100px;
         background: wheat;
       }
 
       .box2 {
-        height: 180px;
+        height: 120px;
         background: grey;
       }
 
@@ -28,7 +28,7 @@
 
       /**/
       .box2 {
-        flex: 1;
+        flex: 1; /* 或者 1 1 auto */
       }
     </style>
   </head>
@@ -37,10 +37,7 @@
 5.a.父元素设置 display: flex
 5.b.左侧固定的元素不需要设置 flex 属性
 5.c.右侧元素设置 flex: 1 (1 1 auto 的简写属性)
-// flex-grow 默认值为0，指的是 容器存在剩余空间，项目 不放大
-// flex-shrink 默认值为1，指的是 容器空间不足，项目 将缩小
 -->
-
     <div class="wrapper">
       <div class="box">box</div>
       <div class="box2">box2</div>

@@ -8,14 +8,14 @@
   </head>
   <body>
     <div class="flex-container">
-      <div class="flex-item flex-grow-de">flex item</div>
-      <div class="flex-item flex-grow-de">flex item</div>
+      <div class="flex-item">flex item</div>
+      <div class="flex-item">flex item</div>
     </div>
     <br />
 
     <!-- 在剩余空间的分配上并不是1:2 ? ? ? -->
     <div class="flex-container">
-      <div class="flex-item flex-grow-de">flex item</div>
+      <div class="flex-item">flex item</div>
       <div class="flex-item flex-grow-1">flex item</div>
       <div class="flex-item flex-grow-2">flex item</div>
     </div>
@@ -25,13 +25,13 @@
 
     <!-- 应用为：左侧固定，右侧自适应布局 todo -->
     <div class="flex-container">
-      <div class="flex-item-w flex-grow-de">flex item</div>
+      <div class="flex-item-w">flex item</div>
       <div class="flex-item-w flex-grow-1">flex item</div>
     </div>
     <br />
 
     <div class="flex-container" style="width: 800px">
-      <div class="flex-item-w flex-grow-de">flex item</div>
+      <div class="flex-item-w">flex item</div>
       <div class="flex-item-w flex-grow-1">flex item</div>
       <div class="flex-item-w flex-grow-1">flex item</div>
     </div>
@@ -45,13 +45,7 @@
     </div>
     <br />
 
-    <div class="flex-container">
-      <div class="flex-item flex-grow-2">flex item</div>
-      <div class="flex-item flex-grow-2">flex item</div>
-    </div>
-    <br />
-
-    <!-- 在剩余空间的分配上并不是1:2 ? ? ? -->
+    <!-- 在剩余空间的分配上是1:2 ? ? ? -->
     <div class="flex-container">
       <div class="flex-item flex-grow-1">flex item</div>
       <div class="flex-item flex-grow-2">flex item</div>

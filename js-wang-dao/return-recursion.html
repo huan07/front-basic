@@ -30,6 +30,8 @@
 
     <script>
       // 递归：函数可以调用自身
+      // 缺点：递归非常耗费内存，因为需要同时保存成千上百个调用帧，很容易发生“栈溢出”错误（stack overflow）
+
       // 斐波那契数列
       function fibonacci(num) {
         if (num === 0) {
@@ -49,6 +51,27 @@
       // => 3 + f(0)+f(1)
       // => 5
       console.log(recursion0, recursion1, recursion4);
+
+      //
+      // 尾递归优化
+      // ES6 中只要使用尾递归，就不会发生栈溢出（或者层层递归造成的超时），相对节省内存
+      // 不是很好懂的，啥玩意儿
+      // https://www.bilibili.com/video/BV1ek4y1r7GT?p=8
+      (() => {
+        function fibonacci2(n, ac1 = 1, ac2 = 1) {
+          if (n <= 1) {
+            return ac2;
+          }
+          return fibonacci2(n - 1, ac2, ac1 + ac2);
+        }
+
+        var recursion0 = fibonacci2(0);
+        var recursion1 = fibonacci2(1);
+        var recursion2 = fibonacci2(2);
+        var recursion3 = fibonacci2(3);
+        var recursion4 = fibonacci2(4);
+        console.log(recursion0, recursion1, recursion2, recursion3, recursion4);
+      })();
     </script>
   </body>
 </html>
