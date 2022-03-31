@@ -1,58 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>隐式转换</title>
-</head>
-<body>
+  </head>
+  <body>
+    <script>
+      var a = [0];
+      if (a) {
+        console.log(a == true); // false
+      } else {
+        console.log('wut');
+      }
 
-<script>
-    var a = [0];
-    if (a) {
-        console.log(a == true) // TODO
-    } else {
-        console.log("wut");
-    }
+      console.warn(Boolean(a));
+    </script>
 
-    console.warn(Boolean(a))
+    <script>
+      // todo
+    </script>
 
-    // 题目2
-    function fn() {
+    <script>
+      // 题目2
+      function fn() {
         return 20;
-    }
+      }
 
-    console.warn('fn =>', fn + 10)
-    console.log(fn.valueOf(), typeof fn.valueOf())
-    console.log(fn.toString(), Number(fn))
+      console.warn('fn =>', fn + 10);
+      console.log(fn.valueOf(), typeof fn.valueOf());
+      console.log(fn.toString(), Number(fn));
 
-    function fn2() {
+      function fn2() {
         return 20;
-    }
+      }
 
-    fn2.toString = function() {
+      fn2.toString = function () {
         return 10;
-    };
+      };
 
-    console.warn('fn2 =>', fn2 + 10)
-    console.log(fn2.valueOf(), typeof fn2.valueOf())
-    console.log(fn2.toString(), Number(fn2))
+      console.warn('fn2 =>', fn2 + 10);
+      console.log(fn2.valueOf(), typeof fn2.valueOf());
+      console.log(fn2.toString(), Number(fn2));
 
-    function fn3() {
+      function fn3() {
         return 20;
-    }
+      }
 
-    fn3.toString = function() {
+      fn3.toString = function () {
         return 10;
-    };
+      };
 
-    fn3.valueOf = function() {
+      fn3.valueOf = function () {
         return 5;
-    };
+      };
 
-    console.warn('fn3 =>', fn3 + 10) // 15
-    console.log(fn3.valueOf(), Number(fn3))
-
-</script>
-
-</body>
+      console.warn('fn3 =>', fn3 + 10); // 15
+      console.log(fn3.valueOf(), Number(fn3));
+    </script>
+  </body>
 </html>

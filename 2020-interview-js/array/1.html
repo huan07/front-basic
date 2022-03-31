@@ -30,8 +30,45 @@
       })();
     </script>
 
-    <script></script>
+    <script>
+      // https://github.com/haizlin/fe-interview/issues/3562
+      const arr = [1, 2, 3, 5];
 
-    <script></script>
+      function toLeft([first, ...rest]) {
+        return [...rest, first];
+      }
+
+      function toRight(arr) {
+        arr = arr.concat();
+        return [arr.pop(), ...arr];
+      }
+
+      console.log(toLeft(arr), toRight(arr));
+    </script>
+
+    <script>
+      // https://github.com/haizlin/fe-interview/issues/3558
+      (() => {
+        const arr = [1, 1, 2, 2, 2, 2, 3, 3];
+
+        // 有且只有两个连续相等的所有元素
+        function getTandemDuplication(arr) {
+          const result = [];
+          for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === arr[i + 1]) {
+              if (!result.includes(arr[i])) {
+                // 4个连续相等也算出来了
+                result.push(arr[i]);
+              } else {
+                result.pop();
+              }
+            }
+          }
+          return result;
+        }
+
+        console.log('getTandemDuplication =>', getTandemDuplication(arr));
+      })();
+    </script>
   </body>
 </html>

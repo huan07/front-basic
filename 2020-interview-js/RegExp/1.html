@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2</title>
+  </head>
+  <body>
+    <div>div</div>
+    <p>p</p>
+    <span>span</span>
+    !@#$
+    <script>
+      // https://github.com/haizlin/fe-interview/issues/3566
+      const innerText = document.documentElement.innerText;
+      const reg = /[^A-Za-z0-9]/g; // 查找不在方括号之间的字符
+      const result = innerText.match(reg);
+      console.log(innerText, result);
+    </script>
+  </body>
+</html>
